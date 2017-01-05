@@ -71,6 +71,7 @@
                     scope.dateformat = 'dd MMMM yyyy';
                 }
                 scope.df = scope.dateformat;
+                scope.dft = scope.dateformat + ' ' + 'HH:mm:ss'
             };
 
             scope.updateDf = function(dateFormat){
@@ -195,7 +196,7 @@
 
             };
             scope.text = '<span>Mifos X is designed by the <a href="http://www.openmf.org/">Mifos Initiative</a>.' +
-            '<a href="http://mifos.org/resources/community/"> A global community </a> thats aims to speed the elimination of poverty by enabling Organizations to more effectively and efficiently deliver responsible financial services to the world’s poor and unbanked </span><br/>' +
+            '<a href="http://mifos.org/resources/community/"> A global community </a> that aims to speed the elimination of poverty by enabling Organizations to more effectively and efficiently deliver responsible financial services to the world’s poor and unbanked </span><br/>' +
             '<span>Sounds interesting?<a href="http://mifos.org/take-action/volunteer/"> Get involved!</a></span>';
 
             scope.logout = function () {
@@ -329,7 +330,7 @@
                 "https://mifosforge.jira.com/wiki/pages/viewpage.action?pageId=67141762","https://mifosforge.jira.com/wiki/dosearchsite.action?queryString=report&startIndex=0&where=docs",
                 "https://mifosforge.jira.com/wiki/dosearchsite.action?queryString=accounting&startIndex=0&where=docs",  "https://mifosforge.jira.com/wiki/display/docs/Manage+Clients",
                 "https://mifosforge.jira.com/wiki/display/docs/Manage+Groups","https://mifosforge.jira.com/wiki/display/docs/Manage+Centers",
-                "https://mifosforge.jira.com/wiki/display/docs/Community+App+User+Manual","https://mifosforge.jira.com/wiki/display/docs/Manage+Offices",
+                "https://mifosforge.jira.com/wiki/display/docs/User+Manual","https://mifosforge.jira.com/wiki/display/docs/Manage+Offices",
                 "https://mifosforge.jira.com/wiki/display/docs/Manage+Holidays","https://mifosforge.jira.com/wiki/display/docs/Manage+Employees",
                 "https://mifosforge.jira.com/wiki/display/docs/Manage+Funds","https://mifosforge.jira.com/wiki/display/docs/Bulk+Loan+Reassignment",
                 "https://mifosforge.jira.com/wiki/display/docs/Currency+Configuration","https://mifosforge.jira.com/wiki/display/docs/Standing+Instructions+History",
