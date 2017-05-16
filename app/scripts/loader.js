@@ -1,5 +1,6 @@
 (function () {
     require.config({
+		waitSeconds : 2000,
         paths: {
             'jquery': '../bower_components/jquery/jquery',
             'angular': '../bower_components/angular/angular',
