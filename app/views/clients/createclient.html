@@ -84,6 +84,13 @@
 													<div class="col-sm-3">
 														<input type="text" id="middlename" ng-model="formData.middlename"  class="form-control"/>
 													</div>
+													<label data-ng-switch on="showNonPersonOptions" class="control-label col-sm-2" for="isStaff">{{ 'label.input.isStaff' | translate }}</label>
+	
+													<div data-ng-switch on="showNonPersonOptions" class="col-sm-3">
+														<label class="checkbox">
+															<input type="checkbox" id="isStaff" ng-model="formData.isStaff">
+														</label>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -213,17 +220,17 @@
 											<div data-ng-switch-when="true">
 												<div class="form-group">
 													<label class="control-label col-sm-2">{{'label.input.constitution' | translate}}<span
-															class="required">*</span></label>
+															class="required"></span></label>
 
 													<div class="col-sm-3">
 														<select id="constitutionId" name="constitution" ng-model="formData.clientNonPersonDetails.constitutionId"  class="form-control"
 																ng-options="constitution.id as constitution.name for constitution in clientNonPersonConstitutionOptions"
-																value="{{constitution.id}}" required late-Validate>
+																value="{{constitution.id}}">
 															<option value="">--{{'label.menu.constitution' | translate}}--</option>
 														</select>
 													</div>
 													<div class="col-sm-2">
-														<form-validate valattributeform="createclientform" valattribute="constitution"/>
+
 													</div>
 												</div>
 											</div>
