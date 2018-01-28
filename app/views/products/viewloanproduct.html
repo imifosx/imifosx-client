@@ -1,4 +1,4 @@
-<div class="col-md-12" ng-controller="ViewLoanProductController">
+<div class="content-container" ng-controller="ViewLoanProductController">
 <div class="paddedbottom10">
     <ul class="breadcrumb">
         <li><a href="#/products">{{'label.anchor.products' | translate}}</a></li>
@@ -7,10 +7,12 @@
     </ul>
 </div>
 <div>
+    <div class="card">
+        <div class="content">
 <div class="pull-right">
     <div class="btn-group">
         <a href="#/editloanproduct/{{loanproduct.id}}" class="btn btn-primary" has-permission='UPDATE_LOANPRODUCT'><i
-                class="icon-edit icon-white"></i>{{'label.button.edit' | translate}}</a>
+                class="fa fa-edit "></i>{{'label.button.edit' | translate}}</a>
     </div>
 </div>
 <legend>{{loanproduct.name}}</legend>
@@ -188,6 +190,10 @@
     <td colspan="3">{{loanproduct.interestType.value}}</td>
 </tr>
 <tr>
+    <td>{{'label.heading.equalamortization' | translate}}</td>
+    <td colspan="3">{{loanproduct.isEqualAmortization}}</td>
+</tr>
+<tr>
     <td>{{'label.heading.interestcalculationperiod' | translate}}</td>
     <td colspan="3">{{loanproduct.interestCalculationPeriodType.value}}</td>
 </tr>
@@ -244,6 +250,10 @@
     <td>{{'label.input.variableinstallments' | translate}}</td>
     <td colspan="3">(Min:{{loanproduct.minimumGap}}&nbsp;, Max:{{loanproduct.maximumGap}})
     </td>
+</tr>
+<tr>
+    <td>{{'label.input.canUseForTopup' | translate}}</td>
+    <td colspan="3">{{loanproduct.canUseForTopup | YesOrNo}}</td>
 </tr>
 
 <tr>
@@ -541,9 +551,11 @@
     <td colspan="3">
     </td>
     <td class="pull-right">
-        <a ng-click="scrollto('viewlptop')"><i class="icon-upload"></i>{{'label.button.top' | translate}}</a>
+        <a ng-click="scrollto('viewlptop')"><i class="fa fa-upload"></i>{{'label.button.top' | translate}}</a>
     </td>
 </tr>
 </table>
+</div>
+</div>
 </div>
 </div>

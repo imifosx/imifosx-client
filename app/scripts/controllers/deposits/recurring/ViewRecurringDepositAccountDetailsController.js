@@ -1,6 +1,6 @@
 (function (module) {
     mifosX.controllers = _.extend(module, {
-        ViewRecurringDepositAccountDetailsController: function (scope, routeParams, resourceFactory, location, route, dateFilter,$modal) {
+        ViewRecurringDepositAccountDetailsController: function (scope, routeParams, resourceFactory, paginatorService, location, route, dateFilter,$uibModal) {
             scope.isDebit = function (savingsTransactionType) {
                 return savingsTransactionType.withdrawal == true || savingsTransactionType.feeDeduction == true || savingsTransactionType.withholdTax == true;
             };
@@ -97,10 +97,12 @@
 
             resourceFactory.recurringDepositAccountResource.get({accountId: routeParams.id, associations: 'all'}, function (data) {
                 scope.savingaccountdetails = data;
+                scope.savingaccountdetails.availableBalance = scope.savingaccountdetails.enforceMinRequiredBalance?(scope.savingaccountdetails.summary.accountBalance - scope.savingaccountdetails.minRequiredOpeningBalance):scope.savingaccountdetails.summary.accountBalance;
                 scope.convertDateArrayToObject('date');
                 scope.chartSlabs = scope.savingaccountdetails.accountChart.chartSlabs;
                 scope.isprematureAllowed = data.maturityDate != null;
                 scope.status = data.status.value;
+                scope.heading = (!scope.savingaccountdetails.status.rejected && !scope.savingaccountdetails.status.submittedAndPendingApproval)?'label.heading.interestchart':'label.heading.summary';
                 if (scope.status == "Submitted and pending approval" || scope.status == "Active" || scope.status == "Approved") {
                     scope.choice = true;
                 }
@@ -115,11 +117,11 @@
                     scope.buttons = { singlebuttons: [
                         {
                             name: "button.modifyapplication",
-                            icon: "icon-pencil "
+                            icon: "fa fa-pencil "
                         },
                         {
                             name: "button.approve",
-                            icon: "icon-ok-sign"
+                            icon: "fa fa-check"
                         }
                     ],
                         options: [
@@ -143,11 +145,11 @@
                     scope.buttons = { singlebuttons: [
                         {
                             name: "button.undoapproval",
-                            icon: "icon-undo"
+                            icon: "fa fa-undo"
                         },
                         {
                             name: "button.activate",
-                            icon: "icon-ok-sign"
+                            icon: "fa fa-check"
                         }
                     ]
                     };
@@ -157,15 +159,15 @@
                     scope.buttons = { singlebuttons: [
                         {
                             name: "button.deposit",
-                            icon: "icon-arrow-right"
+                            icon: "fa fa-arrow-right"
                         },
                         {
                             name: "button.prematureClose",
-                            icon: "icon-arrow-left"
+                            icon: "fa fa-arrow-left"
                         },
                         {
                             name: "button.calculateInterest",
-                            icon: "icon-table"
+                            icon: "fa fa-table"
                         }
                     ],
                         options: [
@@ -198,7 +200,7 @@
                     if(!scope.isprematureAllowed){
                         scope.buttons.singlebuttons[1] = {
                             name: "button.close",
-                            icon: "icon-arrow-right"
+                            icon: "fa fa-arrow-right"
                         };
                     }
 
@@ -222,15 +224,15 @@
                     scope.buttons = { singlebuttons: [
                         {
                             name: "button.close",
-                            icon: "icon-arrow-right"
+                            icon: "fa fa-arrow-right"
                         },
                         {
                             name: "button.calculateInterest",
-                            icon: "icon-table"
+                            icon: "fa fa-table"
                         },
                         {
                             name: "button.postInterest",
-                            icon: "icon-table"
+                            icon: "fa fa-table"
                         }
                     ],
                         options: [
@@ -256,11 +258,61 @@
                         }
                     }
                 }
+
+
                 /*var annualdueDate = [];
                  annualdueDate = data.annualFee.feeOnMonthDay;
                  annualdueDate.push(2013);
                  scope.annualdueDate = new Date(annualdueDate);*/
+                resourceFactory.standingInstructionTemplateResource.get({fromClientId: scope.savingaccountdetails.clientId,fromAccountType: 2,fromAccountId: routeParams.id},function (response) {
+                    scope.standinginstruction = response;
+                    scope.searchTransaction();
+                });
             });
+
+            var fetchFunction = function (offset, limit, callback) {
+                var params = {};
+                params.offset = offset;
+                params.limit = limit;
+                params.locale = scope.optlang.code;
+                params.fromAccountId = routeParams.id;
+                params.fromAccountType = 2;
+                params.clientId = scope.savingaccountdetails.clientId;
+                params.clientName = scope.savingaccountdetails.clientName;
+                params.dateFormat = scope.df;
+
+                resourceFactory.standingInstructionResource.search(params, callback);
+            };
+
+            scope.searchTransaction = function () {
+                scope.displayResults = true;
+                scope.instructions = paginatorService.paginate(fetchFunction, 14);
+                scope.isCollapsed = false;
+            };
+
+            scope.deletestandinginstruction = function (id) {
+                $uibModal.open({
+                    templateUrl: 'delInstruction.html',
+                    controller: DelInstructionCtrl,
+                    resolve: {
+                        ids: function () {
+                            return id;
+                        }
+                    }
+                });
+            };
+
+            var DelInstructionCtrl = function ($scope, $uibModalInstance, ids) {
+                $scope.delete = function () {
+                    resourceFactory.standingInstructionResource.cancel({standingInstructionId: ids}, function (data) {
+                        scope.searchTransaction();
+                        $uibModalInstance.close('delete');
+                    });
+                };
+                $scope.cancel = function () {
+                    $uibModalInstance.dismiss('cancel');
+                };
+            };
 
             resourceFactory.DataTablesResource.getAllDataTables({apptable: 'm_savings_account'}, function (data) {
                 scope.savingdatatables = data;
@@ -316,7 +368,7 @@
             };
 
             scope.incentives = function(index){
-                $modal.open({
+                $uibModal.open({
                     templateUrl: 'incentive.html',
                     controller: IncentiveCtrl,
                     resolve: {
@@ -327,7 +379,7 @@
                 });
             };
 
-            var IncentiveCtrl = function ($scope, $modalInstance, chartSlab) {
+            var IncentiveCtrl = function ($scope, $uibModalInstance, chartSlab) {
                 $scope.chartSlab = chartSlab;
                 _.each($scope.chartSlab.incentives, function (incentive) {
                     if(!incentive.attributeValueDesc){
@@ -335,7 +387,7 @@
                     }
                 });
                 $scope.cancel = function () {
-                    $modalInstance.dismiss('cancel');
+                    $uibModalInstance.dismiss('cancel');
                 };
             };
 
@@ -355,7 +407,7 @@
 
         }
     });
-    mifosX.ng.application.controller('ViewRecurringDepositAccountDetailsController', ['$scope', '$routeParams', 'ResourceFactory', '$location', '$route', 'dateFilter','$modal', mifosX.controllers.ViewRecurringDepositAccountDetailsController]).run(function ($log) {
+    mifosX.ng.application.controller('ViewRecurringDepositAccountDetailsController', ['$scope', '$routeParams', 'ResourceFactory', 'PaginatorService', '$location', '$route', 'dateFilter','$uibModal', mifosX.controllers.ViewRecurringDepositAccountDetailsController]).run(function ($log) {
         $log.info("ViewRecurringDepositAccountDetailsController initialized");
     });
 }(mifosX.controllers || {}));

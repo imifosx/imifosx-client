@@ -1,9 +1,11 @@
 (function (module) {
     mifosX.controllers = _.extend(module, {
-        CreateLoanProductController: function (scope, resourceFactory, location, dateFilter) {
+        CreateLoanProductController: function (scope, $rootScope, resourceFactory, location, dateFilter,WizardHandler) {
             scope.restrictDate = new Date();
             scope.formData = {};
+            scope.loanproduct = {};
             scope.charges = [];
+            scope.accountingOptions = ['None','Cash','Accrual(Periodic)','Accrual(Upfront)'];
             scope.floatingrateoptions = [];
             scope.loanProductConfigurableAttributes = [];
             scope.showOrHideValue = "show";
@@ -50,7 +52,7 @@
                 }
                 scope.formData.currencyCode = scope.product.currencyOptions[0].code;
                 scope.formData.includeInBorrowerCycle = 'false';
-                scope.formData.useBorrowerCycle = 'false';
+                scope.formData.useBorrowerCycle = false;
                 scope.formData.digitsAfterDecimal = '2';
                 scope.formData.inMultiplesOf = '0';
                 scope.formData.repaymentFrequencyType = scope.product.repaymentFrequencyType.id;
@@ -62,7 +64,7 @@
                 scope.formData.principalVariationsForBorrowerCycle = scope.product.principalVariationsForBorrowerCycle;
                 scope.formData.interestRateVariationsForBorrowerCycle = scope.product.interestRateVariationsForBorrowerCycle;
                 scope.formData.numberOfRepaymentVariationsForBorrowerCycle = scope.product.numberOfRepaymentVariationsForBorrowerCycle;
-                scope.formData.multiDisburseLoan = 'false';
+                scope.formData.multiDisburseLoan = false;
                 scope.formData.accountingRule = '1';
                 scope.formData.daysInYearType = scope.product.daysInYearType.id;
                 scope.formData.daysInMonthType = scope.product.daysInMonthType.id;
@@ -78,7 +80,25 @@
                 scope.formData.isLinkedToFloatingInterestRates = false ;
                 scope.formData.allowVariableInstallments = false ;
                 scope.product.interestRecalculationNthDayTypeOptions.push({"code" : "onDay", "id" : -2, "value" : "on day"});
+                scope.loanproduct = angular.copy(scope.formData);
             });
+
+             scope.$watch('formData',function(newVal){
+                scope.loanproduct = angular.extend(scope.loanproduct,newVal);
+             },true);
+
+             $rootScope.formValue = function(array,model,findattr,retAttr){
+                 findattr = findattr ? findattr : 'id';
+                 retAttr = retAttr ? retAttr : 'value';
+                 console.log(findattr,retAttr,model);
+                 return _.find(array, function (obj) {
+                    return obj[findattr] === model;
+                 })[retAttr];
+            };
+
+            scope.goNext = function(form){
+                WizardHandler.wizard().checkValid(form);
+            }
 
             scope.chargeSelected = function (chargeId) {
 
@@ -221,7 +241,7 @@
 			if ((multiDisburseLoan != true) && item.chargeTimeType.id == 12) {
 				return false;
 			}
-			if (item.currency.code != currencyCode) { 
+			if (item.currency.code != currencyCode) {
 				return false;
 			}
 			return true;
@@ -370,7 +390,7 @@
             };
         }
     });
-    mifosX.ng.application.controller('CreateLoanProductController', ['$scope', 'ResourceFactory', '$location', 'dateFilter', mifosX.controllers.CreateLoanProductController]).run(function ($log) {
+    mifosX.ng.application.controller('CreateLoanProductController', ['$scope','$rootScope', 'ResourceFactory', '$location', 'dateFilter','WizardHandler', mifosX.controllers.CreateLoanProductController]).run(function ($log) {
         $log.info("CreateLoanProductController initialized");
     });
 }(mifosX.controllers || {}));

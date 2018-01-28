@@ -65,8 +65,10 @@
                     clientAccountResource: defineResource(apiVer + "/clients/:clientId/accounts", {clientId: '@clientId'}, {
                         getAllClients: {method: 'GET', params: {}}
                     }),
-                    clientNotesResource: defineResource(apiVer + "/clients/:clientId/notes", {clientId: '@clientId'}, {
-                        getAllNotes: {method: 'GET', params: {}, isArray: true}
+                    clientNotesResource: defineResource(apiVer + "/clients/:clientId/notes/:noteId", {clientId: '@clientId', noteId: '@noteId'}, {
+                        getAllNotes: {method: 'GET', params: {}, isArray: true},
+                        delete:{method:'DELETE',params:{}},
+                        put:{method:'PUT',params:{}}
                     }),
                     clientTemplateResource: defineResource(apiVer + "/clients/template", {}, {
                         get: {method: 'GET', params: {}}
@@ -78,13 +80,18 @@
                         get: {method: 'GET', params: {}}
                     }),
 
-                    surveyResource: defineResource(apiVer + "/surveys", {}, {
-                        get: {method: 'GET', params: {}, isArray: true}
+                    surveyResource: defineResource(apiVer + "/surveys/:surveyId", {surveyId: '@surveyId'}, {
+                        getAll: {method: 'GET', params: {}, isArray: true},
+                        get: {method: 'GET', params: {surveyId: '@surveyId'}, isArray: false},
+                        update: {method: 'PUT', params: {surveyId: '@surveyId'}},
+                        activateOrDeactivate: {method: 'POST', params: {surveyId: '@surveyId',command: '@command'}},
                     }),
-                    surveyScorecardResource: defineResource(apiVer + "/surveys/:surveyId/scorecards", {surveyId: '@surveyId'}, { 
-                        post: {method: 'POST', params: {}, isArray: false}                       
+                    surveyScorecardResource: defineResource(apiVer + "/surveys/scorecards/:surveyId", {surveyId: '@surveyId'}, {
+                        post: {method: 'POST', params: {}, isArray: false}
                     }),
-
+                    clientSurveyScorecardResource: defineResource(apiVer + "/surveys/scorecards/clients/:clientId", {clientId: '@clientId'}, {
+                        get: {method: 'GET', params: {clientId: '@clientId'}, isArray: true}
+                    }),
                     groupResource: defineResource(apiVer + "/groups/:groupId/:anotherresource", {groupId: '@groupId', anotherresource: '@anotherresource'}, {
                         get: {method: 'GET', params: {}},
                         getAllGroups: {method: 'GET', params: {}, isArray: true},
@@ -163,8 +170,8 @@
                         update: {method: 'PUT', params: {}},
                         getAllInterestRateCharts: {method: 'GET', params: {productId: '@productId'}, isArray: true}
                     }),
-                    batchResource: defineResource(apiVer + "/batches", {}, { 
-                        post: {method: 'POST', params: {}, isArray: true}                       
+                    batchResource: defineResource(apiVer + "/batches", {}, {
+                        post: {method: 'POST', params: {}, isArray: true}
                     }),
                     loanResource: defineResource(apiVer + "/loans/:loanId/:resourceType/:resourceId", {resourceType: '@resourceType', loanId: '@loanId', resourceId: '@resourceId', limit: '@limit', sqlSearch: '@sqlSearch'}, {
                         getAllLoans: {method: 'GET', params: {limit:'@limit', sqlSearch: '@sqlSearch'}},
@@ -311,6 +318,9 @@
                         getholvalues: {method: 'GET', params: {}},
                         update: { method: 'PUT', params: {}}
                     }),
+                    holidayTemplateResource: defineResource(apiVer + "/holidays/template", {}, {
+                        get: {method: 'GET', params: {}, isArray: true}
+                    }),
                     savingsTemplateResource: defineResource(apiVer + "/savingsaccounts/template", {}, {
                         get: {method: 'GET', params: {}}
                     }),
@@ -409,6 +419,9 @@
                         get: {method: 'GET', params: {}},
                         update: {method: 'PUT', params: {}}
                     }),
+                    configurationResourceByName: defineResource(apiVer + "/configurations/", {configName: '@configName'}, {
+                        get: {method: 'GET', params: {configName:'configName'}}
+                    }),
                     cacheResource: defineResource(apiVer + "/caches", {}, {
                         get: {method: 'GET', params: {}, isArray: true},
                         update: {method: 'PUT', params: {}}
@@ -424,8 +437,9 @@
                     loanReassignmentResource: defineResource(apiVer + "/loans/loanreassignment/:templateSource", {templateSource: '@templateSource'}, {
                         get: {method: 'GET', params: {}}
                     }),
-                    loanRescheduleResource: defineResource(apiVer + "/rescheduleloans/:scheduleId",{scheduleId:'@scheduleId'},{
+                    loanRescheduleResource: defineResource(apiVer + "/rescheduleloans/:scheduleId",{scheduleId:'@scheduleId', command: '@command'},{
                      get: {method: 'GET',params:{}},
+                     getAll: {method: 'GET', params: {}, isArray: true},
                      template: {method: 'GET',params:{}},
                      preview:{method:'GET',params:{command:'previewLoanReschedule'}},
                      put: {method: 'POST', params: {command:'reschedule'}},
@@ -520,12 +534,46 @@
                         get: {method: 'GET', params: {}, isArray : true},
                         put: {method: 'PUT', params:{}}
                     }),
+                    externalServicesNotificationResource: defineResource(apiVer + "/externalservice/NOTIFICATION", {},{
+                        get: {method: 'GET', params: {}, isArray : true},
+                        put: {method: 'PUT', params:{}}
+                    }),
                     externalServicesResource: defineResource(apiVer + "/externalservice/:id", {id: '@id'},{
                         get: {method: 'GET', params: {}, isArray : true},
                         put: {method: 'PUT', params:{}}
                     }),
-                    provisioningcriteria: defineResource(apiVer + "/provisioningcriteria/:criteriaId",{criteriaId:'@criteriaId'},{
-                        get: {method: 'GET',params:{}},
+                    clientaddressFields:defineResource(apiVer+"/client/addresses/template",{},{
+                            get:{method:'GET',params:{}}
+                        }
+                    ),
+                    addressFieldConfiguration:defineResource(apiVer+"/fieldconfiguration/:entity",{},{
+                        get:{method:'GET',params:{},isArray:true }
+                    }),
+                    clientAddress:defineResource(apiVer+"/client/:clientId/addresses",{},{
+
+                        post:{method:'POST',params:{type:'@type'}},
+                        get:{method:'GET',params:{type:'@type',status:'@status'},isArray:true},
+                        put:{method:'PUT',params:{}}
+                    }),
+                    familyMember:defineResource(apiVer+"/clients/:clientId/familymembers/:clientFamilyMemberId",{},{
+
+                        get:{method: 'GET',params:{} },
+                        delete:{method: 'DELETE',params:{}},
+                            put:{method:'PUT',params:{}}
+
+                    }),
+                    familyMembers:defineResource(apiVer+"/clients/:clientId/familymembers/",{},{
+
+                        get:{method: 'GET',isArray: true },
+                        post:{method:'POST',params:{}}
+
+
+                    }),
+                    familyMemberTemplate:defineResource(apiVer+"/clients/:clientId/familymembers/template",{},{
+                        get:{method: 'GET',params:{}}
+                    }),
+                   provisioningcriteria: defineResource(apiVer + "/provisioningcriteria/:criteriaId",{criteriaId:'@criteriaId'},{
+                         get: {method: 'GET',params:{}},
                         getAll: {method: 'GET',params:{}, isArray : true},
                         template: {method: 'GET',params:{}},
                         post:{method:'POST',params:{}},
@@ -600,6 +648,50 @@
                         post: {method: 'POST', params:{}},
                         put: {method: 'PUT', params:{}},
                         approve: {method: 'PUT', params:{command: 'approve'}}
+                    }),
+
+                    smsCampaignTemplateResource: defineResource(apiVer + "/smscampaigns/template", {}, {
+                        get: {method: 'GET', params: {}}
+                    }),
+
+                    smsCampaignResource: defineResource(apiVer + "/smscampaigns/:campaignId/:additionalParam", {campaignId: '@campaignId', additionalParam: '@additionalParam'}, {
+                        getAll: {method: 'GET', params: {}},
+                        get: {method: 'GET', params: {}},
+                        save: {method: 'POST', params: {}},
+                        update: {method: 'PUT', params: {}},
+                        preview: {method: 'POST', params: {}},
+                        withCommand: {method: 'POST', params: {}},
+                        delete: {method: 'DELETE', params: {}}
+                    }),
+
+                    smsResource: defineResource(apiVer + "/sms/:campaignId/messageByStatus", {campaignId: '@campaignId', additionalParam: '@additionalParam'}, {
+                        getByStatus: {method: 'GET', params:{}}
+                    }),
+
+                    entityDatatableChecksResource: defineResource(apiVer + "/entityDatatableChecks/:entityDatatableCheckId/:additionalParam", {entityDatatableCheckId: '@entityDatatableCheckId', additionalParam: '@additionalParam'}, {
+                        getAll: {method: 'GET', params: {}},
+                        get: {method: 'GET', params: {}},
+                        save: {method: 'POST', params: {}},
+                        delete: {method: 'DELETE', params: {}}
+                    }),
+
+					adHocQueryResource: defineResource(apiVer + "/adhocquery/:adHocId", {adHocId: '@adHocId'}, {
+                        getAllAdHocQuery: {method: 'GET', params: {}, isArray: true},
+                        disableAdHocQuery: {method: 'POST'},
+                        enableAdHocQuery: {method: 'POST'},
+                        update: { method: 'PUT' }
+                    }),
+                    adHocQueryTemplateResource: defineResource(apiVer + "/adhocquery/template", {}, {
+                        get: {method: 'GET', params: {}}
+                    }),
+
+                    twoFactorResource: defineResource(apiVer+"/twofactor", {deliveryMethod: "@deliveryMethod", extendedToken: "@extendedToken"}, {
+                        getDeliveryMethods: {method: 'GET', params: {}, isArray: true},
+                        requestOTP: {method: 'POST', params: {deliveryMethod: "@deliveryMethod", extendedToken: "@extendedToken"}}
+                    }),
+                    twoFactorConfigResource: defineResource(apiVer+"/twofactor/configure", {}, {
+                        getAllConfigs: {method: 'GET', params: {}},
+                        put: {method: 'PUT', params: {}}
                     })
                 };
             }];

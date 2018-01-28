@@ -124,6 +124,12 @@
             .when('/survey/:clientId', {
                 templateUrl: 'views/clients/survey.html'
             })
+            .when('/viewsurvey/:id', {
+                templateUrl: 'views/surveys/viewsurvey.html'
+            })
+            .when('/clients/survey/:clientId', {
+                templateUrl: 'views/surveys/viewclientsurvey.html'
+            })
             .when('/newclientloanaccount/:clientId', {
                 templateUrl: 'views/loans/newloanaccount.html'
             })
@@ -803,6 +809,12 @@
             .when('/externalservices/:externalServicesType/editconfig', {
                 templateUrl: 'views/administration/editExternalServicesConfiguration.html'
             })
+            .when('/twofactorconfig', {
+                templateUrl: 'views/administration/viewTwoFactorConfig.html'
+            })
+            .when('/twofactorconfig/edit/:configType', {
+                templateUrl: 'views/administration/editTwoFactorConfig.html'
+            })
             .when('/loans/:loanId/reschedule/', {
                 templateUrl: 'views/loans/rescheduleloans.html'
             })
@@ -887,7 +899,61 @@
             .when('/loanforeclosure/:id', {
                 templateUrl: 'views/loans/loanforeclosure.html'
             })
-        ;
+            .when('/address/:id', {
+                templateUrl: 'views/administration/AddressForm.html'
+            })
+            .when('/editAddress/:addrType/:addrId/:clientId', {
+                templateUrl: 'views/administration/EditAddress.html'
+            })
+            .when('/smscampaigns', {
+                templateUrl: 'views/organization/smscampaigns/smscampaigns.html'
+            })
+            .when('/createsmscampaign', {
+                templateUrl: 'views/organization/smscampaigns/createsmscampaign.html'
+            })
+            .when('/viewsmscampaign/:campaignId', {
+                templateUrl: 'views/organization/smscampaigns/viewsmscampaign.html'
+            })
+            .when('/editsmscampaign/:campaignId', {
+                templateUrl: 'views/organization/smscampaigns/editsmscampaign.html'
+            })
+            .when('/entitydatatablechecks', {
+                templateUrl: 'views/organization/entitydatatablechecks/entitydatatablechecks.html'
+            })
+            .when('/notifications', {
+                templateUrl: 'views/notification/notifications.html'
+            })
+            .when('/surveys',{
+                templateUrl: 'views/surveys/surveys.html'
+            })
+            .when('/surveys/add',{
+                templateUrl: 'views/surveys/createsurvey.html'
+            })
+            .when('/editsurvey/:id',{
+                templateUrl: 'views/surveys/editsurvey.html'
+            })
+            .when('/editfamilymember/:clientId/:familyMemberId', {
+                templateUrl: 'views/clients/editfamilymembers.html'
+            })
+            .when('/addfamilymembers/:clientId/', {
+                templateUrl: 'views/clients/addfamilymembers.html'
+            })
+			.when('/adhocquery/', {
+                templateUrl: 'views/adhocquery/adhocquerylists.html'
+            })
+            .when('/createadhocquery/', {
+                templateUrl: 'views/adhocquery/createadhocquery.html'
+            })
+            .when('/viewadhocquery/:id', {
+                templateUrl: 'views/adhocquery/viewadhocquery.html'
+            })
+            .when('/editadhocquery/:id', {
+                templateUrl: 'views/adhocquery/editadhocquery.html'
+            })
+            .otherwise({
+                templateUrl: "views/errors/404.html"
+            })
+            ;
         $locationProvider.html5Mode(false);
     };
     mifosX.ng.application.config(defineRoutes).run(function ($log) {

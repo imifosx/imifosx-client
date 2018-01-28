@@ -1,21 +1,20 @@
-<div ng-controller="ViewSavingProductController">
-<div id="viewlptop">
-    <div class="paddedbottom10">
+<div class="content-container" ng-controller="ViewSavingProductController">
         <ul class="breadcrumb">
             <li><a href="#/products">{{'label.anchor.products' | translate}}</a></li>
             <li><a href="#/savingproducts">{{'label.anchor.savingproducts' | translate}}</a></li>
             <li class="active">{{savingproduct.name}}</li>
         </ul>
-    </div>
-</div>
-<div class="pull-right">
-    <div class="btn-group">
-        <a href="#/editsavingproduct/{{savingproduct.id}}" class="btn btn-primary" has-permission='UPDATE_SAVINGSPRODUCT'><i class="icon-edit icon-white"></i>{{'label.button.edit' | translate}}</a>
-    </div>
-</div>
-<div class="col-md-12">
-    <legend>{{savingproduct.name}}</legend>
-    <table class="table" width="100%">
+
+<div class="card">
+    <div class="content">
+    <legend>{{savingproduct.name}}
+        <div class="pull-right">
+            <div class="btn-group">
+                <a href="#/editsavingproduct/{{savingproduct.id}}" class="btn btn-primary" has-permission='UPDATE_SAVINGSPRODUCT'><i class="fa fa-edit "></i>{{'label.button.edit' | translate}}</a>
+            </div>
+        </div>
+    </legend>
+    <table width="100%">
         <tr>
             <td colspan="4">
                 <strong>{{'label.heading.details' | translate}}</strong>
@@ -276,9 +275,10 @@
             <td colspan="3">
             </td>
             <td class="pull-right">
-                <a ng-click="scrollto('viewlptop')"><i class="icon-upload"></i>{{'label.button.top' | translate}}</a>
+                <a ng-click="scrollto('viewlptop')"><i class="fa fa-upload"></i>{{'label.button.top' | translate}}</a>
             </td>
         </tr>
     </table>
+</div>
 </div>
 </div>

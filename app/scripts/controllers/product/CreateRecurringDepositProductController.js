@@ -1,7 +1,8 @@
 (function (module) {
     mifosX.controllers = _.extend(module, {
-        CreateRecurringDepositProductController: function (scope, resourceFactory, location, dateFilter,$modal) {
+        CreateRecurringDepositProductController: function (scope, resourceFactory, location, dateFilter,$uibModal,WizardHandler) {
             scope.formData = {};
+            scope.depositproduct = {};
             scope.charges = [];
             scope.showOrHideValue = "show";
             scope.configureFundOptions = [];
@@ -37,9 +38,20 @@
                 scope.chart = scope.product.chartTemplate;
                 scope.chart.chartSlabs = [];
                 scope.formData.accountingRule = '1';
+                scope.depositproduct = angular.copy(scope.formData);
 
             });
-
+            scope.$watch('formData',function(newVal){
+                scope.depositproduct = angular.extend(scope.depositproduct,newVal);
+            },true);
+            scope.formValue = function(array,model,findattr,retAttr){
+                findattr = findattr ? findattr : 'id';
+                retAttr = retAttr ? retAttr : 'value';
+                console.log(findattr,retAttr,model);
+                return _.find(array, function (obj) {
+                    return obj[findattr] === model;
+                })[retAttr];
+            };
             //advanced accounting rule
             scope.showOrHide = function (showOrHideValue) {
 
@@ -63,6 +75,10 @@
                 }
             }
 
+            scope.goNext = function(form){
+                WizardHandler.wizard().checkValid(form);
+            }
+            
             scope.deleteCharge = function (index) {
                 scope.charges.splice(index, 1);
             }
@@ -310,7 +326,7 @@
             }
 
             scope.incentives = function(index){
-                $modal.open({
+                $uibModal.open({
                     templateUrl: 'incentive.html',
                     controller: IncentiveCtrl,
                     resolve: {
@@ -357,11 +373,11 @@
                 return newIncentiveDataData;
             }
 
-            var IncentiveCtrl = function ($scope, $modalInstance, data,chartSlab) {
+            var IncentiveCtrl = function ($scope, $uibModalInstance, data,chartSlab) {
                 $scope.data = data;
                 $scope.chartSlab = chartSlab;
                 $scope.cancel = function () {
-                    $modalInstance.dismiss('cancel');
+                    $uibModalInstance.dismiss('cancel');
                 };
 
                 $scope.addNewRow = function () {
@@ -386,7 +402,7 @@
             };
         }
     });
-    mifosX.ng.application.controller('CreateRecurringDepositProductController', ['$scope', 'ResourceFactory', '$location', 'dateFilter','$modal', mifosX.controllers.CreateRecurringDepositProductController]).run(function ($log) {
+    mifosX.ng.application.controller('CreateRecurringDepositProductController', ['$scope', 'ResourceFactory', '$location', 'dateFilter','$uibModal','WizardHandler', mifosX.controllers.CreateRecurringDepositProductController]).run(function ($log) {
         $log.info("CreateRecurringDepositProductController initialized");
     });
 }(mifosX.controllers || {}));

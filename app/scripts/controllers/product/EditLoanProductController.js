@@ -92,7 +92,8 @@
                     minimumDaysBetweenDisbursalAndFirstRepayment: scope.product.minimumDaysBetweenDisbursalAndFirstRepayment,
                     principalThresholdForLastInstallment: scope.product.principalThresholdForLastInstallment,
                     installmentAmountInMultiplesOf: scope.product.installmentAmountInMultiplesOf,
-                    canDefineInstallmentAmount : scope.product.canDefineInstallmentAmount
+                    canDefineInstallmentAmount : scope.product.canDefineInstallmentAmount,
+                    isEqualAmortization : scope.product.isEqualAmortization,
                 };
 
                 if (scope.product.isInterestRecalculationEnabled) {
@@ -128,6 +129,7 @@
 
                 }
                 if(scope.product.allowAttributeOverrides != null){
+                    console.log('scope.product.allowAttributeOverrides : ',scope.product.allowAttributeOverrides);
                     scope.amortization = scope.product.allowAttributeOverrides.amortizationType;
                     scope.arrearsTolerance = scope.product.allowAttributeOverrides.inArrearsTolerance;
                     scope.graceOnArrearsAging = scope.product.allowAttributeOverrides.graceOnArrearsAgeing;
@@ -238,6 +240,7 @@
                 scope.formData.allowVariableInstallments = scope.product.allowVariableInstallments ;
                 scope.formData.minimumGap = scope.product.minimumGap;
                 scope.formData.maximumGap = scope.product.maximumGap;
+                scope.formData.canUseForTopup = scope.product.canUseForTopup;
             });
 
             scope.chargeSelected = function (chargeId) {

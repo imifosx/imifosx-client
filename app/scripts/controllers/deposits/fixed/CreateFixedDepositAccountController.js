@@ -1,6 +1,6 @@
 (function (module) {
     mifosX.controllers = _.extend(module, {
-        CreateFixedDepositAccountController: function (scope, resourceFactory, location, routeParams, dateFilter,$modal) {
+        CreateFixedDepositAccountController: function (scope, resourceFactory, location, routeParams, dateFilter,$uibModal) {
             scope.products = [];
             scope.fieldOfficers = [];
             scope.formData = {};
@@ -148,18 +148,19 @@
 
                 if (scope.charges.length > 0) {
                     for (var i in scope.charges) {
-                        if (scope.charges[i].chargeTimeType.value == 'Annual Fee') {
-                            this.formData.charges.push({ chargeId: scope.charges[i].chargeId, amount: scope.charges[i].amount,
-                                feeOnMonthDay: dateFilter(scope.charges[i].feeOnMonthDay, 'dd MMMM')});
-                        } else if (scope.charges[i].chargeTimeType.value == 'Specified due date') {
-                            this.formData.charges.push({ chargeId: scope.charges[i].chargeId, amount: scope.charges[i].amount,
-                                dueDate: dateFilter(scope.charges[i].dueDate, scope.df)});
-                        } else if (scope.charges[i].chargeTimeType.value == 'Monthly Fee') {
-                            this.formData.charges.push({ chargeId: scope.charges[i].chargeId, amount: scope.charges[i].amount,
-                                feeOnMonthDay: dateFilter(scope.charges[i].feeOnMonthDay, 'dd MMMM'), feeInterval: scope.charges[i].feeInterval});
-                        } else {
-                            this.formData.charges.push({ chargeId: scope.charges[i].chargeId, amount: scope.charges[i].amount});
+
+                        var chargeData = { chargeId: scope.charges[i].chargeId, amount: scope.charges[i].amount};
+                        if(scope.charges[i].chargeTimeType.value == 'Annual Fee' || scope.charges[i].chargeTimeType.value == 'Monthly Fee'){
+                            chargeData.feeOnMonthDay = dateFilter(scope.charges[i].feeOnMonthDay, 'dd MMMM');
                         }
+                        if (scope.charges[i].chargeTimeType.value == 'Specified due date' || scope.charges[i].chargeTimeType.code=='chargeTimeType.weeklyFee') {
+                            chargeData.dueDate = dateFilter(scope.charges[i].dueDate, scope.df);
+                        }
+
+                        if (scope.charges[i].chargeTimeType.value == 'Monthly Fee' || scope.charges[i].chargeTimeType.code=='chargeTimeType.weeklyFee') {
+                            chargeData.feeInterval = scope.charges[i].feeInterval;
+                        }
+                        this.formData.charges.push(chargeData);
                     }
                 }
 
@@ -306,7 +307,7 @@
                 scope.chart.chartSlabs.splice(index, 1);
             }
             scope.incentives = function(index){
-                $modal.open({
+                $uibModal.open({
                     templateUrl: 'incentive.html',
                     controller: IncentiveCtrl,
                     resolve: {
@@ -353,7 +354,7 @@
                 return newIncentiveDataData;
             }
 
-            var IncentiveCtrl = function ($scope, $modalInstance, data,chartSlab) {
+            var IncentiveCtrl = function ($scope, $uibModalInstance, data,chartSlab) {
                 $scope.data = data;
                 $scope.chartSlab = chartSlab;
                 _.each($scope.chartSlab.incentives, function (incentive) {
@@ -362,7 +363,7 @@
                     }
                 });
                 $scope.cancel = function () {
-                    $modalInstance.dismiss('cancel');
+                    $uibModalInstance.dismiss('cancel');
                 };
 
                 $scope.addNewRow = function () {
@@ -388,7 +389,7 @@
 
         }
     });
-    mifosX.ng.application.controller('CreateFixedDepositAccountController', ['$scope', 'ResourceFactory', '$location', '$routeParams', 'dateFilter','$modal', mifosX.controllers.CreateFixedDepositAccountController]).run(function ($log) {
+    mifosX.ng.application.controller('CreateFixedDepositAccountController', ['$scope', 'ResourceFactory', '$location', '$routeParams', 'dateFilter','$uibModal', mifosX.controllers.CreateFixedDepositAccountController]).run(function ($log) {
         $log.info("CreateFixedDepositAccountController initialized");
     });
 }(mifosX.controllers || {}));

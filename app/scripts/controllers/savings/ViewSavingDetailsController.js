@@ -1,6 +1,6 @@
 (function (module) {
     mifosX.controllers = _.extend(module, {
-        ViewSavingDetailsController: function (scope, routeParams, resourceFactory, location, $modal, route, dateFilter, $sce, $rootScope, API_VERSION) {
+        ViewSavingDetailsController: function (scope, routeParams, resourceFactory, paginatorService, location, $uibModal, route, dateFilter, $sce, $rootScope, API_VERSION) {
             scope.report = false;
             scope.hidePentahoReport = true;
             scope.showActiveCharges = true;
@@ -120,12 +120,17 @@
                             route.reload();
                         });
                         break;
+                    case "postInterestAsOn":
+                        location.path('/savingaccount/' + accountId + '/postInterestAsOn');
+                        break;
 
                 }
             };
 
+
             resourceFactory.savingsResource.get({accountId: routeParams.id, associations: 'all'}, function (data) {
                 scope.savingaccountdetails = data;
+                scope.savingaccountdetails.availableBalance = scope.savingaccountdetails.enforceMinRequiredBalance?(scope.savingaccountdetails.summary.accountBalance - scope.savingaccountdetails.minRequiredOpeningBalance):scope.savingaccountdetails.summary.accountBalance;
                 scope.convertDateArrayToObject('date');
                 if(scope.savingaccountdetails.groupId) {
                     resourceFactory.groupResource.get({groupId: scope.savingaccountdetails.groupId}, function (data) {
@@ -139,7 +144,7 @@
                 scope.staffData.staffId = data.staffId;
                 scope.date.toDate = new Date();
                 scope.date.fromDate = new Date(data.timeline.activatedOnDate);
-                
+
                 scope.status = data.status.value;
                 if (scope.status == "Submitted and pending approval" || scope.status == "Active" || scope.status == "Approved") {
                     scope.choice = true;
@@ -156,12 +161,12 @@
                     scope.buttons = { singlebuttons: [
                         {
                             name: "button.modifyapplication",
-                            icon: "icon-pencil ",
+                            icon: "fa fa-pencil ",
                             taskPermissionName:"UPDATE_SAVINGSACCOUNT"
                         },
                         {
                             name: "button.approve",
-                            icon: "icon-ok-sign",
+                            icon: "fa fa-check",
                             taskPermissionName:"APPROVE_SAVINGSACCOUNT"
                         }
                     ],
@@ -190,17 +195,17 @@
                     scope.buttons = { singlebuttons: [
                         {
                             name: "button.undoapproval",
-                            icon: "icon-undo",
+                            icon: "fa faf-undo",
                             taskPermissionName:"APPROVALUNDO_SAVINGSACCOUNT"
                         },
                         {
                             name: "button.activate",
-                            icon: "icon-ok-sign",
+                            icon: "fa fa-check",
                             taskPermissionName:"ACTIVATE_SAVINGSACCOUNT"
                         },
                         {
                             name: "button.addcharge",
-                            icon: "icon-plus",
+                            icon: "fa fa-plus",
                             taskPermissionName:"CREATE_SAVINGSACCOUNTCHARGE"
                         }
                     ]
@@ -210,18 +215,23 @@
                 if (data.status.value == "Active") {
                     scope.buttons = { singlebuttons: [
                         {
-                            name: "button.deposit",
+                            name: "button.postInterestAsOn",
                             icon: "icon-arrow-right",
+                            taskPermissionName:"POSTINTERESTASON_SAVINGSACCOUNT"
+                        },
+                        {
+                            name: "button.deposit",
+                            icon: "fa fa-arrow-up",
                             taskPermissionName:"DEPOSIT_SAVINGSACCOUNT"
                         },
                         {
                             name: "button.withdraw",
-                            icon: "icon-arrow-left",
+                            icon: "fa fa-arrow-down",
                             taskPermissionName:"WITHDRAW_SAVINGSACCOUNT"
                         },
                         {
                             name: "button.calculateInterest",
-                            icon: "icon-table",
+                            icon: "fa fa-table",
                             taskPermissionName:"CALCULATEINTEREST_SAVINGSACCOUNT"
                         }
                     ],
@@ -278,7 +288,32 @@
                     annualdueDate.push(new Date().getFullYear());
                     scope.annualdueDate = new Date(annualdueDate);
                 };
+
+                resourceFactory.standingInstructionTemplateResource.get({fromClientId: scope.savingaccountdetails.clientId,fromAccountType: 2,fromAccountId: routeParams.id},function (response) {
+                    scope.standinginstruction = response;
+                    scope.searchTransaction();
+                });
             });
+
+            var fetchFunction = function (offset, limit, callback) {
+                var params = {};
+                params.offset = offset;
+                params.limit = limit;
+                params.locale = scope.optlang.code;
+                params.fromAccountId = routeParams.id;
+                params.fromAccountType = 2;
+                params.clientId = scope.savingaccountdetails.clientId;
+                params.clientName = scope.savingaccountdetails.clientName;
+                params.dateFormat = scope.df;
+
+                resourceFactory.standingInstructionResource.search(params, callback);
+            };
+
+            scope.searchTransaction = function () {
+                scope.displayResults = true;
+                scope.instructions = paginatorService.paginate(fetchFunction, 14);
+                scope.isCollapsed = false;
+            };
 
             resourceFactory.DataTablesResource.getAllDataTables({apptable: 'm_savings_account'}, function (data) {
                 scope.savingdatatables = data;
@@ -384,7 +419,7 @@
 
                 // allow untrusted urls for iframe http://docs.angularjs.org/error/$sce/insecurl
                 scope.viewReportDetails = $sce.trustAsResourceUrl(scope.baseURL);
-                
+
             };
 
             scope.viewSavingsTransactionReceipts = function (transactionId) {
@@ -408,6 +443,31 @@
                 scope.viewReportDetails = $sce.trustAsResourceUrl(scope.baseURL);
 
             };
+
+            scope.deletestandinginstruction = function (id) {
+                $uibModal.open({
+                    templateUrl: 'delInstruction.html',
+                    controller: DelInstructionCtrl,
+                    resolve: {
+                        ids: function () {
+                            return id;
+                        }
+                    }
+                });
+            };
+
+            var DelInstructionCtrl = function ($scope, $uibModalInstance, ids) {
+                $scope.delete = function () {
+                    resourceFactory.standingInstructionResource.cancel({standingInstructionId: ids}, function (data) {
+                        scope.searchTransaction();
+                        $uibModalInstance.close('delete');
+                    });
+                };
+                $scope.cancel = function () {
+                    $uibModalInstance.dismiss('cancel');
+                };
+            };
+
             scope.printReport = function () {
                 window.print();
                 window.close();
@@ -445,10 +505,10 @@
                 }
                 return false;
             };
-            
+
         }
     });
-    mifosX.ng.application.controller('ViewSavingDetailsController', ['$scope', '$routeParams', 'ResourceFactory', '$location','$modal', '$route', 'dateFilter', '$sce', '$rootScope', 'API_VERSION', mifosX.controllers.ViewSavingDetailsController]).run(function ($log) {
+    mifosX.ng.application.controller('ViewSavingDetailsController', ['$scope', '$routeParams', 'ResourceFactory','PaginatorService' , '$location','$uibModal', '$route', 'dateFilter', '$sce', '$rootScope', 'API_VERSION', mifosX.controllers.ViewSavingDetailsController]).run(function ($log) {
         $log.info("ViewSavingDetailsController initialized");
     });
 }(mifosX.controllers || {}));

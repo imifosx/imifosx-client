@@ -1,6 +1,6 @@
 (function (module) {
     mifosX.controllers = _.extend(module, {
-        ViewProductMixController: function (scope, resourceFactory, routeParams, location, $modal) {
+        ViewProductMixController: function (scope, resourceFactory, routeParams, location, $uibModal) {
             scope.productmix = [];
             scope.choice = 0;
             scope.allowed = [];
@@ -12,20 +12,20 @@
             });
 
             scope.deleteProductmix = function () {
-                $modal.open({
+                $uibModal.open({
                     templateUrl: 'deleteproductmix.html',
                     controller: ProductmixDeleteCtrl
                 });
             };
-            var ProductmixDeleteCtrl = function ($scope, $modalInstance) {
+            var ProductmixDeleteCtrl = function ($scope, $uibModalInstance) {
                 $scope.delete = function () {
                     resourceFactory.loanProductResource.delete({loanProductId: routeParams.id, resourceType: 'productmix'}, {}, function (data) {
-                        $modalInstance.close('delete');
+                        $uibModalInstance.close('delete');
                         location.path('/productmix');
                     });
                 };
                 $scope.cancel = function () {
-                    $modalInstance.dismiss('cancel');
+                    $uibModalInstance.dismiss('cancel');
                 };
             };
             scope.restrict = function () {
@@ -41,6 +41,13 @@
                         }
                     }
                 }
+                for (var i in this.allowed) {
+                     for (var j in scope.restrictedProducts) {
+                         if(scope.restrictedProducts[j].id == this.allowed[i]) {
+                             scope.allowed.splice(i, 1);
+                         }
+                     }
+                 }
             };
             scope.allow = function () {
                 for (var i in this.restricted) {
@@ -55,6 +62,13 @@
                         }
                     }
                 }
+                for (var i in this.restricted) {
+                    for (var j in scope.allowedProducts) {
+                        if(scope.allowedProducts[j].id == this.restricted[i]) {
+                            scope.restricted.splice(i, 1);
+                        }
+                    }
+                }            
             };
             scope.submit = function () {
                 var temp = [];
@@ -71,7 +85,7 @@
 
         }
     });
-    mifosX.ng.application.controller('ViewProductMixController', ['$scope', 'ResourceFactory', '$routeParams', '$location', '$modal', mifosX.controllers.ViewProductMixController]).run(function ($log) {
+    mifosX.ng.application.controller('ViewProductMixController', ['$scope', 'ResourceFactory', '$routeParams', '$location', '$uibModal', mifosX.controllers.ViewProductMixController]).run(function ($log) {
         $log.info("ViewProductMixController initialized");
     });
 }(mifosX.controllers || {}));
