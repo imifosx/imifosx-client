@@ -432,7 +432,7 @@
                 </div>
                 <div class="col-sm-2">
                     <input type="text" id="interestRatePerPeriod" placeholder="{{'label.input.default' | translate}}"
-                           name="interestRatePerPeriod" class="form-control" ng-model="formData.interestRatePerPeriod"/>
+                           name="interestRatePerPeriod" class="form-control" ng-model="formData.interestRatePerPeriod" required late-validate>
                 </div>
                 <div class="col-sm-2">
                     <input id="maxInterestRatePerPeriod" placeholder="{{'label.input.maximum' | translate}}" type="text"
@@ -1211,7 +1211,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td><a ng-click="deleteCharge($index)"><i class="fa fa-times "></i></a></td>
+                        <td><a ng-click="deleteCharge($index)"><i class="fa fa-times-circle fa-2x"></i></a></td>
                     </tr>
                 </table>
             </div>
@@ -1539,7 +1539,7 @@
                 </fieldset>
             </form>
         </wz-step>
-        <wz-step wz-title = "Preview">
+        <wz-step ng-if="isClicked" wz-title = "Preview">
             <form name="Preview" novalidate="" class="form-horizontal  ">
                 <fieldset>
                     <api-validate></api-validate>
