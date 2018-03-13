@@ -12,8 +12,6 @@
                 </div>
                 <div class="col-md-6">
                     <a href="#/createemployee" class="btn btn-primary pull-right" has-permission='CREATE_STAFF'><i class="fa fa-plus "></i>{{'label.button.createemployee' | translate }}</a>
-                    <a href="#/bulkimportemployees" class="btn btn-primary pull-right" has-permission='CREATE_STAFF'>
-                        <i class="fa fa-upload"></i>&nbsp;{{'label.button.importemployees' | translate}}</a>
                 </div>
             </div>
             </div>
@@ -24,7 +22,7 @@
                     <th>{{ 'label.heading.name' | translate }}</th>
                     <th>{{ 'label.heading.isLoanOfficer' | translate }}</th>
                     <th>{{ 'label.heading.office' | translate }}</th>
-                    <th>{{ 'label.heading.status' | translate }}</th>
+                    <th>{{ 'label.active' | translate }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -32,9 +30,7 @@
                     <td class="pointer" data-ng-click="routeTo(employee.id)">{{employee.displayName}}</td>
                     <td class="pointer" data-ng-click="routeTo(employee.id)">{{employee.isLoanOfficer}}</td>
                     <td class="pointer" data-ng-click="routeTo(employee.id)">{{employee.officeName}}</td>
-                    <td class="pointer" data-ng-click="routeTo(employee.id)">
-                        <i class="fa fa-stop {{'employees.StatusType.active.' + employee.isActive | StatusLookup}}" uib-tooltip="{{'label.tooltip.employees.active.' + employee.isActive | translate}}" tooltip-placement="right"></i>
-                    </td>
+                    <td class="pointer" data-ng-click="routeTo(employee.id)">{{employee.isActive}}</td>
                 </tr>
                 </tbody>
             </table>

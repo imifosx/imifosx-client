@@ -4,8 +4,7 @@
 			"Andriykopanytsia",
 			"Green Zero",
 			"Visem",
-			"SimondR",
-			"Renamerr"
+			"SimondR"
 		]
 	},
 	"label.heading.name": "Ім'я",
@@ -194,7 +193,6 @@
 	"label.and": "та",
 	"label.message.password.expired": "Термін дії вашого пароля закінчився, будь ласка, оновіть пароль",
 	"label.select": "--Вибір--",
-	"label.delete": "Видалити",
 	"label.error": "Помилка",
 	"error.login.failed": "Будь ласка, спробуйте ще раз, у вас неприпустимі облікові дані.",
 	"error.msg.command.unsupported": "Програмна помилка: вжита команда не підтримується.",
@@ -2263,9 +2261,5 @@
 	"error.msg.client.active.for.update.parameter.savingsProductId": "Не можна змінити ощадний рахунок, якщо клієнт є активним",
 	"label.input.opensavingsproduct": "відкрити рахунок овердрафту",
 	"------------------": "------------",
-	"label.heading.notification": "Сповіщення",
-	"reportRunFrequency.daily": "Щодня",
-	"reportRunFrequency.weekly": "Щотижня",
-	"reportRunFrequency.monthly": "Щомісячно",
-	"reportRunFrequency.yearly": "Щорічно"
+	"label.heading.notification": "Сповіщення"
 }
