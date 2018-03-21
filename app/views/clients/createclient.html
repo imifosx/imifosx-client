@@ -256,17 +256,18 @@
                      </div>
                   </div>
                   <div class="form-group" ng-show="showSavingOptions">
-                     <label class="control-label col-sm-2">{{ 'label.input.opensavingsproduct' | translate }}&nbsp;</label>
-                     <div class="col-sm-3">
+                     <label class="control-label col-sm-2" ng-show="false">{{ 'label.input.opensavingsproduct' | translate }}&nbsp;</label>
+                     <div class="col-sm-3" ng-show="false">
                         <input id="opensavingsproduct" type="checkbox" ng-model="savings.opensavingsproduct" ng-true-value="true"
                            ng-false-value="false">
                      </div>
                      <div ng-show="savings.opensavingsproduct">
-                        <label class="control-label col-sm-2">{{'label.input.savingproduct' | translate}}</label>
+                        <label class="control-label col-sm-2">{{'label.input.savingproduct' | translate}}
+                            <span class="required">*</span></label>
                         <div class="col-sm-3">
                            <select id="savingsProductId" ng-model="formData.savingsProductId"
                               ng-options="savingProduct.id as savingProduct.name for savingProduct in savingproducts"
-                              value="{{savingProduct.id}}"  class="form-control">
+                              value="{{savingProduct.id}}"  class="form-control" required>
                               <option value="">--{{'label.menu.selectsavingproduct' | translate}}--</option>
                            </select>
                         </div>

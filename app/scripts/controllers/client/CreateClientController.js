@@ -14,7 +14,7 @@
             scope.restrictDate = new Date();
             scope.showSavingOptions = false;
             scope.savings = {};
-            scope.savings.opensavingsproduct = false;
+            scope.savings.opensavingsproduct = true;
             scope.forceOffice = null;
             scope.showNonPersonOptions = false;
             scope.clientPersonId = 1;
@@ -358,7 +358,7 @@
 
 
                 resourceFactory.clientResource.save(this.formData, function (data) {
-                    location.path('/viewclient/' + data.clientId);
+                    location.path('/createshareaccount/' + data.clientId);
                 });
             };
         }
