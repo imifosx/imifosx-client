@@ -4252,5 +4252,8 @@
     "label.selecton" : "Select On",
     "label.selectday" : "Select Day",
     "label.heading.repaymentscheduleing.rule" : "Repayment Scheduleing Type",
-	"label.heading.viewcertificate":"View Share Certificate"
+	"label.heading.viewcertificate":"View Share Certificate",
+
+    "validation.msg.sharesaccount.share.account.cannot.be.closed.before.closing.existing.loan": "Share account cannot be closed before closing existing loan account",
+    "validation.msg.sharesaccount.share.account.cannot.be.closed.before.closing.existing.savings": "Share account cannot be closed before closing existing savings account"
 }
