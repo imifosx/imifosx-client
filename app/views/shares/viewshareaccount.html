@@ -99,7 +99,7 @@
                                 <td ng-show="purchasedShare.type.value=='Charge Payment'">{{shareaccountdetails.currency.displaySymbol}}{{purchasedShare.amount | number}}</td>
                                 <td>{{shareaccountdetails.currency.displaySymbol}}{{purchasedShare.amount | number}}</td>
 								 <td><span ng-if="transaction.reversed!=true"
-								 ng-click="viewShareCertificate(shareaccountdetails.clientId)"> <i class="fa fa-file-text fa fa-large"></i> </span> </td>
+								 ng-click="viewShareCertificate(purchasedShare.id)"> <i class="fa fa-file-text fa fa-large"></i> </span> </td>
                             </tr>
                         </table>
                     </uib-tab>

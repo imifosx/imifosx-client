@@ -309,7 +309,7 @@
 
             };
 			
-			scope.viewShareCertificate = function (clientId) {
+			scope.viewShareCertificate = function (transactionId) {
                 scope.report = true;
                 scope.viewTransactionReport = true;
                 scope.viewSavingReport = false;
@@ -321,8 +321,8 @@
                 scope.baseURL += "?output-type=" + encodeURIComponent(scope.formData.outputType) + "&tenantIdentifier=" + $rootScope.tenantIdentifier+"&locale="+scope.optlang.code;
 
                 var reportParams = "";
-                var paramName = "R_clientId";
-                reportParams += encodeURIComponent(paramName) + "=" + encodeURIComponent(clientId);
+                var paramName = "R_transactionId";
+                reportParams += encodeURIComponent(paramName) + "=" + encodeURIComponent(transactionId);
                 if (reportParams > "") {
                     scope.baseURL += "&" + reportParams;
                 }
