@@ -4252,5 +4252,10 @@
     "label.selecton" : "Select On",
     "label.selectday" : "Select Day",
     "label.heading.repaymentscheduleing.rule" : "Repayment Scheduleing Type",
-	"label.heading.viewcertificate":"View Share Certificate"
+	"label.heading.viewcertificate":"View Share Certificate",
+
+	"label.tooltip.global.Share-Withdrawal-Limit": "Members cannot withdraw more than this value (in percentage) of paid-up share capital in one financial year.",
+	"label.tooltip.global.Share-Buying-Limit": "One member cannot subscribe to more than this value(in percentage) of paid-up share capital.",
+	"label.tooltip.global.Limit-Max-Deposit-With-Multiplier": "If enabled, this will add limits on how much can be deposited into a savings account, the value is the multiplier which is multiplied with the Avg-Deposit-In-Savings to determine the limiting value.",
+	"label.tooltip.global.Avg-Deposit-In-Savings": "The average deposit value in the savings account that is used in conjunction with Limit-Max-Deposit-With-Multiplier."
 }
