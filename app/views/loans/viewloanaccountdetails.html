@@ -498,7 +498,7 @@
 
                     <uib-tab heading="{{'label.heading.repaymentschedule' | translate}}">
 
-                        <table class="table table-striped .width100">
+                        <table id="mytable" class="table table-striped .width100">
                             <colgroup span="4"></colgroup>
                             <thead>
                             <tr>
@@ -574,6 +574,17 @@
                             </tr>
                             </tfoot>
                         </table>
+                        <b/>
+                        <script type="text/javascript">
+                            function printData() {
+                                var divToPrint = document.getElementById("mytable");
+                                newWin = window.open("");
+                                newWin.document.write(divToPrint.outerHTML);
+                                newWin.print();
+                                newWin.close();
+                            }
+                            </script>
+                       <button onclick="printData()"><b>PRINT SCHEDULE</b></button> 
 
                     </uib-tab>
 
