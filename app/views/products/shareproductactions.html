@@ -44,6 +44,19 @@
                 </div>
             </div>
 
+			<hr>
+	<div class="radio-inline">
+	    <label>
+	        <input type="radio" ng-model="formData.dividendDistribution" value="cash">{{'label.input.cash' |translate}}
+	    </label>
+	</div>
+	<div class="radio-inline">
+	    <label>
+	        <input type="radio" ng-model="formData.dividendDistribution" value="share">{{'label.input.share' |translate}}
+	    </label>
+	</div>
+	<hr>
+	
             <div class="form-group" data-ng-show="withdrawBalance">
                 <label class="control-label col-sm-2" for="withdrawBalance">{{ 'label.input.withdrawBalance' |
                     translate}}<span class="required">*</span></label>
