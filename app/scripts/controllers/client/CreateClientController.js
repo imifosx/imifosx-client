@@ -33,6 +33,7 @@
             scope.formDat.datatables = [];
             scope.tf = "HH:mm";
             scope.clientId = routeParams.clientId;
+			scope.formData.active = true;
 
 
             var requestParams = {staffInSelectedOfficeOnly:true};
