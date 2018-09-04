@@ -1,0 +1,1157 @@
+<div ng-controller="IjaraController" class="content-container">
+    
+	<div ng-controller="NewLoanAccAppController" class="content-container">
+	<ul class="breadcrumb">
+        <li ng-show="groupName">
+            <a href="#/viewgroup/{{groupId}}">
+                <strong>'{{groupName}}'</strong>
+            </a>
+        </li>
+        <li ng-show="clientName">
+            <a href="#/viewclient/{{clientId}}">
+                <strong>'{{clientName}}'</strong>
+            </a>
+        </li>
+        <li class="active">{{'label.anchor.ijaraapplication' | translate}}</li>
+    </ul>
+	
+    <wizard >
+        <div class="card">
+            <wz-step >
+			<form class="contact100-form validate-form" id="form1 "onsubmit="return false;">
+				<span class="contact100-form-title">
+
+				</span>
+				<select style="width:100%; padding-bottom: 10px;" id="c1" name="categories" onchange="checkval(this);">
+					<option value="">Select Category</option>
+					<option value="a1">Buildings</option>
+					<option value="a2">Bridges, culverts, bunders, etc. </option>
+					<option value="a3">Roads</option>
+					<option value="a4">Plant and Machinery</option>
+					<option value="a5">Furniture and fittings</option>
+					<option value="a6">Motor Vehicles </option>
+					<option value="a7">Ships </option>
+					<option value="a8">Aircrafts or Helicopters </option>
+					<option value="a9">Railways sidings, locomotives, rolling stocks, tramways, etc</option>
+					<option value="a10">Ropeway structures </option>
+					<option value="a11">Office equipment  </option>
+					<option value="a12">Computers and data processing units  </option>
+					<option value="a13">Laboratory equipment </option>
+					<option value="a14">Electrical Installations and Equipment </option>
+					<option value="a15">Hydraulic works, pipelines and sluices  </option>
+					<br>
+					</select>
+					<select name="types" id ="t1"    style="display:none; width:100%; padding-bottom: 10px;" onchange="checkval1(this);">
+					<option value="">Select Type</option>
+					<option value="">Buildings (other than factory buildings) RCC Frame Structure</option>
+					<option value="">Buildings (other than factory buildings) other than RCC Frame Structure</option>
+					</select>
+					<select name="types2" id="t2"    style="display:none; width:100%; padding-bottom: 10px;" onchange="checkval1(this);">
+					<option value="">Select Type</option>
+					<option value="">Carpeted roads</option>
+					<option value="">Non-carpeted roads</option>
+					</select>
+					<select name="types3" id="t3"    style="display:none; width:100%; padding-bottom: 10px;" onchange="checkval1(this);">
+					<option value="">Select Type</option>
+					<option value="">General rate applicable to plant and machinery</option>
+					<option value="">Special Plant and Machinery</option>
+					</select>
+					<select name="types4" id="t4"    style="display:none; width:100%; padding-bottom: 10px;" onchange="checkval1(this);">
+					<option value="">Select Type</option>
+					<option value="">General furniture and fittings</option>
+					<option value="">Furniture and fittings used in hotels, restaurants and boarding houses, schools, etc</option>
+					</select>
+					<select name="types5" id="t5"    style="display:none; width:100%; padding-bottom: 10px;" onchange="checkval1(this);">
+					<option value="">Select Type</option>
+					<option value="">Motor cycles, scooters and other mopeds</option>
+					<option value="">Motor buses, motor lorries, motor cars and motor taxies used in a business of running them on hire</option>
+					<option value="">Motor buses, motor lorries and motor cars other than those used in a business of running them on hire</option>
+					<option value="">Motor tractors, harvesting combines and heavy vehicles</option>
+					<option value="">Electrically operated vehicles including battery powered or fuel cell powered vehicles</option>
+					</select>
+					<select name="types6" id="t6"    style="display:none; width:100%; padding-bottom: 10px;" onchange="checkval1(this);">
+					<option value="">Select Type</option>
+					<option value="">Ocean-going ships</option>
+					<option value="">Vessels ordinarily operating on inland waters</option>
+					</select>
+					<select name="types7" id="t7"    style="display:none; width:100%; padding-bottom: 10px;" onchange="checkval1(this);">
+					<option value="">Select Type</option>
+					<option value="">Servers and networks</option>
+					<option value="">End user devices, such as, desktops, laptops, etc.</option>
+					</select>
+					<select name="types8" id="t8"    style="display:none; width:100%; padding-bottom: 10px;" onchange="checkval1(this);">
+					<option value="">Select Type</option>
+					<option value="">General laboratory equipment</option>
+					<option value="">Laboratory equipments used in educational institutions</option>
+					</select>
+					<select name="groups" id="g1"    style="display:none; width:100%; padding-bottom: 10px;" onchange="func_values(this);">
+					<option value="">Select Type</option>
+					<option value="">Carpeted Roads—RCC</option>
+					<option value="">Carpeted Roads—other than RCC</option>
+					</select>
+					<select name="groups2" id="g2"    style="display:none; width:100%; padding-bottom: 10px;" onchange="func_values1(this);">
+					<option value="">Select Type</option>
+					<option value="">Plant and Machinery other than continuous process plant not covered under specific industries</option>
+					<option value="">Continuous process plant for which no special rate has been prescribed under </option>
+					</select>
+					<select name="groups3" id="g3"    style="display:none; width:100%; padding-bottom: 10px;"  onchange="func_sg1(this);">
+					<option value="">Select Type</option>
+					<option value="">Plant and Machinery related to production and exhibition of Motion Picture Films</option>
+					<option value="">Plant and Machinery used in glass manufacturing </option>
+					<option value="">Plant and Machinery used in mines and quarries</option>
+					<option value="">Plant and Machinery used in Telecommunications</option>
+					<option value="">Plant and Machinery used in exploration, production and refining oil and gas </option>
+					<option value="">Plant and Machinery used in generation, transmission and distribution of power</option>
+					<option value="">Plant and Machinery used in manufacture of steel</option>
+					<option value="">Plant and Machinery used in manufacture of non-ferrous metals</option>
+					<option value="">Plant and Machinery used in medical and surgical operations</option>
+					<option value="">Plant and Machinery used in manufacture of pharmaceuticals and chemicals </option>
+					<option value="">Plant and Machinery used in civil construction</option>
+					<option value="">Plant and Machinery used in salt works</option>
+					</select>
+					<select name="groups4" id="g4"    style="display:none; width:100%; padding-bottom: 10px;" onchange="func_values2(this);">
+					<option value="">Select Type</option>
+					<option value="">Bulk Carriers and liner vessels</option>
+					<option value="">Crude tankers, product carriers and easy chemical carriers with or without conventional tank coatings</option>
+					<option value="">Chemicals and Acid Carriers : With Stainless steel tanks </option>
+					<option value="">Chemicals and Acid Carriers : With other tanks</option>
+					<option value="">Liquified gas carriers</option>
+					<option value="">Conventional large passenger vessels which are used for cruise purpose also</option>
+					<option value="">Coastal service ships of all categories</option>
+					<option value="">Offshore supply and support vessels</option>
+					<option value="">Catamarans and other high speed passenger for ships or boats</option>
+					<option value="">Drill ships</option>
+					<option value="">Hovercrafts</option>
+					<option value="">Fishing vessels with wooden hull</option>
+					<option value="">Dredgers, tugs, barges, survey launches and other similar ships used mainly for dredging purposes</option>
+					</select>
+					<select name="groups5" id="g5"    style="display:none; width:100%; padding-bottom: 10px;" onchange="func_values2(this);">
+					<option value="">Select Type</option>
+					<option value="">Speed boats</option>
+					<option value="">Other vessels</option>
+					</select>
+					<select name="subgroups" id="sg1"    style="display:none; width:100%; padding-bottom: 10px;"  onchange="sg_values_all(this)">
+					<option value="">Select Type</option>
+					<option value="">Cinematograph films—Machinery used in the production and exhibition of cinematograph films</option>
+					<option value="">Projecting equipment for exhibition of films</option>
+					</select>
+					<select name="subgroups2" id="sg2"    style="display:none; width:100%; padding-bottom: 10px;"  onchange="sg_values_all(this)">
+					<option value="">Select Type</option>
+					<option value="">Plant and Machinery except direct fire glass melting furnaces</option>
+					<option value="">Plant and Machinery except direct fire glass melting furnaces </option>
+					<option value="">Float Glass Melting Furnaces</option>
+					</select>
+					<select name="subgroups4" id="sg4"    style="display:none; width:100%; padding-bottom: 10px;"  onchange="sg_values_all(this)">
+					<option value="">Select Type</option>
+					<option value="">Towers</option>
+					<option value="">Telecom transreceivers, switching centres, transmission and other network equipment</option>
+					<option value="">Telecom—Ducts, Cables and optical fibre</option>
+					<option value="">Satellites</option>
+					</select>
+					<select name="subgroups5" id="sg5"    style="display:none; width:100%; padding-bottom: 10px;"  onchange="sg_values_all(this)">
+					<option value="">Select Type</option>
+					<option value="">Refineries</option>
+					<option value="">Oil and gas assets (including wells), processing plant and facilities</option>
+					<option value="">Petrochemical Plant</option>
+					<option value="">Storage tanks and related equipment</option>
+					<option value="">Pipelines</option>
+					<option value="">Drilling Rig</option>
+					<option value="">Field operations (above ground) Portable boilers, drilling tools, well-head tanks, etc.</option>
+					<option value="">Loggers</option>
+					</select>
+					<select name="subgroups6" id="sg6"    style="display:none; width:100%; padding-bottom: 10px;"  onchange="sg_values_all(this)">
+					<option value="">Select Type</option>
+					<option value="">Thermal/Gas/Combined Cycle Power Generation Plant</option>
+					<option value="">Hydro Power Generation Plant</option>
+					<option value="">Nuclear Power Generation Plant</option>
+					<option value="">Transmission lines, cables and other network assets</option>
+					<option value="">Wind Power Generation Plant</option>Sinter Plant
+					<option value="">Electric Distribution Plant</option>
+					<option value="">Gas Storage and Distribution Plant</option>
+					<option value="">Water Distribution Plant including pipelines</option>
+					</select>
+					<select name="subgroups7" id="sg7"    style="display:none; width:100%; padding-bottom: 10px;"  onchange="sg_values_all(this)">
+					<option value="">Select Type</option>
+					<option value="">Sinter Plant</option>
+					<option value="">Blast Furnace</option>
+					<option value="">Coke ovens</option>
+					<option value="">Rolling mill in steel plant</option>
+					<option value="">Basic oxygen Furnace Converter</option>
+					</select>
+					<select name="subgroups8" id="sg8"    style="display:none; width:100%; padding-bottom: 10px;"  onchange="sg_values_all(this)">
+					<option value="">Select Type</option>
+					<option value="">Metal pot line </option>
+					<option value="">Bauxite crushing and grinding section</option>
+					<option value="">Digester section</option>
+					<option value="">Turbine</option>
+					<option value="">Equipments for Calcination </option>
+					<option value="">Copper Smelter </option>
+					<option value="">Roll Grinder</option>
+					<option value="">Soaking Pit</option>
+					<option value="">Annealing Furnace</option>
+					<option value="">Rolling Mills</option>
+					<option value="">Equipments for Scalping, Slitting, etc.</option>
+					<option value="">Surface Miner, Ripper Dozer, etc., used in mines</option>
+					<option value="">Copper refining plant </option>
+					</select>
+					<select name="subgroups9" id="sg9"    style="display:none; width:100%; padding-bottom: 10px;" onchange="sg_values_all(this)" >
+					<option value="">Select Type</option>
+					<option value="">Electrical Machinery, X-ray and electrotherapeutic apparatus and accessories</option>
+					<option value="">Other Equipments.</option>
+					</select>
+					<select name="subgroups10" id="sg10"    style="display:none; width:100%; padding-bottom: 10px;"  onchange="sg_values_all(this)">
+					<option value="">Select Type</option>
+					<option value="">Electrical Machinery, X-ray and electrotherapeutic apparatus and accessories</option>
+					<option value="">Reactors</option>
+					<option value="">Distillation Columns</option>
+					<option value="">Drying equipments/Centrifuges and Decanters</option>
+					<option value="">Vessel/storage tanks</option>
+					</select>
+					<select name="subgroups11" id="sg11"    style="display:none; width:100%; padding-bottom: 10px;"  onchange="sg_values_all(this)">
+					<option value="">Select Type</option>
+					<option value="">Concreting, Crushing, Piling Equipments and Road Making Equipments</option>
+					<option value="">Heavy Lift Equipments : Cranes with capacity of more than 100 tons</option>
+					<option value="">Heavy Lift Equipments : Cranes with capacity of less than 100 tons</option>
+					<option value="">Transmission line, Tunneling Equipments </option>
+					<option value="">Earth-moving equipments</option>
+					<option value="">Others including Material Handling /Pipeline/Welding Equipments </option>
+					</select>
+
+					<select name="values" id="v1"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+					<option value="">values</option>
+					<option value="">60</option>
+					<option value="">30</option>
+					</select>
+					<select name="values2" id="v2"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+					<option value="">30</option>
+					</select>
+					<select name="values3" id="v3"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+					<option value="">values</option>
+					<option value="">10</option>
+					<option value="">05</option>
+					</select>
+					<select name="values4" id="v4"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+					<option value="">values</option>
+					<option value="">15</option>
+					<option value="">25</option>
+					</select>
+					<select name="values5" id="v5"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+					<option value="">values</option>
+					<option value="">10</option>
+					<option value="">08</option>
+					</select>
+					<select name="values6" id="v6"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+					<option value="">values</option>
+					<option value="">10</option>
+					<option value="">06</option>
+					<option value="">08</option>
+					<option value="">08</option>
+					<option value="">08</option>
+					</select>
+					<select name="values7" id="v7"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+					<option value="">values</option>
+					<option value="">25</option>
+					<option value="">20</option>
+					<option value="">25</option>
+					<option value="">20</option>
+					<option value="">30</option>
+					<option value="">30</option>
+					<option value="">30</option>
+					<option value="">20</option>
+					<option value="">20</option>
+					<option value="">25</option>
+					<option value="">15</option>
+					<option value="">10</option>
+					<option value="">14</option>
+					</select>
+					<select name="values8" id="v8"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+					<option value="">values</option>
+					<option value="">13</option>
+					<option value="">28</option>
+					</select>
+					<select name="values9" id="v9"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+					<option value="">values</option>
+					<option value="">06</option>
+					<option value="">03</option>
+					</select>
+					<select name="values10" id="v10"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+					<option value="">values</option>
+					<option value="">10</option>
+					<option value="">05</option>
+					</select>
+					<select name="type_values" id="tv1"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+					<option value="">03</option>
+					</select>
+					</select>
+					<select name="type_values2" id="tv2"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+					<option value="">20</option>
+					</select>
+					</select>
+					<select name="type_values3" id="tv3"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+					<option value="">15</option>
+					</select>
+					</select>
+					<select name="type_value4" id="tv4"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+					<option value="">15</option>
+					</select>
+					</select>
+					<select name="type_value5" id="tv5"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+					<option value="">05</option>
+					</select>
+					</select>
+					<select name="type_values6" id="tv6"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+					<option value="">10</option>
+					</select>
+					</select>
+					<select name="type_values7" id="tv7"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+					<option value="">15</option>
+					</select>
+					<select name="group_values" id="gv1"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+					<option value="">08</option>
+					</select>
+					<select name="group_values2" id="gv2"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+					<option value="">15</option>
+					</select>
+					<select name="sg_values" id="sgv1"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+					<option value="">values</option>
+					<option value="">13</option>
+					<option value="">23</option>
+					</select>
+					<select name="sg_values2" id="sgv2"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+					<option value="">values</option>
+					<option value="">13</option>
+					<option value="">08</option>
+					<option value="">10</option>
+					</select>
+					<select name="sg_values4" id="sgv4"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+					<option value="">values</option>
+					<option value="">18</option>
+					<option value="">13</option>
+					<option value="">18</option>
+					<option value="">18</option>
+					</select>
+					<select name="sg_values5" id="sgv5"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+					<option value="">values</option>
+					<option value="">25</option>
+					<option value="">25</option>
+					<option value="">25</option>
+					<option value="">25</option>
+					<option value="">30</option>
+					<option value="">30</option>
+					<option value="">08</option>
+					<option value="">08</option>
+					</select>
+					<select name="sg_values6" id="sgv6"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+					<option value="">values</option>
+					<option value="">40</option>
+					<option value="">40</option>
+					<option value="">40</option>
+					<option value="">40</option>
+					<option value="">22</option>
+					<option value="">35</option>
+					<option value="">30</option>
+					<option value="">030</option>
+					</select>
+					<select name="sg_values7" id="sgv7"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+					<option value="">values</option>
+					<option value="">20</option>
+					<option value="">20</option>
+					<option value="">20</option>
+					<option value="">20</option>
+					<option value="">25</option>
+					</select>
+					<select name="sg_values8" id="sgv8"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+					<option value="">values</option>
+					<option value="">40</option>
+					<option value="">40</option>
+					<option value="">40</option>
+					<option value="">40</option>
+					<option value="">40</option>
+					<option value="">40</option>
+					<option value="">40</option>
+					<option value="">30</option>
+					<option value="">30</option>
+					<option value="">30</option>
+					<option value="">30</option>
+					<option value="">25</option>
+					<option value="">25</option>
+					</select>
+					<select name="sg_values9" id="sgv9"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+					<option value="">values</option>
+					<option value="">13</option>
+					<option value="">15</option>
+					</select>
+					<select name="sg_values10" id="sgv10"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+					<option value="">values</option>
+					<option value="">20</option>
+					<option value="">20</option>
+					<option value="">20</option>
+					<option value="">20</option>
+					</select>
+					<select name="sg_values11" id="sgv11"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+					<option value="">values</option>
+					<option value="">12</option>
+					<option value="">20</option>
+					<option value="">15</option>
+					<option value="">10</option>
+					<option value="">09</option>
+					<option value="">12</option>
+					</select>
+					</select>
+				
+				<br/>				
+				<div class="wrap-input100 validate-input" data-validate="Base Price is Required">
+					<span class="label-input100">Base Price</span>
+					<input class="input100" type="text" name="name" placeholder="BASE PRICE" onkeypress="return isNumber(evt)" id="userInput">
+					<span class="focus-input100"></span>
+				</div>
+
+				<div class="wrap-input100 validate-input" data-validate="Term Of Lease is Required">
+					<span class="label-input100">Term Of Lease</span>
+					<input class="input100" type="text" name="name" placeholder="TERM OF LEASE" onkeypress="return isNumber(evt)"  id="userInput1">
+					<span class="focus-input100"></span>
+				</div>
+				
+				<div class="wrap-input100 validate-input" data-validate = "Enter Residual Value">
+					<span class="label-input100">Residual Value</span>
+					<input class="input100" type="text" name="residual" placeholder="RESIDUAL VALUE" onkeypress="return isNumber(evt)"  id="userInput2">
+					<span class="focus-input100"></span>
+				</div>
+
+				
+				 <div class="card">
+                    <api-validate></api-validate>
+                    <form name="newloanaccountform" novalidate="" rc-submit="submit()" class="well form-inline">
+                    <table class="table width100">
+                        <tr>
+                            <td class="width14">
+                                <label>{{ 'label.input.product' | translate }}<span class="required">*</span>:&nbsp;</label>
+                                <i class="fa fa-question-sign" tooltip="{{'label.tooltip.product' | translate}}"></i>
+                            </td>
+                            <td class="width36 paddedbottom10">
+                                <select id="productId" ng-model="formData.productId" class="form-control width170px"
+                                        ng-options="product.id[1] as product.name for product in products" value="{{product.id}}"  disabled = "isdisabled"
+                                        ng-init="loanProductChange(formData.productId)" required="required">
+                                    <option style="display:none" value="">{{'label.selectloanproduct' | translate}}</option>
+                                </select>
+                            </td>
+                            <td class="width14">
+                                <label ng-show="true">{{ 'label.input.loanofficer' | translate }}:&nbsp;</label>
+                                <i ng-show="true" class="fa fa-question-sign" tooltip="{{'label.tooltip.loanofficer' | translate}}"></i>
+                            </td>
+                            <td class="width36 paddedbottom10">
+                                <select ng-show="true" id="loanOfficerId" ng-model="formData.loanOfficerId"
+                                        ng-options="loanOfficer.id as loanOfficer.displayName for loanOfficer in loanaccountinfo.loanOfficerOptions | orderBy:'displayName':reverse"
+                                        class="form-control width170px" value="{{loanOfficer.id}}">
+                                    <option value="">{{'label.selectloanofficer' | translate}}</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr ng-show="true">
+                            <td><label>{{ 'label.input.loanpurpose' | translate }}:&nbsp;</label>
+                            <i class="fa fa-question-sign" tooltip="{{'label.tooltip.loanpurpose' | translate}}"></i></td>
+                            <td class="paddedbottom10">
+                                <select ng-show="true" id="loanPurposeId" ng-model="formData.loanPurposeId"
+                                        ng-options="loanPurpose.id as loanPurpose.name for loanPurpose in loanaccountinfo.loanPurposeOptions | orderBy:'name':reverse"
+                                        class="form-control width170px" value="{{loanPurpose.id}}">
+                                    <option value="">{{'label.selectpurpose' | translate}}</option>
+                                </select>
+                            </td>
+			     <td class="width14">
+                                <label ng-show="true">{{ 'label.input.loanofficer' | translate }}:&nbsp;</label>
+                                <i ng-show="true" class="fa fa-question-sign" tooltip="{{'label.tooltip.loanofficer' | translate}}"></i>
+                            </td>
+                            <td class="width36 paddedbottom10">
+                                <select ng-show="true" id="loanPurposeId" ng-model="formData.loanPurposeId"
+                                        ng-options="loanPurpose.id as loanPurpose.name for loanPurpose in loanaccountinfo.loanPurposeOptions | orderBy:'name':reverse"
+                                        class="form-control width170px" value="{{loanPurpose.id}}">
+                                    <option value="">{{'label.selectloanofficer' | translate}}</option>
+                                </select>
+                            </td>
+                          
+                        </tr>
+                        <tr ng-show="true">
+                            <td><label>{{ 'label.input.submittedon' | translate }}<span class="required">*</span>:&nbsp;</label>
+                            <i class="fa fa-question-sign" tooltip="{{'label.tooltip.submittedon' | translate}}"></i></td>
+                            <td class="paddedbottom10">
+                                <input type="text" id="submittedOnDate" name="submittedon" datepicker-pop="dd MMMM yyyy"
+                                    ng-model="date.first" is-open="opened" min="'2000-01-01'" max="restrictDate" class="form-control"/>
+                            </td>
+                            <td>
+                                <label title="{{ 'label.input.expecteddisbursementon' | translate }}">{{ 'label.input.disbursementon' | translate }}<span class="required">*</span>:&nbsp;</label>
+                                <i class="fa fa-question-sign" tooltip="{{'label.tooltip.disbursementon' | translate}}"></i>
+                            </td>
+                            <td class="paddedbottom10">
+                                <input id="expectedDisbursementDate" sort type="text" name="expecteddisbursementon"
+                                    datepicker-pop="dd MMMM yyyy" ng-model="date.second" is-open="opened1" min="minDate"
+                                    max="'2020-06-22'" class="form-control"/>
+                            </td>
+                        </tr>
+                        
+                    </table>
+                    <div ng-hide="previewRepayment">
+                        <div ng-show="true">
+                                                      
+                            <table ng-show="loanaccountinfo" ng-hide="previewRepayment" class="table width100">
+                                <tr>
+                                    <td class="width19"><label>{{ 'label.input.principal' | translate }}&nbsp;<span
+                                            class="required">*</span>:</label></td>
+                                    <td class="width31 paddedbottom10">
+                                        <input type="text"  class="form-control" id="principal" name="principal" ng-model="formData.principal"
+                                            number-format required late-Validate/>&nbsp;{{loanaccountinfo.currency.displaySymbol}}
+                                    <form-validate valattributeform="newloanaccountform" valattribute="principal"/>
+                                    </td>
+                                    <td class="width14"><label>{{ 'label.input.loanterm' | translate }}&nbsp;<span class="required">*</span>:</label>
+                                    </td>
+                                    <td class="width36 paddedbottom10">
+                                        <input id="loanTermFrequency" class="form-control" name="loanterm" type="text"
+                                            ng-model="formData.loanTermFrequency" required late-Validate/>
+                                        <select ng-disabled="response.uiDisplayConfigurations.loanAccount.isReadOnlyField.loanTermFrequencyType == true" id="loanTermFrequencyType" class="form-control" ng-model="formData.loanTermFrequencyType"
+                                                ng-options="termFrequencyType.id as termFrequencyType.value for termFrequencyType in loanaccountinfo.termFrequencyTypeOptions"
+                                                value="{{termFrequencyType.id}}"/>
+                                        <form-validate valattributeform="newloanaccountform" valattribute="loanterm"/>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div ng-show="loanaccountinfo" ng-hide="previewRepayment">                       
+                                <div class="col-md-12">
+                                    <label><strong>{{ 'label.heading.charges' | translate }}</strong></label>
+                                    <select ng-model="chargeFormData.chargeId"
+                                            ng-options="charge.id as (charge.name + ',' + charge.currency.displaySymbol) for charge in loanaccountinfo.chargeOptions|filter:loanaccountinfo.currency.code:strict"
+                                            value="{{charge.id}}" class="form-control width170px">
+                                        <option value="">{{'label.selectcharge' | translate}}</option>
+                                    </select>
+                                    <a ng-click="addCharge()"><i class="fa fa-plus "></i></a>
+                                </div>
+                                <table class="table width100" ng-show="charges.length>0">
+                                    <tr class="graybg">
+                                        <th>{{'label.heading.name' | translate}}</th>
+                                        <th>{{'label.heading.type' | translate}}</th>
+                                        <th>{{'label.heading.amount' | translate}}</th>
+                                        <th>{{'label.heading.collectedon' | translate}}</th>
+                                        <th>{{'label.heading.date' | translate}}</th>
+                                        <th>{{'label.heading.actions' | translate}}</th>
+                                    </tr>
+                                    <tr ng-repeat="charge in charges">
+                                        <td>{{charge.name}},{{charge.currency.displaySymbol}}</td>
+                                        <td>{{charge.chargeCalculationType.value}}</td>
+                                        <td><input id="{{charges[$index].amount}}" class="form-control" type="text" ng-model="charge.amount"
+                                                placeholder="{{'label.input.amount' | translate}}" number-format></td>
+                                        <td>{{charge.chargeTimeType.value}}</td>
+                                        <td>
+                                            <input id="charges[{{$index}}].duedate" type="text" datepicker-pop="dd MMMM yyyy" class="form-control"
+                                                placeholder="{{'label.input.duedate' | translate}}" ng-model="charge.dueDate"
+                                                is-open="'openedch'+$index" min="minDate" max="'2020-06-22'"/>
+                                        </td>
+                                        <td><a ng-click="deleteCharge($index)"><i class="fa fa-times "></i></a></td>
+                                    </tr>
+                                </table>
+                                <div ng-show="loanaccountinfo.overdueCharges.length>0">
+                                    <label><strong>{{ 'label.heading.overduepenalitycharge' | translate }}</strong></label>
+                                    <table class="table" class="width100" >
+                                        <tr class="graybg">
+                                            <th>{{'label.heading.name' | translate}}</th>
+                                            <th>{{'label.heading.type' | translate}}</th>
+                                            <th>{{'label.heading.amount' | translate}}</th>
+                                            <th>{{'label.heading.collectedon' | translate}}</th>
+                                        </tr>
+                                        <tr ng-repeat="charge in loanaccountinfo.overdueCharges">
+                                            <td>{{charge.name}},{{charge.currency.displaySymbol}}</td>
+                                            <td>{{charge.chargeCalculationType.value}}</td>
+                                            <td>{{charge.amount | number}}</td>
+                                            <td>{{charge.chargeTimeType.value}}</td>
+                                        </tr>
+                                    </table>
+                                </div>                               
+                                <div ng-hide="response.uiDisplayConfigurations.loanAccount.isHiddenSection.collateralSection == true">
+                                <table class="table" class="width100" ng-show="collaterals.length>0">
+                                    <tr class="graybg">
+                                        <th>{{'label.heading.type' | translate}}</th>
+                                        <th>{{'label.heading.value' | translate}}</th>
+                                        <th>{{'label.heading.description' | translate}}</th>
+                                        <th>{{'label.heading.actions' | translate}}</th>
+                                    </tr>
+                                    <tr ng-repeat="collateral in collaterals">
+                                        <td><input type="text" class="input-sm form-control" ng-model="collateral.name" readonly></td>
+                                        <td><input id="{{collaterals[$index].value}}" type="text" class="form-control"
+                                                ng-model="collateral.value"></td>
+                                        <td><input id="{{collaterals[$index].description}}" type="text" ng-model="collateral.description"
+                                                placeholder="{{'label.input.description' | translate}}" class="form-control"/></td>
+                                        <td><a ng-click="deleteCollateral($index)"><i class="fa fa-times "></i></a></td>
+                                    </tr>
+                                </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                <div ng-show="loanaccountinfo">
+<span><a ng-show="previewRepayment" ng-click="previewRepayment=!previewRepayment">{{'label.anchor.backtoloaninfo'
+| translate}}</i></a><br><br></span>
+                </div>
+                        <div class="center">
+                            <button id="save1" type="submit" class="btn btn-primary" ng-if="datatables">
+                                {{'label.button.proceed' | translate}}
+                            </button>
+                            <div ng-if="!datatables">
+                                <button id="cancel" type="reset" class="btn btn-default" ng-click="cancel()">{{'label.button.cancel' | translate}}</button>
+                                <button id="save" type="submit" has-permission='CREATE_LOAN' class="btn btn-primary" ng-show="loanaccountinfo">{{'label.button.save' |
+                                    translate}}
+                                </button>
+                            </div>
+                        </div>
+                        </fieldset>
+                    </form>
+                </div>
+                </wz-step>
+                <wz-step  ng-if="datatables" ng-repeat="datatable in datatables" title="{{datatable.registeredTableName}}"  id="dynamicSteps">
+                    <form class="form-horizontal well" ng-submit="submit()">
+                        <api-validate></api-validate>
+                        <fieldset>
+                            <h3><strong>{{datatable.registeredTableName}}</strong></h3>
+                            <hr/>
+                            <div class="form-group" ng-repeat="columnHeader in datatable.columnHeaderData">
+                                <label class="control-label col-sm-3">{{ columnHeader.columnName | prettifyDataTableColumn }}
+                                    <span ng-show="!columnHeader.isColumnNullable" class="required">*</span>
+                                </label>
+                                <div class="col-sm-3">
+                                    <input ng-show="fieldType(columnHeader.columnDisplayType) == 'TEXT'" type="text"
+                                            ng-model="formData.datatables[datatables.indexOf(datatable)].data[columnHeader.columnName]" class="form-control"/>
+                                    <input ng-show="fieldType(columnHeader.columnDisplayType) == 'DATE'" type="text"
+                                            datepicker-pop="dd MMMM yyyy" ng-model="formDat.datatables[datatables.indexOf(datatable)].data[columnHeader.columnName]"
+                                            is-open="opened{{$index}}" class="form-control"/>
+                                    <div ng-show="fieldType(columnHeader.columnDisplayType) == 'DATETIME'" class="form-inline">
+                                        <div class="form-group">
+                                            <input type="text" datepicker-pop="dd MMMM yyyy"
+                                                    ng-model="formDat.datatables[datatables.indexOf(datatable)].data[columnHeader.columnName].date"
+                                                    is-open="opened{{$index}}" class="form-control"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="time" placeholder="HH:MM:SS"
+                                                    ng-model="formDat.datatables[datatables.indexOf(datatable)].data[columnHeader.columnName].time" class="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div ng-show="fieldType(columnHeader.columnDisplayType) == 'BOOLEAN'">
+                                        <label class="radio-inline">
+                                            <input type="radio" ng-model="formData.datatables[datatables.indexOf(datatable)].data[columnHeader.columnName]"
+                                                    value="true"/>
+                                            {{'label.input.true' | translate}}
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" ng-model="formData.datatables[datatables.indexOf(datatable)].data[columnHeader.columnName]"
+                                                    value="false"/>
+                                            {{'label.input.false' | translate}}
+                                        </label>
+                                    </div>
+                                    <span data-ng-switch on="columnHeader.columnDisplayType">
+                                        <select ng-show="fieldType(columnHeader.columnDisplayType) == 'SELECT'"
+                                                data-ng-switch-when="CODELOOKUP"
+                                                ng-model="formData.datatables[datatables.indexOf(datatable)].data[columnHeader.columnName]"
+                                                ng-options="columnValue.id as columnValue.value for columnValue in columnHeader.columnValues"
+                                                value="{{columnValue.id}}" class="form-control">
+                                            <option value="">{{'label.selectone' | translate}}</option>
+                                        </select>
+                                        <select ng-show="fieldType(columnHeader.columnDisplayType) == 'SELECT'"
+                                                data-ng-switch-when="CODEVALUE"
+                                                ng-model="formData.datatables[datatables.indexOf(datatable)].data[columnHeader.columnName]"
+                                                ng-options="columnValue.value as columnValue.value for columnValue in columnHeader.columnValues"
+                                                value="{{columnValue.id}}" class="form-control">
+                                            <option value="">{{'label.selectone' | translate}}</option>
+                                        </select>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="pull-right" ng-if="!$last">
+                                <button id="save4" type="submit" class="btn btn-primary">
+                                    {{'label.button.proceed' | translate}}
+                                </button>
+                            </div>
+                            <div class="col-md-offset-5" ng-if="$last">
+                                <button id="cancel3" type="reset" class="btn btn-default" ng-click="cancel()">{{'label.button.cancel' | translate}}</button>
+                                <button id="save3" type="submit" has-permission='CREATE_LOAN' class="btn btn-primary" ng-show="loanaccountinfo">{{'label.button.save' |
+                                    translate}}
+                                </button>
+                            </div>
+                        </fieldset>
+                    </form>					
+                </wz-step>				
+                    </div>
+                </wizard>
+	</div>
+</div>
+<div class="container-contact100-form-btn">
+					<div class="wrap-contact100-form-btn">
+						<div class="contact100-form-bgbtn"></div>
+						<button class="contact100-form-btn" type="submit" onclick="calculate_ijara();">
+							<span>
+								CALCULATE
+								
+							</span>
+						</button>
+					</div>
+				</div>
+				<div class="container-contact100-form-btn">
+					<div class="wrap-contact100-form-btn">
+						<div class="contact100-form-bgbtn"></div>
+						<button class="contact100-form-btn" value="Clear Results" onClick="">
+							<span>
+								RESET
+							
+							</span>
+						</button>
+					</div>
+				</div>
+				
+					<center style = "font-size:25px ;">CALCULATED IJARA</center>
+					<div class="container-contact100-form-btn">
+						<div class="wrap-contact100-form-btn">
+							<div class="contact100-form-bgbtn"></div>
+							<button style = "font-size:40px ;"class="contact100-form-btn" id="result">
+							</button>
+							</h2>
+							<center>
+						</div>
+					</div>
+			</form>
+            </div>
+        </div>
+               
+	<script language="JavaScript" type="text/javascript">
+	var glob_var=0;
+	var cal_var=0;
+	var term_of_lease=0;
+	var base_price=0;
+	var id = "form1";
+	function resetForm(id) {
+    $('#'+id).each(function(){
+        this.reset();
+    });
+}
+
+function resetForm() {
+    document.getElementById("myForm").reset();
+}
+	function calculate_ijara(){
+		var residual_value=0;
+		base_price = document.getElementById("userInput").value
+		term_of_lease = document.getElementById("userInput1").value
+		if(term_of_lease>=glob_var){
+		residual_value = document.getElementById("userInput2").value
+		var cal1 = (base_price/glob_var)*term_of_lease;
+		var cal2 = +base_price + +cal1;
+		var cal =   parseFloat(cal2).toFixed(2);
+		cal = cal -  residual_value;
+		document.getElementById("result").innerHTML = cal;
+		}
+		else{
+		var cal1 = (base_price/glob_var)*term_of_lease;
+		var cal2 = +base_price + +cal1;
+		var cal =   parseFloat(cal2).toFixed(2);
+		document.getElementById("result").innerHTML = cal;
+		}
+		}
+		var evt;
+		function isNumber(evt) {
+			evt = (evt) ? evt : window.event;
+			var charCode = (evt.which) ? evt.which : evt.keyCode;
+			if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+				return false;
+			}
+			return true;
+		}
+
+
+	function checkval(sel) {
+	if (sel.selectedIndex==1){
+		var val2 = document.getElementById('t1').name
+	  sel.form[val2].style.display=sel.selectedIndex==1?'block':'none';  
+	  }
+	else if(sel.selectedIndex==2){
+	  
+	  var val2 = document.getElementById('v2').name
+	  sel.form[val2].style.display=sel.selectedIndex==2?'block':'none';  
+	  cal_var = document.getElementById("v2");
+	  glob_var = cal_var.options[cal_var.selectedIndex].text;
+	  }
+	 else if(sel.selectedIndex==3){
+	  
+	  var val2 = document.getElementById('t2').name
+	  sel.form[val2].style.display=sel.selectedIndex==3?'block':'none';  
+	  }
+	  else if(sel.selectedIndex==4){
+	  
+	  var val2 = document.getElementById('t3').name
+	  sel.form[val2].style.display=sel.selectedIndex==4?'block':'none';  
+	  }
+	  else if(sel.selectedIndex==5){
+	  
+	  var val2 = document.getElementById('t4').name
+	  sel.form[val2].style.display=sel.selectedIndex==5?'block':'none';  
+	  }
+	  else if(sel.selectedIndex==6){
+	  
+	  var val2 = document.getElementById('t5').name
+	  sel.form[val2].style.display=sel.selectedIndex==6?'block':'none';  
+	  }
+	  else if(sel.selectedIndex==7){
+	  
+	  var val2 = document.getElementById('t6').name
+	  sel.form[val2].style.display	=sel.selectedIndex==7?'block':'none';  
+	  }
+	  else if(sel.selectedIndex==8){
+	  var val2 = document.getElementById('tv2').name
+	  sel.form[val2].style.display=sel.selectedIndex==8?'block':'none';  
+	  cal_var = document.getElementById("tv2");
+	  glob_var = cal_var.options[cal_var.selectedIndex].text;
+	  }
+	  else if(sel.selectedIndex==9){
+	  var val2 = document.getElementById('tv3').name
+	  sel.form[val2].style.display=sel.selectedIndex==9?'block':'none'; 
+	  cal_var = document.getElementById("tv3");
+	  glob_var = cal_var.options[cal_var.selectedIndex].text;  
+	  }
+	  else if(sel.selectedIndex==10){
+	  var val2 = document.getElementById('tv4').name
+	  sel.form[val2].style.display=sel.selectedIndex==10?'block':'none';  
+	  cal_var = document.getElementById("tv4");
+	  glob_var = cal_var.options[cal_var.selectedIndex].text; 
+	  }
+	  else if(sel.selectedIndex==11){
+	  var val2 = document.getElementById('tv5').name
+	  sel.form[val2].style.display=sel.selectedIndex==11?'block':'none';  
+	  cal_var = document.getElementById("tv5");
+	  glob_var = cal_var.options[cal_var.selectedIndex].text; 
+	  }  
+	  else if(sel.selectedIndex==12){
+	  var val1 = document.getElementById('c1').selectedIndex
+	  var val2 = document.getElementById('t7').name
+	  sel.form[val2].style.display=sel.selectedIndex==12?'block':'none';  
+	  }
+	  else if(sel.selectedIndex==13){
+	  var val1 = document.getElementById('c1').selectedIndex
+	  var val2 = document.getElementById('t8').name
+	  sel.form[val2].style.display=sel.selectedIndex=13?'block':'none';  
+	  }
+	  else if(sel.selectedIndex==14){
+	  var val2 = document.getElementById('tv6').name
+	  sel.form[val2].style.display=sel.selectedIndex==14?'block':'none'; 
+	  cal_var = document.getElementById("tv6");
+	  glob_var = cal_var.options[cal_var.selectedIndex].text; 
+	  }
+	  else if(sel.selectedIndex==15){
+	  var val2 = document.getElementById('tv7').name
+	  sel.form[val2].style.display=sel.selectedIndex==15?'block':'none';
+	  cal_var = document.getElementById("tv7");
+	  glob_var = cal_var.options[cal_var.selectedIndex].text;   
+	  }  
+	} 
+
+
+	function checkval1(sel){
+
+	if(sel.name=='types'){
+		if(sel.selectedIndex==1|2)
+		var val3 = document.getElementById('v1').name
+		sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none';   
+		var x= sel.selectedIndex;
+		var y= document.getElementById('v1').options
+		glob_var = y[x].text;
+		}
+	else if(sel.name=='types2'){
+		if(sel.selectedIndex==1){
+		var val3 = document.getElementById('g1').name
+		sel.form[val3].style.display=sel.selectedIndex==1?'block':'none';   
+		}
+		if(sel.selectedIndex==2){
+		var val3 = document.getElementById('tv1').name
+		sel.form[val3].style.display=sel.selectedIndex==2?'block':'none';   
+	  cal_var = document.getElementById("tv7");
+	  glob_var = cal_var.options[cal_var.selectedIndex].text;  
+	  }
+	}
+
+	else if(sel.name=='types3'){
+		if(sel.selectedIndex==1){
+		var val3 = document.getElementById('g2').name
+		sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none';   
+		}	
+		else if(sel.selectedIndex==2){
+		var val3 = document.getElementById('g3').name
+		sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none';   
+		}	
+	}
+	else if(sel.name=='types4'){
+		if(sel.selectedIndex==1|2)
+		var val3 = document.getElementById('v5').name
+		sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none'; 
+		var x= sel.selectedIndex;
+		var y= document.getElementById('v5').options
+		glob_var = y[x].text;
+		}
+	else if(sel.name=='types5'){
+		if(sel.selectedIndex==1|2)
+		var val3 = document.getElementById('v6').name
+		sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none';   
+		var x= sel.selectedIndex;
+		var y= document.getElementById('v6').options
+		glob_var = y[x].text;
+		}
+	else if(sel.name=='types6'){
+		if(sel.selectedIndex==1){
+		var val3 = document.getElementById('g4').name
+		sel.form[val3].style.display=sel.selectedIndex==1?'block':'none';   
+		}
+		if(sel.selectedIndex==2){
+		var val3 = document.getElementById('g5').name
+		sel.form[val3].style.display=sel.selectedIndex==2?'block':'none';   
+		}
+	}
+	else if(sel.name=='types7'){
+		if(sel.selectedIndex==1|2)
+		var val3 = document.getElementById('v9').name
+		sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none';   
+		var x= sel.selectedIndex;
+		var y= document.getElementById('v9').options
+		glob_var = y[x].text;
+		}
+	else if(sel.name=='types8'){
+		if(sel.selectedIndex==1|2)
+		var val3 = document.getElementById('v10').name
+		sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none';   
+		var x= sel.selectedIndex;
+		var y= document.getElementById('v10').options
+		glob_var = y[x].text;
+		}
+
+	}
+
+	function func_values(sel){
+
+		var val3 = document.getElementById('v3').name
+		sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none';   
+		var x= sel.selectedIndex;
+		var y= document.getElementById('v3').options
+		glob_var = y[x].text;
+	}
+	function func_values1(sel){
+		var val3 = document.getElementById('v4').name
+		sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none';   
+		var x= sel.selectedIndex;
+		var y= document.getElementById('v4').options
+		glob_var = y[x].text;
+	}
+
+	function func_values2(sel){
+	if(sel.name=='groups4'){
+		if(sel.selectedIndex==1|2|3|4|5|6|7|8|9|10|11|12|13){
+		var val3 = document.getElementById('v7').name
+		sel.form[val3].style.display=sel.selectedIndex==1|2|3|4|5|6|7|8|9|10|11|12|13?'block':'none';   
+		var x= sel.selectedIndex;
+		var y= document.getElementById('v7').options
+		glob_var = y[x].text;
+		}
+		}
+	else if(sel.name=='groups5'){
+		if(sel.selectedIndex==1|2){
+		var val3 = document.getElementById('v8').name
+		sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none';   
+		var x= sel.selectedIndex;
+		var y= document.getElementById('v8').options
+		glob_var = y[x].text;
+		}
+	}
+	}
+	function func_sg1(sel){
+	if(sel.selectedIndex==1){
+		var val3 = document.getElementById('sg1').name
+		sel.form[val3].style.display=sel.selectedIndex==1?'block':'none';   
+		}
+	else if(sel.selectedIndex==2){
+		var val3 = document.getElementById('sg2').name
+		sel.form[val3].style.display=sel.selectedIndex==2?'block':'none';
+	}
+	else if(sel.selectedIndex==3){
+		var val3 = document.getElementById('gv1').name
+		sel.form[val3].style.display=sel.selectedIndex==3?'block':'none';	
+		var x= sel.selectedIndex;
+		var y= document.getElementById('gv1').options
+		glob_var = y[x].text;
+	}
+	else if(sel.selectedIndex==4){
+		var val3 = document.getElementById('sg4').name
+		sel.form[val3].style.display=sel.selectedIndex==4?'block':'none';   
+	}
+	else if(sel.selectedIndex==5){
+		var val3 = document.getElementById('sg5').name
+		sel.form[val3].style.display=sel.selectedIndex==5?'block':'none';   
+	}
+	else if(sel.selectedIndex==6){
+		var val3 = document.getElementById('sg6').name
+		sel.form[val3].style.display=sel.selectedIndex==6?'block':'none';   
+	}
+	else if(sel.selectedIndex==7){
+		var val3 = document.getElementById('sg7').name
+		sel.form[val3].style.display=sel.selectedIndex==7?'block':'none';   
+	}
+	else if(sel.selectedIndex==8){
+		var val3 = document.getElementById('sg8').name
+		sel.form[val3].style.display=sel.selectedIndex==8?'block':'none';   
+	}
+	else if(sel.selectedIndex==9){
+		var val3 = document.getElementById('sg9').name
+		sel.form[val3].style.display=sel.selectedIndex==9?'block':'none';   
+	}
+	else if(sel.selectedIndex==10){
+		var val3 = document.getElementById('sg10').name
+		sel.form[val3].style.display=sel.selectedIndex==10?'block':'none';   
+	}
+	else if(sel.selectedIndex==11){
+		var val3 = document.getElementById('sg11').name
+		sel.form[val3].style.display=sel.selectedIndex==11?'block':'none';   
+	}
+	else if(sel.selectedIndex==12){
+		var val3 = document.getElementById('gv2').name
+		sel.form[val3].style.display=sel.selectedIndex==12?'block':'none';   
+		var x= sel.selectedIndex;
+		var y= document.getElementById('gv2').options
+		glob_var = y[x].text;
+	}
+	}
+
+	function sg_values_all(sel){
+	if(sel.name=='subgroups'){
+		if(sel.selectedIndex==1|2)
+		var val3 = document.getElementById('sgv1').name
+		sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none';   
+		var x= sel.selectedIndex;
+		var y= document.getElementById('sgv1').options
+		glob_var = y[x].text;
+		}
+	else if(sel.name=='subgroups2'){
+		if(sel.selectedIndex==1|2|3)
+		var val3 = document.getElementById('sgv2').name
+		sel.form[val3].style.display=sel.selectedIndex==1|2|3?'block':'none';   
+		var x= sel.selectedIndex;
+		var y= document.getElementById('sgv2').options
+		glob_var = y[x].text;
+		}
+	else if(sel.name=='subgroups4'){
+		if(sel.selectedIndex==1|2|3|4)
+		var val3 = document.getElementById('sgv4').name
+		sel.form[val3].style.display=sel.selectedIndex==1|2|3|4?'block':'none';   
+		var x= sel.selectedIndex;
+		var y= document.getElementById('sgv4').options
+		glob_var = y[x].text;	
+		}
+	else if(sel.name=='subgroups5'){
+		if(sel.selectedIndex==1|2|3|4|5|6|7|8)
+		var val3 = document.getElementById('sgv5').name
+		sel.form[val3].style.display=sel.selectedIndex==1|2|3|4|5|6|7|8?'block':'none';   
+		var x= sel.selectedIndex;
+		var y= document.getElementById('sgv5').options
+		glob_var = y[x].text;	
+		}
+	else if(sel.name=='subgroups6'){
+		if(sel.selectedIndex==1|2|3|4|5|6|7|8)
+		var val3 = document.getElementById('sgv6').name
+		sel.form[val3].style.display=sel.selectedIndex==1|2|3|4|5|6|7|8?'block':'none';   
+		var x= sel.selectedIndex;
+		var y= document.getElementById('sgv6').options
+		glob_var = y[x].text;
+		}
+	else if(sel.name=='subgroups7'){
+		if(sel.selectedIndex==1|2|3|4|5)
+		var val3 = document.getElementById('sgv7').name
+		sel.form[val3].style.display=sel.selectedIndex==1|2|3|4|5?'block':'none';   
+		var x= sel.selectedIndex;
+		var y= document.getElementById('sgv7').options
+		glob_var = y[x].text;
+		}
+	else if(sel.name=='subgroups8'){
+		if(sel.selectedIndex==1|2|3|4|5|6|7|8|9|10|11|12|13)
+		var val3 = document.getElementById('sgv8').name
+		sel.form[val3].style.display=sel.selectedIndex==1|2|3|4|5|6|7|8|9|10|11|12|13?'block':'none';  
+		var x= sel.selectedIndex;
+		var y= document.getElementById('sgv8').options
+		glob_var = y[x].text;	
+		}
+	else if(sel.name=='subgroups9'){
+		if(sel.selectedIndex==1|2)
+		var val3 = document.getElementById('sgv9').name
+		sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none';   
+		var x= sel.selectedIndex;
+		var y= document.getElementById('sgv9').options
+		glob_var = y[x].text;
+		}
+	else if(sel.name=='subgroups10'){
+		if(sel.selectedIndex==1|2|3|4)
+		var val3 = document.getElementById('sgv10').name
+		sel.form[val3].style.display=sel.selectedIndex==1|2|3|4?'block':'none';   
+		var x= sel.selectedIndex;
+		var y= document.getElementById('sgv10').options
+		glob_var = y[x].text;
+		}
+	else if(sel.name=='subgroups11'){
+		for (i = 1; i <= 6; i++){
+		if(sel.selectedIndex==i){
+		var val3 = document.getElementById('sgv11').name
+		sel.form[val3].style.display=sel.selectedIndex==i?'block':'none'; 
+		var x= sel.selectedIndex;
+		var y= document.getElementById('sgv11').options
+		glob_var = y[x].text;
+		}
+		
+		}
+	}
+
+
+	}
+	</script>
+
+
+
+	<!--===============================================================================================-->
+<script>
+$('#t1').change(function(){
+$("#v1 option").eq($(this).find(':selected').index()).prop('selected',true);});
+$('#g1').change(function(){
+$("#v3 option").eq($(this).find(':selected').index()).prop('selected',true);});
+$('#g2').change(function(){
+$("#v4 option").eq($(this).find(':selected').index()).prop('selected',true);});
+$('#sg1').change(function(){
+$("#sgv1 option").eq($(this).find(':selected').index()).prop('selected',true);});
+$('#sg2').change(function(){
+$("#sgv2 option").eq($(this).find(':selected').index()).prop('selected',true);});
+$('#sg4').change(function(){
+$("#sgv4 option").eq($(this).find(':selected').index()).prop('selected',true);});
+$('#sg5').change(function(){
+$("#sgv5 option").eq($(this).find(':selected').index()).prop('selected',true);});
+$('#sg6').change(function(){
+$("#sgv6 option").eq($(this).find(':selected').index()).prop('selected',true);});
+$('#sg7').change(function(){
+$("#sgv7 option").eq($(this).find(':selected').index()).prop('selected',true);});
+$('#sg8').change(function(){
+$("#sgv8 option").eq($(this).find(':selected').index()).prop('selected',true);});
+$('#sg9').change(function(){
+$("#sgv9 option").eq($(this).find(':selected').index()).prop('selected',true);});
+$('#sg10').change(function(){
+$("#sgv10 option").eq($(this).find(':selected').index()).prop('selected',true);});
+$('#sg11').change(function(){
+$("#sgv11 option").eq($(this).find(':selected').index()).prop('selected',true);});
+$('#t4').change(function(){
+$("#v5 option").eq($(this).find(':selected').index()).prop('selected',true);});
+$('#t5').change(function(){
+$("#v6 option").eq($(this).find(':selected').index()).prop('selected',true);});
+$('#g4').change(function(){
+$("#v7 option").eq($(this).find(':selected').index()).prop('selected',true);});
+$('#g5').change(function(){
+$("#v8 option").eq($(this).find(':selected').index()).prop('selected',true);});
+$('#t7').change(function(){
+$("#v9 option").eq($(this).find(':selected').index()).prop('selected',true);});
+$('#t8').change(function(){
+$("#v10 option").eq($(this).find(':selected').index()).prop('selected',true);});
+
+</script>	
+ </div>
+</div>
+
