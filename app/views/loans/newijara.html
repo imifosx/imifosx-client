@@ -1,5 +1,3 @@
-<div ng-controller="IjaraController" class="content-container">
-    
 	<div ng-controller="NewLoanAccAppController" class="content-container">
 	<ul class="breadcrumb">
         <li ng-show="groupName">
@@ -15,10 +13,10 @@
         <li class="active">{{'label.anchor.ijaraapplication' | translate}}</li>
     </ul>
 	
-    <wizard >
+    <wizard current-step="step">
         <div class="card">
             <wz-step >
-			<form class="contact100-form validate-form" id="form1 "onsubmit="return false;">
+			<form class="well form-inline" id="form1 "onsubmit="return false;">
 				<span class="contact100-form-title">
 
 				</span>
@@ -398,31 +396,75 @@
 					<option value="">12</option>
 					</select>
 					</select>
-				
 				<br/>				
+				<table class="table width100">
+				<tr>
+				<td class="width14 >
 				<div class="wrap-input100 validate-input" data-validate="Base Price is Required">
 					<span class="label-input100">Base Price</span>
-					<input class="input100" type="text" name="name" placeholder="BASE PRICE" onkeypress="return isNumber(evt)" id="userInput">
+				</td>
+					<td class="width36 paddedbottom10">
+				<input class="input100" type="text" name="name" placeholder="BASE PRICE" onkeypress="return isNumber(evt)" id="userInput">
 					<span class="focus-input100"></span>
-				</div>
-
-				<div class="wrap-input100 validate-input" data-validate="Term Of Lease is Required">
-					<span class="label-input100">Term Of Lease</span>
-					<input class="input100" type="text" name="name" placeholder="TERM OF LEASE" onkeypress="return isNumber(evt)"  id="userInput1">
-					<span class="focus-input100"></span>
-				</div>
 				
+				</td>
+				<td class="width14 >
+				
+					<span class="label-input100">Term Of Lease</span>
+				<td class="width36 paddedbottom10">				
+				<input class="input100" type="text" name="name" placeholder="TERM OF LEASE" onkeypress="return isNumber(evt)"  id="userInput1">
+					<span class="focus-input100"></span>
+				
+				</td>
+				</tr>
+				<tr>
+				<td class="width14">
 				<div class="wrap-input100 validate-input" data-validate = "Enter Residual Value">
 					<span class="label-input100">Residual Value</span>
+				</td>
+				<td class="width36 paddedbottom10">	
 					<input class="input100" type="text" name="residual" placeholder="RESIDUAL VALUE" onkeypress="return isNumber(evt)"  id="userInput2">
 					<span class="focus-input100"></span>
-				</div>
-
 				
-				 <div class="card">
-                    <api-validate></api-validate>
-                    <form name="newloanaccountform" novalidate="" rc-submit="submit()" class="well form-inline">
-                    <table class="table width100">
+				</td>		
+				<td class="width14">		
+						<button class="contact100-form-btn" type="submit" onclick="calculate_ijara();">
+							<span>
+								CALCULATE
+								
+							</span>
+						</button>
+				</td>
+				<td class="width14">
+				<button class="contact100-form-btn" id ="resetbutton" value="Clear Results" onclick="Reset (form);">
+							<span>
+								RESET
+							</span>
+						</button>
+				</td>
+				</tr>
+				<tr>
+				
+				<td class ="width14">
+					<p style = "font-size:20px ;">CALCULATED</p>				
+				</td>
+						<td class ="width14">
+					<p style = "font-size:20px ;"> IJARA </p>				
+				</td>
+				<td class="width14">
+				<p style = "font-size:20px ;"class="contact100-form-btn" id="result">
+							</p>
+							
+				</td>				
+				</tr>
+				</table>
+				</form>
+		</div>		
+				 <div class="card-content">
+  
+                    <form name="newloanaccountform"  ng-submit="submit()" class="well form-inline">
+					<api-validate></api-validate>
+					<table class="table width100">
                         <tr>
                             <td class="width14">
                                 <label>{{ 'label.input.product' | translate }}<span class="required">*</span>:&nbsp;</label>
@@ -430,8 +472,8 @@
                             </td>
                             <td class="width36 paddedbottom10">
                                 <select id="productId" ng-model="formData.productId" class="form-control width170px"
-                                        ng-options="product.id[1] as product.name for product in products" value="{{product.id}}"  disabled = "isdisabled"
-                                        ng-init="loanProductChange(formData.productId)" required="required">
+                                        ng-options="product.id as product.name for product in products" value="{{product.id}}"  
+                                        ng-change="loanProductChange(formData.productId)" required="required">
                                     <option style="display:none" value="">{{'label.selectloanproduct' | translate}}</option>
                                 </select>
                             </td>
@@ -457,18 +499,7 @@
                                     <option value="">{{'label.selectpurpose' | translate}}</option>
                                 </select>
                             </td>
-			     <td class="width14">
-                                <label ng-show="true">{{ 'label.input.loanofficer' | translate }}:&nbsp;</label>
-                                <i ng-show="true" class="fa fa-question-sign" tooltip="{{'label.tooltip.loanofficer' | translate}}"></i>
-                            </td>
-                            <td class="width36 paddedbottom10">
-                                <select ng-show="true" id="loanPurposeId" ng-model="formData.loanPurposeId"
-                                        ng-options="loanPurpose.id as loanPurpose.name for loanPurpose in loanaccountinfo.loanPurposeOptions | orderBy:'name':reverse"
-                                        class="form-control width170px" value="{{loanPurpose.id}}">
-                                    <option value="">{{'label.selectloanofficer' | translate}}</option>
-                                </select>
-                            </td>
-                          
+			                              
                         </tr>
                         <tr ng-show="true">
                             <td><label>{{ 'label.input.submittedon' | translate }}<span class="required">*</span>:&nbsp;</label>
@@ -494,12 +525,12 @@
                                                       
                             <table ng-show="loanaccountinfo" ng-hide="previewRepayment" class="table width100">
                                 <tr>
-                                    <td class="width19"><label>{{ 'label.input.principal' | translate }}&nbsp;<span
+<td class="width19"><label>{{ 'label.input.principal' | translate }}&nbsp;<span
                                             class="required">*</span>:</label></td>
                                     <td class="width31 paddedbottom10">
-                                        <input type="text"  class="form-control" id="principal" name="principal" ng-model="formData.principal"
+                                        <input type="text"  class="form-control" id="principal" name="principal" ng-model= $cal
                                             number-format required late-Validate/>&nbsp;{{loanaccountinfo.currency.displaySymbol}}
-                                    <form-validate valattributeform="newloanaccountform" valattribute="principal"/>
+                                        <form-validate valattributeform="newloanaccountform" valattribute="principal"/>
                                     </td>
                                     <td class="width14"><label>{{ 'label.input.loanterm' | translate }}&nbsp;<span class="required">*</span>:</label>
                                     </td>
@@ -511,7 +542,8 @@
                                                 value="{{termFrequencyType.id}}"/>
                                         <form-validate valattributeform="newloanaccountform" valattribute="loanterm"/>
                                     </td>
-                                </tr>
+									</tr>
+									
                             </table>
                             <div ng-show="loanaccountinfo" ng-hide="previewRepayment">                       
                                 <div class="col-md-12">
@@ -679,39 +711,7 @@
                 </wizard>
 	</div>
 </div>
-<div class="container-contact100-form-btn">
-					<div class="wrap-contact100-form-btn">
-						<div class="contact100-form-bgbtn"></div>
-						<button class="contact100-form-btn" type="submit" onclick="calculate_ijara();">
-							<span>
-								CALCULATE
-								
-							</span>
-						</button>
-					</div>
-				</div>
-				<div class="container-contact100-form-btn">
-					<div class="wrap-contact100-form-btn">
-						<div class="contact100-form-bgbtn"></div>
-						<button class="contact100-form-btn" value="Clear Results" onClick="">
-							<span>
-								RESET
-							
-							</span>
-						</button>
-					</div>
-				</div>
-				
-					<center style = "font-size:25px ;">CALCULATED IJARA</center>
-					<div class="container-contact100-form-btn">
-						<div class="wrap-contact100-form-btn">
-							<div class="contact100-form-bgbtn"></div>
-							<button style = "font-size:40px ;"class="contact100-form-btn" id="result">
-							</button>
-							</h2>
-							<center>
-						</div>
-					</div>
+
 			</form>
             </div>
         </div>
@@ -727,7 +727,13 @@
         this.reset();
     });
 }
-
+       function Reset (form) {
+            form.reset ();
+        }
+ $("#MyButton").click(function() {
+    alert('clicked')
+    $("#div").load(" #div > *");
+  }); 
 function resetForm() {
     document.getElementById("myForm").reset();
 }
@@ -765,6 +771,7 @@ function resetForm() {
 	if (sel.selectedIndex==1){
 		var val2 = document.getElementById('t1').name
 	  sel.form[val2].style.display=sel.selectedIndex==1?'block':'none';  
+	  console.log(globvar);
 	  }
 	else if(sel.selectedIndex==2){
 	  
@@ -772,78 +779,87 @@ function resetForm() {
 	  sel.form[val2].style.display=sel.selectedIndex==2?'block':'none';  
 	  cal_var = document.getElementById("v2");
 	  glob_var = cal_var.options[cal_var.selectedIndex].text;
+	  console.log(globvar);
 	  }
 	 else if(sel.selectedIndex==3){
 	  
 	  var val2 = document.getElementById('t2').name
 	  sel.form[val2].style.display=sel.selectedIndex==3?'block':'none';  
+	  console.log(globvar);
 	  }
 	  else if(sel.selectedIndex==4){
 	  
 	  var val2 = document.getElementById('t3').name
 	  sel.form[val2].style.display=sel.selectedIndex==4?'block':'none';  
+	  console.log(globvar);
 	  }
 	  else if(sel.selectedIndex==5){
 	  
 	  var val2 = document.getElementById('t4').name
 	  sel.form[val2].style.display=sel.selectedIndex==5?'block':'none';  
+	  console.log(globvar);
 	  }
 	  else if(sel.selectedIndex==6){
 	  
 	  var val2 = document.getElementById('t5').name
 	  sel.form[val2].style.display=sel.selectedIndex==6?'block':'none';  
+	  console.log(globvar);
 	  }
 	  else if(sel.selectedIndex==7){
 	  
 	  var val2 = document.getElementById('t6').name
 	  sel.form[val2].style.display	=sel.selectedIndex==7?'block':'none';  
+	  console.log(globvar);
 	  }
 	  else if(sel.selectedIndex==8){
 	  var val2 = document.getElementById('tv2').name
 	  sel.form[val2].style.display=sel.selectedIndex==8?'block':'none';  
 	  cal_var = document.getElementById("tv2");
 	  glob_var = cal_var.options[cal_var.selectedIndex].text;
+	  console.log(globvar);
 	  }
 	  else if(sel.selectedIndex==9){
 	  var val2 = document.getElementById('tv3').name
 	  sel.form[val2].style.display=sel.selectedIndex==9?'block':'none'; 
 	  cal_var = document.getElementById("tv3");
 	  glob_var = cal_var.options[cal_var.selectedIndex].text;  
+	  console.log(globvar);
 	  }
 	  else if(sel.selectedIndex==10){
 	  var val2 = document.getElementById('tv4').name
 	  sel.form[val2].style.display=sel.selectedIndex==10?'block':'none';  
 	  cal_var = document.getElementById("tv4");
 	  glob_var = cal_var.options[cal_var.selectedIndex].text; 
+	  console.log(globvar);
 	  }
 	  else if(sel.selectedIndex==11){
 	  var val2 = document.getElementById('tv5').name
 	  sel.form[val2].style.display=sel.selectedIndex==11?'block':'none';  
 	  cal_var = document.getElementById("tv5");
 	  glob_var = cal_var.options[cal_var.selectedIndex].text; 
-	  }  
+	  console.log(globvar);}  
 	  else if(sel.selectedIndex==12){
 	  var val1 = document.getElementById('c1').selectedIndex
 	  var val2 = document.getElementById('t7').name
 	  sel.form[val2].style.display=sel.selectedIndex==12?'block':'none';  
-	  }
+	  console.log(globvar);}
 	  else if(sel.selectedIndex==13){
 	  var val1 = document.getElementById('c1').selectedIndex
 	  var val2 = document.getElementById('t8').name
 	  sel.form[val2].style.display=sel.selectedIndex=13?'block':'none';  
-	  }
+	  console.log(globvar);}
 	  else if(sel.selectedIndex==14){
 	  var val2 = document.getElementById('tv6').name
 	  sel.form[val2].style.display=sel.selectedIndex==14?'block':'none'; 
 	  cal_var = document.getElementById("tv6");
 	  glob_var = cal_var.options[cal_var.selectedIndex].text; 
-	  }
+	  console.log(globvar);}
 	  else if(sel.selectedIndex==15){
 	  var val2 = document.getElementById('tv7').name
 	  sel.form[val2].style.display=sel.selectedIndex==15?'block':'none';
 	  cal_var = document.getElementById("tv7");
 	  glob_var = cal_var.options[cal_var.selectedIndex].text;   
-	  }  
+	  console.log(globvar);}  
 	} 
 
 
@@ -856,29 +872,29 @@ function resetForm() {
 		var x= sel.selectedIndex;
 		var y= document.getElementById('v1').options
 		glob_var = y[x].text;
-		}
+		console.log(globvar);}
 	else if(sel.name=='types2'){
 		if(sel.selectedIndex==1){
 		var val3 = document.getElementById('g1').name
 		sel.form[val3].style.display=sel.selectedIndex==1?'block':'none';   
-		}
+		console.log(globvar);}
 		if(sel.selectedIndex==2){
 		var val3 = document.getElementById('tv1').name
 		sel.form[val3].style.display=sel.selectedIndex==2?'block':'none';   
 	  cal_var = document.getElementById("tv7");
 	  glob_var = cal_var.options[cal_var.selectedIndex].text;  
-	  }
+	  console.log(globvar);}
 	}
 
 	else if(sel.name=='types3'){
 		if(sel.selectedIndex==1){
 		var val3 = document.getElementById('g2').name
 		sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none';   
-		}	
+		console.log(globvar);}	
 		else if(sel.selectedIndex==2){
 		var val3 = document.getElementById('g3').name
 		sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none';   
-		}	
+		console.log(globvar);}	
 	}
 	else if(sel.name=='types4'){
 		if(sel.selectedIndex==1|2)
@@ -887,7 +903,7 @@ function resetForm() {
 		var x= sel.selectedIndex;
 		var y= document.getElementById('v5').options
 		glob_var = y[x].text;
-		}
+		console.log(globvar);}
 	else if(sel.name=='types5'){
 		if(sel.selectedIndex==1|2)
 		var val3 = document.getElementById('v6').name
@@ -895,16 +911,16 @@ function resetForm() {
 		var x= sel.selectedIndex;
 		var y= document.getElementById('v6').options
 		glob_var = y[x].text;
-		}
+		console.log(globvar);}
 	else if(sel.name=='types6'){
 		if(sel.selectedIndex==1){
 		var val3 = document.getElementById('g4').name
 		sel.form[val3].style.display=sel.selectedIndex==1?'block':'none';   
-		}
+		console.log(globvar);}
 		if(sel.selectedIndex==2){
 		var val3 = document.getElementById('g5').name
 		sel.form[val3].style.display=sel.selectedIndex==2?'block':'none';   
-		}
+		console.log(globvar);}
 	}
 	else if(sel.name=='types7'){
 		if(sel.selectedIndex==1|2)
@@ -913,7 +929,7 @@ function resetForm() {
 		var x= sel.selectedIndex;
 		var y= document.getElementById('v9').options
 		glob_var = y[x].text;
-		}
+		console.log(globvar);}
 	else if(sel.name=='types8'){
 		if(sel.selectedIndex==1|2)
 		var val3 = document.getElementById('v10').name
@@ -921,7 +937,7 @@ function resetForm() {
 		var x= sel.selectedIndex;
 		var y= document.getElementById('v10').options
 		glob_var = y[x].text;
-		}
+		console.log(globvar);}
 
 	}
 
@@ -932,14 +948,14 @@ function resetForm() {
 		var x= sel.selectedIndex;
 		var y= document.getElementById('v3').options
 		glob_var = y[x].text;
-	}
+	console.log(globvar);}
 	function func_values1(sel){
 		var val3 = document.getElementById('v4').name
 		sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none';   
 		var x= sel.selectedIndex;
 		var y= document.getElementById('v4').options
 		glob_var = y[x].text;
-	}
+	console.log(globvar);}
 
 	function func_values2(sel){
 	if(sel.name=='groups4'){
@@ -949,7 +965,7 @@ function resetForm() {
 		var x= sel.selectedIndex;
 		var y= document.getElementById('v7').options
 		glob_var = y[x].text;
-		}
+		console.log(globvar);}
 		}
 	else if(sel.name=='groups5'){
 		if(sel.selectedIndex==1|2){
@@ -958,29 +974,29 @@ function resetForm() {
 		var x= sel.selectedIndex;
 		var y= document.getElementById('v8').options
 		glob_var = y[x].text;
-		}
+		console.log(globvar);}
 	}
 	}
 	function func_sg1(sel){
 	if(sel.selectedIndex==1){
 		var val3 = document.getElementById('sg1').name
 		sel.form[val3].style.display=sel.selectedIndex==1?'block':'none';   
-		}
+		console.log(globvar);}
 	else if(sel.selectedIndex==2){
 		var val3 = document.getElementById('sg2').name
 		sel.form[val3].style.display=sel.selectedIndex==2?'block':'none';
-	}
+	console.log(globvar);}
 	else if(sel.selectedIndex==3){
 		var val3 = document.getElementById('gv1').name
 		sel.form[val3].style.display=sel.selectedIndex==3?'block':'none';	
 		var x= sel.selectedIndex;
 		var y= document.getElementById('gv1').options
 		glob_var = y[x].text;
-	}
+	console.log(globvar);}
 	else if(sel.selectedIndex==4){
 		var val3 = document.getElementById('sg4').name
 		sel.form[val3].style.display=sel.selectedIndex==4?'block':'none';   
-	}
+	console.log(globvar);}
 	else if(sel.selectedIndex==5){
 		var val3 = document.getElementById('sg5').name
 		sel.form[val3].style.display=sel.selectedIndex==5?'block':'none';   
@@ -1015,7 +1031,7 @@ function resetForm() {
 		var x= sel.selectedIndex;
 		var y= document.getElementById('gv2').options
 		glob_var = y[x].text;
-	}
+	console.log(globvar);}
 	}
 
 	function sg_values_all(sel){
@@ -1026,7 +1042,7 @@ function resetForm() {
 		var x= sel.selectedIndex;
 		var y= document.getElementById('sgv1').options
 		glob_var = y[x].text;
-		}
+		console.log(globvar);}
 	else if(sel.name=='subgroups2'){
 		if(sel.selectedIndex==1|2|3)
 		var val3 = document.getElementById('sgv2').name
@@ -1034,7 +1050,7 @@ function resetForm() {
 		var x= sel.selectedIndex;
 		var y= document.getElementById('sgv2').options
 		glob_var = y[x].text;
-		}
+		console.log(globvar);}
 	else if(sel.name=='subgroups4'){
 		if(sel.selectedIndex==1|2|3|4)
 		var val3 = document.getElementById('sgv4').name
@@ -1042,7 +1058,7 @@ function resetForm() {
 		var x= sel.selectedIndex;
 		var y= document.getElementById('sgv4').options
 		glob_var = y[x].text;	
-		}
+		console.log(globvar);}
 	else if(sel.name=='subgroups5'){
 		if(sel.selectedIndex==1|2|3|4|5|6|7|8)
 		var val3 = document.getElementById('sgv5').name
@@ -1050,7 +1066,7 @@ function resetForm() {
 		var x= sel.selectedIndex;
 		var y= document.getElementById('sgv5').options
 		glob_var = y[x].text;	
-		}
+		console.log(globvar);}
 	else if(sel.name=='subgroups6'){
 		if(sel.selectedIndex==1|2|3|4|5|6|7|8)
 		var val3 = document.getElementById('sgv6').name
@@ -1058,7 +1074,7 @@ function resetForm() {
 		var x= sel.selectedIndex;
 		var y= document.getElementById('sgv6').options
 		glob_var = y[x].text;
-		}
+		console.log(globvar);}
 	else if(sel.name=='subgroups7'){
 		if(sel.selectedIndex==1|2|3|4|5)
 		var val3 = document.getElementById('sgv7').name
@@ -1066,7 +1082,7 @@ function resetForm() {
 		var x= sel.selectedIndex;
 		var y= document.getElementById('sgv7').options
 		glob_var = y[x].text;
-		}
+		console.log(globvar);}
 	else if(sel.name=='subgroups8'){
 		if(sel.selectedIndex==1|2|3|4|5|6|7|8|9|10|11|12|13)
 		var val3 = document.getElementById('sgv8').name
@@ -1074,7 +1090,7 @@ function resetForm() {
 		var x= sel.selectedIndex;
 		var y= document.getElementById('sgv8').options
 		glob_var = y[x].text;	
-		}
+		console.log(globvar);}
 	else if(sel.name=='subgroups9'){
 		if(sel.selectedIndex==1|2)
 		var val3 = document.getElementById('sgv9').name
@@ -1082,7 +1098,7 @@ function resetForm() {
 		var x= sel.selectedIndex;
 		var y= document.getElementById('sgv9').options
 		glob_var = y[x].text;
-		}
+		console.log(globvar);}
 	else if(sel.name=='subgroups10'){
 		if(sel.selectedIndex==1|2|3|4)
 		var val3 = document.getElementById('sgv10').name
@@ -1090,7 +1106,7 @@ function resetForm() {
 		var x= sel.selectedIndex;
 		var y= document.getElementById('sgv10').options
 		glob_var = y[x].text;
-		}
+		console.log(globvar);}
 	else if(sel.name=='subgroups11'){
 		for (i = 1; i <= 6; i++){
 		if(sel.selectedIndex==i){
@@ -1099,7 +1115,7 @@ function resetForm() {
 		var x= sel.selectedIndex;
 		var y= document.getElementById('sgv11').options
 		glob_var = y[x].text;
-		}
+		console.log(globvar);}
 		
 		}
 	}
@@ -1152,6 +1168,3 @@ $('#t8').change(function(){
 $("#v10 option").eq($(this).find(':selected').index()).prop('selected',true);});
 
 </script>	
- </div>
-</div>
-
