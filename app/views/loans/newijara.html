@@ -12,15 +12,21 @@
         </li>
         <li class="active">{{'label.anchor.ijaraapplication' | translate}}</li>
     </ul>
-	
-    <wizard current-step="step">
-        <div class="card">
-            <wz-step >
-			<form class="well form-inline" id="form1 "onsubmit="return false;">
-				<span class="contact100-form-title">
 
-				</span>
-				<select style="width:100%; padding-bottom: 10px;" id="c1" name="categories" onchange="checkval(this);">
+    <wizard current-step="step">
+        <wz-step >
+		<!--<div class="card">
+            
+			<form class="well form-inline" id="form1 " action="javascript:alert("Submitted");" method="post">
+				
+				</form>
+		</div>-->		
+				 <div class="card-content">
+  
+                    <form name="newloanaccountform"  ng-submit="submit()" class="well form-inline">
+					<!--<api-validate></api-validate>-->
+					
+					<select style="width:100%; padding-bottom: 10px;" id="c1" name="categories" onchange="checkval(this);">
 					<option value="">Select Category</option>
 					<option value="a1">Buildings</option>
 					<option value="a2">Bridges, culverts, bunders, etc. </option>
@@ -400,35 +406,42 @@
 				<table class="table width100">
 				<tr>
 				<td class="width14 >
+					<span class="label-input100">Useful Life</span>
+				</td>
+				<td class ="width36 paddedbottom10">
+				<input type="text" id="mynumber" placeholder = "Number Of Years" value="" disabled>
+				</td>
+				<td class="width14 >
 				<div class="wrap-input100 validate-input" data-validate="Base Price is Required">
 					<span class="label-input100">Base Price</span>
 				</td>
 					<td class="width36 paddedbottom10">
-				<input class="input100" type="text" name="name" placeholder="BASE PRICE" onkeypress="return isNumber(evt)" id="userInput">
-					<span class="focus-input100"></span>
-				
-				</td>
-				<td class="width14 >
-				
-					<span class="label-input100">Term Of Lease</span>
-				<td class="width36 paddedbottom10">				
-				<input class="input100" type="text" name="name" placeholder="TERM OF LEASE" onkeypress="return isNumber(evt)"  id="userInput1">
+				<input class="input100" type="text" name="name" placeholder="Base Price" onkeypress="return isNumber(evt)" id="userInput">
 					<span class="focus-input100"></span>
 				
 				</td>
 				</tr>
 				<tr>
+				<td class="width14 >
+					<span class="label-input100">Term Of Lease</span>
+				<td class="width36 paddedbottom10">				
+				<input class="input100" type="text" name="name" placeholder="Term of Lease" onkeypress="return isNumber(evt)"  id="userInput1">
+					<span class="focus-input100"></span>
+				
+				</td>
 				<td class="width14">
 				<div class="wrap-input100 validate-input" data-validate = "Enter Residual Value">
 					<span class="label-input100">Residual Value</span>
 				</td>
 				<td class="width36 paddedbottom10">	
-					<input class="input100" type="text" name="residual" placeholder="RESIDUAL VALUE" onkeypress="return isNumber(evt)"  id="userInput2">
+					<input class="input100" type="text" name="residual" placeholder="Residual Value" onkeypress="return isNumber(evt)"  id="userInput2">
 					<span class="focus-input100"></span>
 				
-				</td>		
+				</td>	
+				</tr>
+				<tr>
 				<td class="width14">		
-						<button class="contact100-form-btn" type="submit" onclick="calculate_ijara();">
+						<button class="contact100-form-btn"  onclick="calculate_ijara();">
 							<span>
 								CALCULATE
 								
@@ -442,28 +455,19 @@
 							</span>
 						</button>
 				</td>
-				</tr>
-				<tr>
-				
 				<td class ="width14">
-					<p style = "font-size:20px ;">CALCULATED</p>				
+					<p style = "font-size:16px ;">TOTAL IJARA</p>				
 				</td>
-						<td class ="width14">
-					<p style = "font-size:20px ;"> IJARA </p>				
-				</td>
-				<td class="width14">
-				<p style = "font-size:20px ;"class="contact100-form-btn" id="result">
-							</p>
+	
+				<td class="width36">
+				<!--<input type="text">
+							</input>-->
 							
-				</td>				
+				</td>	
+				
 				</tr>
-				</table>
-				</form>
-		</div>		
-				 <div class="card-content">
-  
-                    <form name="newloanaccountform"  ng-submit="submit()" class="well form-inline">
-					<api-validate></api-validate>
+
+				</table> 
 					<table class="table width100">
                         <tr>
                             <td class="width14">
@@ -525,22 +529,21 @@
                                                       
                             <table ng-show="loanaccountinfo" ng-hide="previewRepayment" class="table width100">
                                 <tr>
-<td class="width19"><label>{{ 'label.input.principal' | translate }}&nbsp;<span
+									<td class="width14"><label>{{ 'label.input.principal' | translate }}&nbsp;<span
                                             class="required">*</span>:</label></td>
-                                    <td class="width31 paddedbottom10">
-                                        <input type="text"  class="form-control" id="principal" name="principal" ng-model= $cal
-                                            number-format required late-Validate/>&nbsp;{{loanaccountinfo.currency.displaySymbol}}
-                                        <form-validate valattributeform="newloanaccountform" valattribute="principal"/>
+                                    <td class="width36 paddedbottom10">
+                                        <input id="principal"    name="principal" type="text" 
+                                            ng-model= "formData.principal" />&nbsp;{{loanaccountinfo.currency.displaySymbol}}
+										     
+						<!--<form-validate valattributeform="newloanaccountform" valattribute="principal"/>-->
                                     </td>
                                     <td class="width14"><label>{{ 'label.input.loanterm' | translate }}&nbsp;<span class="required">*</span>:</label>
                                     </td>
                                     <td class="width36 paddedbottom10">
                                         <input id="loanTermFrequency" class="form-control" name="loanterm" type="text"
-                                            ng-model="formData.loanTermFrequency" required late-Validate/>
-                                        <select ng-disabled="response.uiDisplayConfigurations.loanAccount.isReadOnlyField.loanTermFrequencyType == true" id="loanTermFrequencyType" class="form-control" ng-model="formData.loanTermFrequencyType"
-                                                ng-options="termFrequencyType.id as termFrequencyType.value for termFrequencyType in loanaccountinfo.termFrequencyTypeOptions"
-                                                value="{{termFrequencyType.id}}"/>
-                                        <form-validate valattributeform="newloanaccountform" valattribute="loanterm"/>
+                                            ng-model="formData.loanTermFrequency" required />
+                                     
+                                        <!--<form-validate valattributeform="newloanaccountform" valattribute="loanterm"/>-->
                                     </td>
 									</tr>
 									
@@ -715,25 +718,14 @@
 			</form>
             </div>
         </div>
-               
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 	<script language="JavaScript" type="text/javascript">
 	var glob_var=0;
 	var cal_var=0;
 	var term_of_lease=0;
 	var base_price=0;
 	var id = "form1";
-	function resetForm(id) {
-    $('#'+id).each(function(){
-        this.reset();
-    });
-}
-       function Reset (form) {
-            form.reset ();
-        }
- $("#MyButton").click(function() {
-    alert('clicked')
-    $("#div").load(" #div > *");
-  }); 
+
 function resetForm() {
     document.getElementById("myForm").reset();
 }
@@ -747,13 +739,13 @@ function resetForm() {
 		var cal2 = +base_price + +cal1;
 		var cal =   parseFloat(cal2).toFixed(2);
 		cal = cal -  residual_value;
-		document.getElementById("result").innerHTML = cal;
+		document.getElementById("principal").value = cal;
 		}
 		else{
 		var cal1 = (base_price/glob_var)*term_of_lease;
 		var cal2 = +base_price + +cal1;
 		var cal =   parseFloat(cal2).toFixed(2);
-		document.getElementById("result").innerHTML = cal;
+		document.getElementById("principal").value = cal;
 		}
 		}
 		var evt;
@@ -771,95 +763,96 @@ function resetForm() {
 	if (sel.selectedIndex==1){
 		var val2 = document.getElementById('t1').name
 	  sel.form[val2].style.display=sel.selectedIndex==1?'block':'none';  
-	  console.log(globvar);
+	  
 	  }
 	else if(sel.selectedIndex==2){
 	  
 	  var val2 = document.getElementById('v2').name
-	  sel.form[val2].style.display=sel.selectedIndex==2?'block':'none';  
+	  //sel.form[val2].style.display=sel.selectedIndex==2?'block':'none';  
 	  cal_var = document.getElementById("v2");
 	  glob_var = cal_var.options[cal_var.selectedIndex].text;
-	  console.log(globvar);
+	   console.log(glob_var); document.getElementById("mynumber").value = glob_var;
+	  document.getElementById("mynumber").value = glob_var;
 	  }
 	 else if(sel.selectedIndex==3){
 	  
 	  var val2 = document.getElementById('t2').name
 	  sel.form[val2].style.display=sel.selectedIndex==3?'block':'none';  
-	  console.log(globvar);
+	  
 	  }
 	  else if(sel.selectedIndex==4){
 	  
 	  var val2 = document.getElementById('t3').name
 	  sel.form[val2].style.display=sel.selectedIndex==4?'block':'none';  
-	  console.log(globvar);
+	  
 	  }
 	  else if(sel.selectedIndex==5){
 	  
 	  var val2 = document.getElementById('t4').name
 	  sel.form[val2].style.display=sel.selectedIndex==5?'block':'none';  
-	  console.log(globvar);
+	  
 	  }
 	  else if(sel.selectedIndex==6){
 	  
 	  var val2 = document.getElementById('t5').name
 	  sel.form[val2].style.display=sel.selectedIndex==6?'block':'none';  
-	  console.log(globvar);
+	  
 	  }
 	  else if(sel.selectedIndex==7){
 	  
 	  var val2 = document.getElementById('t6').name
 	  sel.form[val2].style.display	=sel.selectedIndex==7?'block':'none';  
-	  console.log(globvar);
+	  
 	  }
 	  else if(sel.selectedIndex==8){
 	  var val2 = document.getElementById('tv2').name
-	  sel.form[val2].style.display=sel.selectedIndex==8?'block':'none';  
+	  //sel.form[val2].style.display=sel.selectedIndex==8?'block':'none';  
 	  cal_var = document.getElementById("tv2");
 	  glob_var = cal_var.options[cal_var.selectedIndex].text;
-	  console.log(globvar);
+	   console.log(glob_var); document.getElementById("mynumber").value = glob_var;
 	  }
 	  else if(sel.selectedIndex==9){
 	  var val2 = document.getElementById('tv3').name
-	  sel.form[val2].style.display=sel.selectedIndex==9?'block':'none'; 
+	  //sel.form[val2].style.display=sel.selectedIndex==9?'block':'none'; 
 	  cal_var = document.getElementById("tv3");
 	  glob_var = cal_var.options[cal_var.selectedIndex].text;  
-	  console.log(globvar);
+	   console.log(glob_var); document.getElementById("mynumber").value = glob_var;
 	  }
 	  else if(sel.selectedIndex==10){
 	  var val2 = document.getElementById('tv4').name
-	  sel.form[val2].style.display=sel.selectedIndex==10?'block':'none';  
+	  //sel.form[val2].style.display=sel.selectedIndex==10?'block':'none';  
 	  cal_var = document.getElementById("tv4");
 	  glob_var = cal_var.options[cal_var.selectedIndex].text; 
-	  console.log(globvar);
+	   console.log(glob_var); document.getElementById("mynumber").value = glob_var;
 	  }
 	  else if(sel.selectedIndex==11){
 	  var val2 = document.getElementById('tv5').name
-	  sel.form[val2].style.display=sel.selectedIndex==11?'block':'none';  
+	  //sel.form[val2].style.display=sel.selectedIndex==11?'block':'none';  
 	  cal_var = document.getElementById("tv5");
 	  glob_var = cal_var.options[cal_var.selectedIndex].text; 
-	  console.log(globvar);}  
+	   console.log(glob_var); document.getElementById("mynumber").value = glob_var;}  
 	  else if(sel.selectedIndex==12){
 	  var val1 = document.getElementById('c1').selectedIndex
 	  var val2 = document.getElementById('t7').name
 	  sel.form[val2].style.display=sel.selectedIndex==12?'block':'none';  
-	  console.log(globvar);}
+	  }
 	  else if(sel.selectedIndex==13){
 	  var val1 = document.getElementById('c1').selectedIndex
 	  var val2 = document.getElementById('t8').name
 	  sel.form[val2].style.display=sel.selectedIndex=13?'block':'none';  
-	  console.log(globvar);}
+	  }
 	  else if(sel.selectedIndex==14){
 	  var val2 = document.getElementById('tv6').name
-	  sel.form[val2].style.display=sel.selectedIndex==14?'block':'none'; 
+	  //sel.form[val2].style.display=sel.selectedIndex==14?'block':'none'; 
 	  cal_var = document.getElementById("tv6");
 	  glob_var = cal_var.options[cal_var.selectedIndex].text; 
-	  console.log(globvar);}
+	   console.log(glob_var); document.getElementById("mynumber").value = glob_var;}
 	  else if(sel.selectedIndex==15){
 	  var val2 = document.getElementById('tv7').name
-	  sel.form[val2].style.display=sel.selectedIndex==15?'block':'none';
+	  //sel.form[val2].style.display=sel.selectedIndex==15?'block':'none';
 	  cal_var = document.getElementById("tv7");
 	  glob_var = cal_var.options[cal_var.selectedIndex].text;   
-	  console.log(globvar);}  
+	   console.log(glob_var); document.getElementById("mynumber").value = glob_var;}  
 	} 
 
 
@@ -868,135 +861,135 @@ function resetForm() {
 	if(sel.name=='types'){
 		if(sel.selectedIndex==1|2)
 		var val3 = document.getElementById('v1').name
-		sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none';   
+		//sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none';   
 		var x= sel.selectedIndex;
 		var y= document.getElementById('v1').options
 		glob_var = y[x].text;
-		console.log(globvar);}
+		 console.log(glob_var); document.getElementById("mynumber").value = glob_var;}
 	else if(sel.name=='types2'){
 		if(sel.selectedIndex==1){
 		var val3 = document.getElementById('g1').name
 		sel.form[val3].style.display=sel.selectedIndex==1?'block':'none';   
-		console.log(globvar);}
+		}
 		if(sel.selectedIndex==2){
 		var val3 = document.getElementById('tv1').name
-		sel.form[val3].style.display=sel.selectedIndex==2?'block':'none';   
-	  cal_var = document.getElementById("tv7");
+		//sel.form[val3].style.display=sel.selectedIndex==2?'block':'none';   
+	  cal_var = document.getElementById("tv1");
 	  glob_var = cal_var.options[cal_var.selectedIndex].text;  
-	  console.log(globvar);}
+	   console.log(glob_var); document.getElementById("mynumber").value = glob_var;}
 	}
 
 	else if(sel.name=='types3'){
 		if(sel.selectedIndex==1){
 		var val3 = document.getElementById('g2').name
 		sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none';   
-		console.log(globvar);}	
+		}	
 		else if(sel.selectedIndex==2){
 		var val3 = document.getElementById('g3').name
 		sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none';   
-		console.log(globvar);}	
+		}	
 	}
 	else if(sel.name=='types4'){
 		if(sel.selectedIndex==1|2)
 		var val3 = document.getElementById('v5').name
-		sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none'; 
+	//	sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none'; 
 		var x= sel.selectedIndex;
 		var y= document.getElementById('v5').options
 		glob_var = y[x].text;
-		console.log(globvar);}
+		 console.log(glob_var); document.getElementById("mynumber").value = glob_var;}
 	else if(sel.name=='types5'){
 		if(sel.selectedIndex==1|2)
 		var val3 = document.getElementById('v6').name
-		sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none';   
+		//sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none';   
 		var x= sel.selectedIndex;
 		var y= document.getElementById('v6').options
 		glob_var = y[x].text;
-		console.log(globvar);}
+		 console.log(glob_var); document.getElementById("mynumber").value = glob_var;}
 	else if(sel.name=='types6'){
 		if(sel.selectedIndex==1){
 		var val3 = document.getElementById('g4').name
 		sel.form[val3].style.display=sel.selectedIndex==1?'block':'none';   
-		console.log(globvar);}
+		}
 		if(sel.selectedIndex==2){
 		var val3 = document.getElementById('g5').name
 		sel.form[val3].style.display=sel.selectedIndex==2?'block':'none';   
-		console.log(globvar);}
+		}
 	}
 	else if(sel.name=='types7'){
 		if(sel.selectedIndex==1|2)
 		var val3 = document.getElementById('v9').name
-		sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none';   
+		//sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none';   
 		var x= sel.selectedIndex;
 		var y= document.getElementById('v9').options
 		glob_var = y[x].text;
-		console.log(globvar);}
+		 console.log(glob_var); document.getElementById("mynumber").value = glob_var;}
 	else if(sel.name=='types8'){
 		if(sel.selectedIndex==1|2)
 		var val3 = document.getElementById('v10').name
-		sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none';   
+		//sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none';   
 		var x= sel.selectedIndex;
 		var y= document.getElementById('v10').options
 		glob_var = y[x].text;
-		console.log(globvar);}
+		 console.log(glob_var); document.getElementById("mynumber").value = glob_var;}
 
 	}
 
 	function func_values(sel){
 
 		var val3 = document.getElementById('v3').name
-		sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none';   
+		//sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none';   
 		var x= sel.selectedIndex;
 		var y= document.getElementById('v3').options
 		glob_var = y[x].text;
-	console.log(globvar);}
+	 console.log(glob_var); document.getElementById("mynumber").value = glob_var;}
 	function func_values1(sel){
 		var val3 = document.getElementById('v4').name
-		sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none';   
+		//sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none';   
 		var x= sel.selectedIndex;
 		var y= document.getElementById('v4').options
 		glob_var = y[x].text;
-	console.log(globvar);}
+	 console.log(glob_var); document.getElementById("mynumber").value = glob_var;}
 
 	function func_values2(sel){
 	if(sel.name=='groups4'){
 		if(sel.selectedIndex==1|2|3|4|5|6|7|8|9|10|11|12|13){
 		var val3 = document.getElementById('v7').name
-		sel.form[val3].style.display=sel.selectedIndex==1|2|3|4|5|6|7|8|9|10|11|12|13?'block':'none';   
+		//sel.form[val3].style.display=sel.selectedIndex==1|2|3|4|5|6|7|8|9|10|11|12|13?'block':'none';   
 		var x= sel.selectedIndex;
 		var y= document.getElementById('v7').options
 		glob_var = y[x].text;
-		console.log(globvar);}
+		 console.log(glob_var); document.getElementById("mynumber").value = glob_var;}
 		}
 	else if(sel.name=='groups5'){
 		if(sel.selectedIndex==1|2){
 		var val3 = document.getElementById('v8').name
-		sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none';   
+		//sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none';   
 		var x= sel.selectedIndex;
 		var y= document.getElementById('v8').options
 		glob_var = y[x].text;
-		console.log(globvar);}
+		 console.log(glob_var); document.getElementById("mynumber").value = glob_var;}
 	}
 	}
 	function func_sg1(sel){
 	if(sel.selectedIndex==1){
 		var val3 = document.getElementById('sg1').name
 		sel.form[val3].style.display=sel.selectedIndex==1?'block':'none';   
-		console.log(globvar);}
+		}
 	else if(sel.selectedIndex==2){
 		var val3 = document.getElementById('sg2').name
 		sel.form[val3].style.display=sel.selectedIndex==2?'block':'none';
-	console.log(globvar);}
+	}
 	else if(sel.selectedIndex==3){
 		var val3 = document.getElementById('gv1').name
-		sel.form[val3].style.display=sel.selectedIndex==3?'block':'none';	
+		//sel.form[val3].style.display=sel.selectedIndex==3?'block':'none';	
 		var x= sel.selectedIndex;
 		var y= document.getElementById('gv1').options
 		glob_var = y[x].text;
-	console.log(globvar);}
+	 console.log(glob_var); document.getElementById("mynumber").value = glob_var;}
 	else if(sel.selectedIndex==4){
 		var val3 = document.getElementById('sg4').name
 		sel.form[val3].style.display=sel.selectedIndex==4?'block':'none';   
-	console.log(globvar);}
+	}
 	else if(sel.selectedIndex==5){
 		var val3 = document.getElementById('sg5').name
 		sel.form[val3].style.display=sel.selectedIndex==5?'block':'none';   
@@ -1027,95 +1020,95 @@ function resetForm() {
 	}
 	else if(sel.selectedIndex==12){
 		var val3 = document.getElementById('gv2').name
-		sel.form[val3].style.display=sel.selectedIndex==12?'block':'none';   
+		//sel.form[val3].style.display=sel.selectedIndex==12?'block':'none';   
 		var x= sel.selectedIndex;
 		var y= document.getElementById('gv2').options
 		glob_var = y[x].text;
-	console.log(globvar);}
+	 console.log(glob_var); document.getElementById("mynumber").value = glob_var;}
 	}
 
 	function sg_values_all(sel){
 	if(sel.name=='subgroups'){
 		if(sel.selectedIndex==1|2)
 		var val3 = document.getElementById('sgv1').name
-		sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none';   
+		//sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none';   
 		var x= sel.selectedIndex;
 		var y= document.getElementById('sgv1').options
 		glob_var = y[x].text;
-		console.log(globvar);}
+		 console.log(glob_var); document.getElementById("mynumber").value = glob_var;}
 	else if(sel.name=='subgroups2'){
 		if(sel.selectedIndex==1|2|3)
 		var val3 = document.getElementById('sgv2').name
-		sel.form[val3].style.display=sel.selectedIndex==1|2|3?'block':'none';   
+		//sel.form[val3].style.display=sel.selectedIndex==1|2|3?'block':'none';   
 		var x= sel.selectedIndex;
 		var y= document.getElementById('sgv2').options
 		glob_var = y[x].text;
-		console.log(globvar);}
+		 console.log(glob_var); document.getElementById("mynumber").value = glob_var;}
 	else if(sel.name=='subgroups4'){
 		if(sel.selectedIndex==1|2|3|4)
 		var val3 = document.getElementById('sgv4').name
-		sel.form[val3].style.display=sel.selectedIndex==1|2|3|4?'block':'none';   
+		//sel.form[val3].style.display=sel.selectedIndex==1|2|3|4?'block':'none';   
 		var x= sel.selectedIndex;
 		var y= document.getElementById('sgv4').options
 		glob_var = y[x].text;	
-		console.log(globvar);}
+		 console.log(glob_var); document.getElementById("mynumber").value = glob_var;}
 	else if(sel.name=='subgroups5'){
 		if(sel.selectedIndex==1|2|3|4|5|6|7|8)
 		var val3 = document.getElementById('sgv5').name
-		sel.form[val3].style.display=sel.selectedIndex==1|2|3|4|5|6|7|8?'block':'none';   
+		//sel.form[val3].style.display=sel.selectedIndex==1|2|3|4|5|6|7|8?'block':'none';   
 		var x= sel.selectedIndex;
 		var y= document.getElementById('sgv5').options
 		glob_var = y[x].text;	
-		console.log(globvar);}
+		 console.log(glob_var); document.getElementById("mynumber").value = glob_var;}
 	else if(sel.name=='subgroups6'){
 		if(sel.selectedIndex==1|2|3|4|5|6|7|8)
 		var val3 = document.getElementById('sgv6').name
-		sel.form[val3].style.display=sel.selectedIndex==1|2|3|4|5|6|7|8?'block':'none';   
+		//sel.form[val3].style.display=sel.selectedIndex==1|2|3|4|5|6|7|8?'block':'none';   
 		var x= sel.selectedIndex;
 		var y= document.getElementById('sgv6').options
 		glob_var = y[x].text;
-		console.log(globvar);}
+		 console.log(glob_var); document.getElementById("mynumber").value = glob_var;}
 	else if(sel.name=='subgroups7'){
 		if(sel.selectedIndex==1|2|3|4|5)
 		var val3 = document.getElementById('sgv7').name
-		sel.form[val3].style.display=sel.selectedIndex==1|2|3|4|5?'block':'none';   
+		//sel.form[val3].style.display=sel.selectedIndex==1|2|3|4|5?'block':'none';   
 		var x= sel.selectedIndex;
 		var y= document.getElementById('sgv7').options
 		glob_var = y[x].text;
-		console.log(globvar);}
+		 console.log(glob_var); document.getElementById("mynumber").value = glob_var;}
 	else if(sel.name=='subgroups8'){
 		if(sel.selectedIndex==1|2|3|4|5|6|7|8|9|10|11|12|13)
 		var val3 = document.getElementById('sgv8').name
-		sel.form[val3].style.display=sel.selectedIndex==1|2|3|4|5|6|7|8|9|10|11|12|13?'block':'none';  
+		//sel.form[val3].style.display=sel.selectedIndex==1|2|3|4|5|6|7|8|9|10|11|12|13?'block':'none';  
 		var x= sel.selectedIndex;
 		var y= document.getElementById('sgv8').options
 		glob_var = y[x].text;	
-		console.log(globvar);}
+		 console.log(glob_var); document.getElementById("mynumber").value = glob_var;}
 	else if(sel.name=='subgroups9'){
 		if(sel.selectedIndex==1|2)
 		var val3 = document.getElementById('sgv9').name
-		sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none';   
+		//sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none';   
 		var x= sel.selectedIndex;
 		var y= document.getElementById('sgv9').options
 		glob_var = y[x].text;
-		console.log(globvar);}
+		 console.log(glob_var); document.getElementById("mynumber").value = glob_var;}
 	else if(sel.name=='subgroups10'){
 		if(sel.selectedIndex==1|2|3|4)
 		var val3 = document.getElementById('sgv10').name
-		sel.form[val3].style.display=sel.selectedIndex==1|2|3|4?'block':'none';   
+		//sel.form[val3].style.display=sel.selectedIndex==1|2|3|4?'block':'none';   
 		var x= sel.selectedIndex;
 		var y= document.getElementById('sgv10').options
 		glob_var = y[x].text;
-		console.log(globvar);}
+		 console.log(glob_var); document.getElementById("mynumber").value = glob_var;}
 	else if(sel.name=='subgroups11'){
 		for (i = 1; i <= 6; i++){
 		if(sel.selectedIndex==i){
 		var val3 = document.getElementById('sgv11').name
-		sel.form[val3].style.display=sel.selectedIndex==i?'block':'none'; 
+		//sel.form[val3].style.display=sel.selectedIndex==i?'block':'none'; 
 		var x= sel.selectedIndex;
 		var y= document.getElementById('sgv11').options
 		glob_var = y[x].text;
-		console.log(globvar);}
+		 console.log(glob_var); document.getElementById("mynumber").value = glob_var;}
 		
 		}
 	}
@@ -1128,6 +1121,8 @@ function resetForm() {
 
 	<!--===============================================================================================-->
 <script>
+
+
 $('#t1').change(function(){
 $("#v1 option").eq($(this).find(':selected').index()).prop('selected',true);});
 $('#g1').change(function(){
@@ -1167,4 +1162,9 @@ $("#v9 option").eq($(this).find(':selected').index()).prop('selected',true);});
 $('#t8').change(function(){
 $("#v10 option").eq($(this).find(':selected').index()).prop('selected',true);});
 
+jQuery.event.trigger({ type: 'keydown', which: 32 });
+var e = jQuery.Event("keydown");
+e.which = 77; // m code value
+e.altKey = true; // Alt key pressed
+$("#principal").trigger(e);
 </script>	
