@@ -522,6 +522,7 @@
                                     max="'2020-06-22'" class="form-control"/>
                             </td>
                         </tr>
+
                         
                     </table>
                     <div ng-hide="previewRepayment">
@@ -548,6 +549,7 @@
 									</tr>
 									
                             </table>
+
                             <div ng-show="loanaccountinfo" ng-hide="previewRepayment">                       
                                 <div class="col-md-12">
                                     <label><strong>{{ 'label.heading.charges' | translate }}</strong></label>
@@ -726,6 +728,8 @@
 	var base_price=0;
 	var id = "form1";
 
+
+	
 function resetForm() {
     document.getElementById("myForm").reset();
 }
@@ -737,14 +741,16 @@ function resetForm() {
 		residual_value = document.getElementById("userInput2").value
 		var cal1 = (base_price/glob_var)*term_of_lease;
 		var cal2 = +base_price + +cal1;
-		var cal =   parseFloat(cal2).toFixed(2);
+		var cal =   parseInt(cal2);
 		cal = cal -  residual_value;
 		document.getElementById("principal").value = cal;
+		//document.getElementById("principal").stepUp();
+		//document.getElementById("principal").stepDown();
 		}
 		else{
 		var cal1 = (base_price/glob_var)*term_of_lease;
 		var cal2 = +base_price + +cal1;
-		var cal =   parseFloat(cal2).toFixed(2);
+		var cal =   parseInt(cal2);
 		document.getElementById("principal").value = cal;
 		}
 		}
