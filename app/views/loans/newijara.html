@@ -12,7 +12,7 @@
         </li>
         <li class="active">{{'label.anchor.ijaraapplication' | translate}}</li>
     </ul>
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <wizard current-step="step">
         <wz-step >
 		<!--<div class="card">
@@ -22,8 +22,9 @@
 				</form>
 		</div>-->		
 				 <div class="card-content">
-  
-                    <form name="newloanaccountform"  ng-submit="submit()" class="well form-inline">
+				 
+				
+                    <form name="newloanaccountform"  ng-submit="submit()" class="well form-inline" id ="myForm">
 					<!--<api-validate></api-validate>-->
 					
 					<select style="width:100%; padding-bottom: 10px;" id="c1" name="categories" onchange="checkval(this);">
@@ -406,7 +407,7 @@
 				<table class="table width100">
 				<tr>
 				<td class="width14 >
-					<span class="label-input100">Useful Life</span>
+					<span class="label-input100">Useful Life (In Years)</span>
 				</td>
 				<td class ="width36 paddedbottom10">
 				<input type="text" id="mynumber" placeholder = "Number Of Years" value="" disabled>
@@ -423,7 +424,7 @@
 				</tr>
 				<tr>
 				<td class="width14 >
-					<span class="label-input100">Term Of Lease</span>
+					<span class="label-input100">Term Of Lease (In Years)</span>
 				<td class="width36 paddedbottom10">				
 				<input class="input100" type="text" name="name" placeholder="Term of Lease" onkeypress="return isNumber(evt)"  id="userInput1">
 					<span class="focus-input100"></span>
@@ -449,7 +450,7 @@
 						</button>
 				</td>
 				<td class="width14">
-				<button class="contact100-form-btn" id ="resetbutton" value="Clear Results" onclick="Reset (form);">
+				<button class="contact100-form-btn" id ="resetbutton" value="Clear Results" onclick="resetForm();">
 							<span>
 								RESET
 							</span>
@@ -542,7 +543,7 @@
                                     </td>
                                     <td class="width36 paddedbottom10">
                                         <input id="loanTermFrequency" class="form-control" name="loanterm" type="text"
-                                            ng-model="formData.loanTermFrequency" required />
+                                            ng-model="formData.loanTermFrequency" disabled />
                                      
                                         <!--<form-validate valattributeform="newloanaccountform" valattribute="loanterm"/>-->
                                     </td>
@@ -726,7 +727,7 @@
 	var cal_var=0;
 	var term_of_lease=0;
 	var base_price=0;
-	var id = "form1";
+	
 
 
 	
@@ -737,6 +738,8 @@ function resetForm() {
 		var residual_value=0;
 		base_price = document.getElementById("userInput").value
 		term_of_lease = document.getElementById("userInput1").value
+		term_of_lease  = 12 * term_of_lease 
+		document.getElementById("loanTermFrequency").value = term_of_lease;
 		if(term_of_lease>=glob_var){
 		residual_value = document.getElementById("userInput2").value
 		var cal1 = (base_price/glob_var)*term_of_lease;
@@ -1128,7 +1131,13 @@ function resetForm() {
 	<!--===============================================================================================-->
 <script>
 
-
+$(document).ready(function() {
+    $("#layout_select").children('option:gt(0)').hide();
+    $("#column_select").change(function() {
+        $("#layout_select").children('option').hide();
+        $("#layout_select").children("option[value^=" + $(this).val() + "]").show()
+    })
+})
 $('#t1').change(function(){
 $("#v1 option").eq($(this).find(':selected').index()).prop('selected',true);});
 $('#g1').change(function(){
