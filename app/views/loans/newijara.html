@@ -1,4 +1,4 @@
-	<div ng-controller="NewLoanAccAppController" class="content-container">
+	<div ng-controller="IjaraController" class="content-container">
 	<ul class="breadcrumb">
         <li ng-show="groupName">
             <a href="#/viewgroup/{{groupId}}">
@@ -24,451 +24,451 @@
 				 <div class="card-content">
 				 
 				
-                    <form name="newloanaccountform"  ng-submit="submit()" class="well form-inline" id ="myForm">
-					<!--<api-validate></api-validate>-->
+						<form name="newloanaccountform"  ng-submit="submit()" class="well form-inline" id ="myForm">
+						<!--<api-validate></api-validate>-->
+						
+						<select style="width:100%; padding-bottom: 10px;" id="c1" name="categories" onchange="checkval(this);">
+						<option value="">Select Category</option>
+						<option value="a1">Buildings</option>
+						<option value="a2">Bridges, culverts, bunders, etc. </option>
+						<option value="a3">Roads</option>
+						<option value="a4">Plant and Machinery</option>
+						<option value="a5">Furniture and fittings</option>
+						<option value="a6">Motor Vehicles </option>
+						<option value="a7">Ships </option>
+						<option value="a8">Aircrafts or Helicopters </option>
+						<option value="a9">Railways sidings, locomotives, rolling stocks, tramways, etc</option>
+						<option value="a10">Ropeway structures </option>
+						<option value="a11">Office equipment  </option>
+						<option value="a12">Computers and data processing units  </option>
+						<option value="a13">Laboratory equipment </option>
+						<option value="a14">Electrical Installations and Equipment </option>
+						<option value="a15">Hydraulic works, pipelines and sluices  </option>
+						<br>
+						</select>
+						<select name="types" id ="t1"    style="display:none; width:100%; padding-bottom: 10px;" onchange="checkval1(this);">
+						<option value="">Select Type</option>
+						<option value="">Buildings (other than factory buildings) RCC Frame Structure</option>
+						<option value="">Buildings (other than factory buildings) other than RCC Frame Structure</option>
+						</select>
+						<select name="types2" id="t2"    style="display:none; width:100%; padding-bottom: 10px;" onchange="checkval1(this);">
+						<option value="">Select Type</option>
+						<option value="">Carpeted roads</option>
+						<option value="">Non-carpeted roads</option>
+						</select>
+						<select name="types3" id="t3"    style="display:none; width:100%; padding-bottom: 10px;" onchange="checkval1(this);">
+						<option value="">Select Type</option>
+						<option value="">General rate applicable to plant and machinery</option>
+						<option value="">Special Plant and Machinery</option>
+						</select>
+						<select name="types4" id="t4"    style="display:none; width:100%; padding-bottom: 10px;" onchange="checkval1(this);">
+						<option value="">Select Type</option>
+						<option value="">General furniture and fittings</option>
+						<option value="">Furniture and fittings used in hotels, restaurants and boarding houses, schools, etc</option>
+						</select>
+						<select name="types5" id="t5"    style="display:none; width:100%; padding-bottom: 10px;" onchange="checkval1(this);">
+						<option value="">Select Type</option>
+						<option value="">Motor cycles, scooters and other mopeds</option>
+						<option value="">Motor buses, motor lorries, motor cars and motor taxies used in a business of running them on hire</option>
+						<option value="">Motor buses, motor lorries and motor cars other than those used in a business of running them on hire</option>
+						<option value="">Motor tractors, harvesting combines and heavy vehicles</option>
+						<option value="">Electrically operated vehicles including battery powered or fuel cell powered vehicles</option>
+						</select>
+						<select name="types6" id="t6"    style="display:none; width:100%; padding-bottom: 10px;" onchange="checkval1(this);">
+						<option value="">Select Type</option>
+						<option value="">Ocean-going ships</option>
+						<option value="">Vessels ordinarily operating on inland waters</option>
+						</select>
+						<select name="types7" id="t7"    style="display:none; width:100%; padding-bottom: 10px;" onchange="checkval1(this);">
+						<option value="">Select Type</option>
+						<option value="">Servers and networks</option>
+						<option value="">End user devices, such as, desktops, laptops, etc.</option>
+						</select>
+						<select name="types8" id="t8"    style="display:none; width:100%; padding-bottom: 10px;" onchange="checkval1(this);">
+						<option value="">Select Type</option>
+						<option value="">General laboratory equipment</option>
+						<option value="">Laboratory equipments used in educational institutions</option>
+						</select>
+						<select name="groups" id="g1"    style="display:none; width:100%; padding-bottom: 10px;" onchange="func_values(this);">
+						<option value="">Select Type</option>
+						<option value="">Carpeted Roads—RCC</option>
+						<option value="">Carpeted Roads—other than RCC</option>
+						</select>
+						<select name="groups2" id="g2"    style="display:none; width:100%; padding-bottom: 10px;" onchange="func_values1(this);">
+						<option value="">Select Type</option>
+						<option value="">Plant and Machinery other than continuous process plant not covered under specific industries</option>
+						<option value="">Continuous process plant for which no special rate has been prescribed under </option>
+						</select>
+						<select name="groups3" id="g3"    style="display:none; width:100%; padding-bottom: 10px;"  onchange="func_sg1(this);">
+						<option value="">Select Type</option>
+						<option value="">Plant and Machinery related to production and exhibition of Motion Picture Films</option>
+						<option value="">Plant and Machinery used in glass manufacturing </option>
+						<option value="">Plant and Machinery used in mines and quarries</option>
+						<option value="">Plant and Machinery used in Telecommunications</option>
+						<option value="">Plant and Machinery used in exploration, production and refining oil and gas </option>
+						<option value="">Plant and Machinery used in generation, transmission and distribution of power</option>
+						<option value="">Plant and Machinery used in manufacture of steel</option>
+						<option value="">Plant and Machinery used in manufacture of non-ferrous metals</option>
+						<option value="">Plant and Machinery used in medical and surgical operations</option>
+						<option value="">Plant and Machinery used in manufacture of pharmaceuticals and chemicals </option>
+						<option value="">Plant and Machinery used in civil construction</option>
+						<option value="">Plant and Machinery used in salt works</option>
+						</select>
+						<select name="groups4" id="g4"    style="display:none; width:100%; padding-bottom: 10px;" onchange="func_values2(this);">
+						<option value="">Select Type</option>
+						<option value="">Bulk Carriers and liner vessels</option>
+						<option value="">Crude tankers, product carriers and easy chemical carriers with or without conventional tank coatings</option>
+						<option value="">Chemicals and Acid Carriers : With Stainless steel tanks </option>
+						<option value="">Chemicals and Acid Carriers : With other tanks</option>
+						<option value="">Liquified gas carriers</option>
+						<option value="">Conventional large passenger vessels which are used for cruise purpose also</option>
+						<option value="">Coastal service ships of all categories</option>
+						<option value="">Offshore supply and support vessels</option>
+						<option value="">Catamarans and other high speed passenger for ships or boats</option>
+						<option value="">Drill ships</option>
+						<option value="">Hovercrafts</option>
+						<option value="">Fishing vessels with wooden hull</option>
+						<option value="">Dredgers, tugs, barges, survey launches and other similar ships used mainly for dredging purposes</option>
+						</select>
+						<select name="groups5" id="g5"    style="display:none; width:100%; padding-bottom: 10px;" onchange="func_values2(this);">
+						<option value="">Select Type</option>
+						<option value="">Speed boats</option>
+						<option value="">Other vessels</option>
+						</select>
+						<select name="subgroups" id="sg1"    style="display:none; width:100%; padding-bottom: 10px;"  onchange="sg_values_all(this)">
+						<option value="">Select Type</option>
+						<option value="">Cinematograph films—Machinery used in the production and exhibition of cinematograph films</option>
+						<option value="">Projecting equipment for exhibition of films</option>
+						</select>
+						<select name="subgroups2" id="sg2"    style="display:none; width:100%; padding-bottom: 10px;"  onchange="sg_values_all(this)">
+						<option value="">Select Type</option>
+						<option value="">Plant and Machinery except direct fire glass melting furnaces</option>
+						<option value="">Plant and Machinery except direct fire glass melting furnaces </option>
+						<option value="">Float Glass Melting Furnaces</option>
+						</select>
+						<select name="subgroups4" id="sg4"    style="display:none; width:100%; padding-bottom: 10px;"  onchange="sg_values_all(this)">
+						<option value="">Select Type</option>
+						<option value="">Towers</option>
+						<option value="">Telecom transreceivers, switching centres, transmission and other network equipment</option>
+						<option value="">Telecom—Ducts, Cables and optical fibre</option>
+						<option value="">Satellites</option>
+						</select>
+						<select name="subgroups5" id="sg5"    style="display:none; width:100%; padding-bottom: 10px;"  onchange="sg_values_all(this)">
+						<option value="">Select Type</option>
+						<option value="">Refineries</option>
+						<option value="">Oil and gas assets (including wells), processing plant and facilities</option>
+						<option value="">Petrochemical Plant</option>
+						<option value="">Storage tanks and related equipment</option>
+						<option value="">Pipelines</option>
+						<option value="">Drilling Rig</option>
+						<option value="">Field operations (above ground) Portable boilers, drilling tools, well-head tanks, etc.</option>
+						<option value="">Loggers</option>
+						</select>
+						<select name="subgroups6" id="sg6"    style="display:none; width:100%; padding-bottom: 10px;"  onchange="sg_values_all(this)">
+						<option value="">Select Type</option>
+						<option value="">Thermal/Gas/Combined Cycle Power Generation Plant</option>
+						<option value="">Hydro Power Generation Plant</option>
+						<option value="">Nuclear Power Generation Plant</option>
+						<option value="">Transmission lines, cables and other network assets</option>
+						<option value="">Wind Power Generation Plant</option>Sinter Plant
+						<option value="">Electric Distribution Plant</option>
+						<option value="">Gas Storage and Distribution Plant</option>
+						<option value="">Water Distribution Plant including pipelines</option>
+						</select>
+						<select name="subgroups7" id="sg7"    style="display:none; width:100%; padding-bottom: 10px;"  onchange="sg_values_all(this)">
+						<option value="">Select Type</option>
+						<option value="">Sinter Plant</option>
+						<option value="">Blast Furnace</option>
+						<option value="">Coke ovens</option>
+						<option value="">Rolling mill in steel plant</option>
+						<option value="">Basic oxygen Furnace Converter</option>
+						</select>
+						<select name="subgroups8" id="sg8"    style="display:none; width:100%; padding-bottom: 10px;"  onchange="sg_values_all(this)">
+						<option value="">Select Type</option>
+						<option value="">Metal pot line </option>
+						<option value="">Bauxite crushing and grinding section</option>
+						<option value="">Digester section</option>
+						<option value="">Turbine</option>
+						<option value="">Equipments for Calcination </option>
+						<option value="">Copper Smelter </option>
+						<option value="">Roll Grinder</option>
+						<option value="">Soaking Pit</option>
+						<option value="">Annealing Furnace</option>
+						<option value="">Rolling Mills</option>
+						<option value="">Equipments for Scalping, Slitting, etc.</option>
+						<option value="">Surface Miner, Ripper Dozer, etc., used in mines</option>
+						<option value="">Copper refining plant </option>
+						</select>
+						<select name="subgroups9" id="sg9"    style="display:none; width:100%; padding-bottom: 10px;" onchange="sg_values_all(this)" >
+						<option value="">Select Type</option>
+						<option value="">Electrical Machinery, X-ray and electrotherapeutic apparatus and accessories</option>
+						<option value="">Other Equipments.</option>
+						</select>
+						<select name="subgroups10" id="sg10"    style="display:none; width:100%; padding-bottom: 10px;"  onchange="sg_values_all(this)">
+						<option value="">Select Type</option>
+						<option value="">Electrical Machinery, X-ray and electrotherapeutic apparatus and accessories</option>
+						<option value="">Reactors</option>
+						<option value="">Distillation Columns</option>
+						<option value="">Drying equipments/Centrifuges and Decanters</option>
+						<option value="">Vessel/storage tanks</option>
+						</select>
+						<select name="subgroups11" id="sg11"    style="display:none; width:100%; padding-bottom: 10px;"  onchange="sg_values_all(this)">
+						<option value="">Select Type</option>
+						<option value="">Concreting, Crushing, Piling Equipments and Road Making Equipments</option>
+						<option value="">Heavy Lift Equipments : Cranes with capacity of more than 100 tons</option>
+						<option value="">Heavy Lift Equipments : Cranes with capacity of less than 100 tons</option>
+						<option value="">Transmission line, Tunneling Equipments </option>
+						<option value="">Earth-moving equipments</option>
+						<option value="">Others including Material Handling /Pipeline/Welding Equipments </option>
+						</select>
+
+						<select name="values" id="v1"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+						<option value="">values</option>
+						<option value="">60</option>
+						<option value="">30</option>
+						</select>
+						<select name="values2" id="v2"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+						<option value="">30</option>
+						</select>
+						<select name="values3" id="v3"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+						<option value="">values</option>
+						<option value="">10</option>
+						<option value="">05</option>
+						</select>
+						<select name="values4" id="v4"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+						<option value="">values</option>
+						<option value="">15</option>
+						<option value="">25</option>
+						</select>
+						<select name="values5" id="v5"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+						<option value="">values</option>
+						<option value="">10</option>
+						<option value="">08</option>
+						</select>
+						<select name="values6" id="v6"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+						<option value="">values</option>
+						<option value="">10</option>
+						<option value="">06</option>
+						<option value="">08</option>
+						<option value="">08</option>
+						<option value="">08</option>
+						</select>
+						<select name="values7" id="v7"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+						<option value="">values</option>
+						<option value="">25</option>
+						<option value="">20</option>
+						<option value="">25</option>
+						<option value="">20</option>
+						<option value="">30</option>
+						<option value="">30</option>
+						<option value="">30</option>
+						<option value="">20</option>
+						<option value="">20</option>
+						<option value="">25</option>
+						<option value="">15</option>
+						<option value="">10</option>
+						<option value="">14</option>
+						</select>
+						<select name="values8" id="v8"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+						<option value="">values</option>
+						<option value="">13</option>
+						<option value="">28</option>
+						</select>
+						<select name="values9" id="v9"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+						<option value="">values</option>
+						<option value="">06</option>
+						<option value="">03</option>
+						</select>
+						<select name="values10" id="v10"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+						<option value="">values</option>
+						<option value="">10</option>
+						<option value="">05</option>
+						</select>
+						<select name="type_values" id="tv1"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+						<option value="">03</option>
+						</select>
+						</select>
+						<select name="type_values2" id="tv2"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+						<option value="">20</option>
+						</select>
+						</select>
+						<select name="type_values3" id="tv3"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+						<option value="">15</option>
+						</select>
+						</select>
+						<select name="type_value4" id="tv4"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+						<option value="">15</option>
+						</select>
+						</select>
+						<select name="type_value5" id="tv5"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+						<option value="">05</option>
+						</select>
+						</select>
+						<select name="type_values6" id="tv6"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+						<option value="">10</option>
+						</select>
+						</select>
+						<select name="type_values7" id="tv7"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+						<option value="">15</option>
+						</select>
+						<select name="group_values" id="gv1"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+						<option value="">08</option>
+						</select>
+						<select name="group_values2" id="gv2"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+						<option value="">15</option>
+						</select>
+						<select name="sg_values" id="sgv1"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+						<option value="">values</option>
+						<option value="">13</option>
+						<option value="">23</option>
+						</select>
+						<select name="sg_values2" id="sgv2"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+						<option value="">values</option>
+						<option value="">13</option>
+						<option value="">08</option>
+						<option value="">10</option>
+						</select>
+						<select name="sg_values4" id="sgv4"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+						<option value="">values</option>
+						<option value="">18</option>
+						<option value="">13</option>
+						<option value="">18</option>
+						<option value="">18</option>
+						</select>
+						<select name="sg_values5" id="sgv5"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+						<option value="">values</option>
+						<option value="">25</option>
+						<option value="">25</option>
+						<option value="">25</option>
+						<option value="">25</option>
+						<option value="">30</option>
+						<option value="">30</option>
+						<option value="">08</option>
+						<option value="">08</option>
+						</select>
+						<select name="sg_values6" id="sgv6"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+						<option value="">values</option>
+						<option value="">40</option>
+						<option value="">40</option>
+						<option value="">40</option>
+						<option value="">40</option>
+						<option value="">22</option>
+						<option value="">35</option>
+						<option value="">30</option>
+						<option value="">030</option>
+						</select>
+						<select name="sg_values7" id="sgv7"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+						<option value="">values</option>
+						<option value="">20</option>
+						<option value="">20</option>
+						<option value="">20</option>
+						<option value="">20</option>
+						<option value="">25</option>
+						</select>
+						<select name="sg_values8" id="sgv8"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+						<option value="">values</option>
+						<option value="">40</option>
+						<option value="">40</option>
+						<option value="">40</option>
+						<option value="">40</option>
+						<option value="">40</option>
+						<option value="">40</option>
+						<option value="">40</option>
+						<option value="">30</option>
+						<option value="">30</option>
+						<option value="">30</option>
+						<option value="">30</option>
+						<option value="">25</option>
+						<option value="">25</option>
+						</select>
+						<select name="sg_values9" id="sgv9"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+						<option value="">values</option>
+						<option value="">13</option>
+						<option value="">15</option>
+						</select>
+						<select name="sg_values10" id="sgv10"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+						<option value="">values</option>
+						<option value="">20</option>
+						<option value="">20</option>
+						<option value="">20</option>
+						<option value="">20</option>
+						</select>
+						<select name="sg_values11" id="sgv11"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
+						<option value="">values</option>
+						<option value="">12</option>
+						<option value="">20</option>
+						<option value="">15</option>
+						<option value="">10</option>
+						<option value="">09</option>
+						<option value="">12</option>
+						</select>
+						</select>
+					<br/>				
+					<table class="table width100">
+					<tr>
+					<td class="width14 >
+						<span class="label-input100">Useful Life (In Years)</span>
+					</td>
+					<td class ="width36 paddedbottom10">
+					<input type="text" id="mynumber" placeholder = "Number Of Years" value="" disabled>
+					</td>
+					<td class="width14 >
+					<div class="wrap-input100 validate-input" data-validate="Base Price is Required">
+						<span class="label-input100">Base Price</span>
+					</td>
+						<td class="width36 paddedbottom10">
+					<input class="input100" type="text" name="name" placeholder="Base Price" onkeypress="return isNumber(evt)" id="userInput">
+						<span class="focus-input100"></span>
 					
-					<select style="width:100%; padding-bottom: 10px;" id="c1" name="categories" onchange="checkval(this);">
-					<option value="">Select Category</option>
-					<option value="a1">Buildings</option>
-					<option value="a2">Bridges, culverts, bunders, etc. </option>
-					<option value="a3">Roads</option>
-					<option value="a4">Plant and Machinery</option>
-					<option value="a5">Furniture and fittings</option>
-					<option value="a6">Motor Vehicles </option>
-					<option value="a7">Ships </option>
-					<option value="a8">Aircrafts or Helicopters </option>
-					<option value="a9">Railways sidings, locomotives, rolling stocks, tramways, etc</option>
-					<option value="a10">Ropeway structures </option>
-					<option value="a11">Office equipment  </option>
-					<option value="a12">Computers and data processing units  </option>
-					<option value="a13">Laboratory equipment </option>
-					<option value="a14">Electrical Installations and Equipment </option>
-					<option value="a15">Hydraulic works, pipelines and sluices  </option>
-					<br>
-					</select>
-					<select name="types" id ="t1"    style="display:none; width:100%; padding-bottom: 10px;" onchange="checkval1(this);">
-					<option value="">Select Type</option>
-					<option value="">Buildings (other than factory buildings) RCC Frame Structure</option>
-					<option value="">Buildings (other than factory buildings) other than RCC Frame Structure</option>
-					</select>
-					<select name="types2" id="t2"    style="display:none; width:100%; padding-bottom: 10px;" onchange="checkval1(this);">
-					<option value="">Select Type</option>
-					<option value="">Carpeted roads</option>
-					<option value="">Non-carpeted roads</option>
-					</select>
-					<select name="types3" id="t3"    style="display:none; width:100%; padding-bottom: 10px;" onchange="checkval1(this);">
-					<option value="">Select Type</option>
-					<option value="">General rate applicable to plant and machinery</option>
-					<option value="">Special Plant and Machinery</option>
-					</select>
-					<select name="types4" id="t4"    style="display:none; width:100%; padding-bottom: 10px;" onchange="checkval1(this);">
-					<option value="">Select Type</option>
-					<option value="">General furniture and fittings</option>
-					<option value="">Furniture and fittings used in hotels, restaurants and boarding houses, schools, etc</option>
-					</select>
-					<select name="types5" id="t5"    style="display:none; width:100%; padding-bottom: 10px;" onchange="checkval1(this);">
-					<option value="">Select Type</option>
-					<option value="">Motor cycles, scooters and other mopeds</option>
-					<option value="">Motor buses, motor lorries, motor cars and motor taxies used in a business of running them on hire</option>
-					<option value="">Motor buses, motor lorries and motor cars other than those used in a business of running them on hire</option>
-					<option value="">Motor tractors, harvesting combines and heavy vehicles</option>
-					<option value="">Electrically operated vehicles including battery powered or fuel cell powered vehicles</option>
-					</select>
-					<select name="types6" id="t6"    style="display:none; width:100%; padding-bottom: 10px;" onchange="checkval1(this);">
-					<option value="">Select Type</option>
-					<option value="">Ocean-going ships</option>
-					<option value="">Vessels ordinarily operating on inland waters</option>
-					</select>
-					<select name="types7" id="t7"    style="display:none; width:100%; padding-bottom: 10px;" onchange="checkval1(this);">
-					<option value="">Select Type</option>
-					<option value="">Servers and networks</option>
-					<option value="">End user devices, such as, desktops, laptops, etc.</option>
-					</select>
-					<select name="types8" id="t8"    style="display:none; width:100%; padding-bottom: 10px;" onchange="checkval1(this);">
-					<option value="">Select Type</option>
-					<option value="">General laboratory equipment</option>
-					<option value="">Laboratory equipments used in educational institutions</option>
-					</select>
-					<select name="groups" id="g1"    style="display:none; width:100%; padding-bottom: 10px;" onchange="func_values(this);">
-					<option value="">Select Type</option>
-					<option value="">Carpeted Roads—RCC</option>
-					<option value="">Carpeted Roads—other than RCC</option>
-					</select>
-					<select name="groups2" id="g2"    style="display:none; width:100%; padding-bottom: 10px;" onchange="func_values1(this);">
-					<option value="">Select Type</option>
-					<option value="">Plant and Machinery other than continuous process plant not covered under specific industries</option>
-					<option value="">Continuous process plant for which no special rate has been prescribed under </option>
-					</select>
-					<select name="groups3" id="g3"    style="display:none; width:100%; padding-bottom: 10px;"  onchange="func_sg1(this);">
-					<option value="">Select Type</option>
-					<option value="">Plant and Machinery related to production and exhibition of Motion Picture Films</option>
-					<option value="">Plant and Machinery used in glass manufacturing </option>
-					<option value="">Plant and Machinery used in mines and quarries</option>
-					<option value="">Plant and Machinery used in Telecommunications</option>
-					<option value="">Plant and Machinery used in exploration, production and refining oil and gas </option>
-					<option value="">Plant and Machinery used in generation, transmission and distribution of power</option>
-					<option value="">Plant and Machinery used in manufacture of steel</option>
-					<option value="">Plant and Machinery used in manufacture of non-ferrous metals</option>
-					<option value="">Plant and Machinery used in medical and surgical operations</option>
-					<option value="">Plant and Machinery used in manufacture of pharmaceuticals and chemicals </option>
-					<option value="">Plant and Machinery used in civil construction</option>
-					<option value="">Plant and Machinery used in salt works</option>
-					</select>
-					<select name="groups4" id="g4"    style="display:none; width:100%; padding-bottom: 10px;" onchange="func_values2(this);">
-					<option value="">Select Type</option>
-					<option value="">Bulk Carriers and liner vessels</option>
-					<option value="">Crude tankers, product carriers and easy chemical carriers with or without conventional tank coatings</option>
-					<option value="">Chemicals and Acid Carriers : With Stainless steel tanks </option>
-					<option value="">Chemicals and Acid Carriers : With other tanks</option>
-					<option value="">Liquified gas carriers</option>
-					<option value="">Conventional large passenger vessels which are used for cruise purpose also</option>
-					<option value="">Coastal service ships of all categories</option>
-					<option value="">Offshore supply and support vessels</option>
-					<option value="">Catamarans and other high speed passenger for ships or boats</option>
-					<option value="">Drill ships</option>
-					<option value="">Hovercrafts</option>
-					<option value="">Fishing vessels with wooden hull</option>
-					<option value="">Dredgers, tugs, barges, survey launches and other similar ships used mainly for dredging purposes</option>
-					</select>
-					<select name="groups5" id="g5"    style="display:none; width:100%; padding-bottom: 10px;" onchange="func_values2(this);">
-					<option value="">Select Type</option>
-					<option value="">Speed boats</option>
-					<option value="">Other vessels</option>
-					</select>
-					<select name="subgroups" id="sg1"    style="display:none; width:100%; padding-bottom: 10px;"  onchange="sg_values_all(this)">
-					<option value="">Select Type</option>
-					<option value="">Cinematograph films—Machinery used in the production and exhibition of cinematograph films</option>
-					<option value="">Projecting equipment for exhibition of films</option>
-					</select>
-					<select name="subgroups2" id="sg2"    style="display:none; width:100%; padding-bottom: 10px;"  onchange="sg_values_all(this)">
-					<option value="">Select Type</option>
-					<option value="">Plant and Machinery except direct fire glass melting furnaces</option>
-					<option value="">Plant and Machinery except direct fire glass melting furnaces </option>
-					<option value="">Float Glass Melting Furnaces</option>
-					</select>
-					<select name="subgroups4" id="sg4"    style="display:none; width:100%; padding-bottom: 10px;"  onchange="sg_values_all(this)">
-					<option value="">Select Type</option>
-					<option value="">Towers</option>
-					<option value="">Telecom transreceivers, switching centres, transmission and other network equipment</option>
-					<option value="">Telecom—Ducts, Cables and optical fibre</option>
-					<option value="">Satellites</option>
-					</select>
-					<select name="subgroups5" id="sg5"    style="display:none; width:100%; padding-bottom: 10px;"  onchange="sg_values_all(this)">
-					<option value="">Select Type</option>
-					<option value="">Refineries</option>
-					<option value="">Oil and gas assets (including wells), processing plant and facilities</option>
-					<option value="">Petrochemical Plant</option>
-					<option value="">Storage tanks and related equipment</option>
-					<option value="">Pipelines</option>
-					<option value="">Drilling Rig</option>
-					<option value="">Field operations (above ground) Portable boilers, drilling tools, well-head tanks, etc.</option>
-					<option value="">Loggers</option>
-					</select>
-					<select name="subgroups6" id="sg6"    style="display:none; width:100%; padding-bottom: 10px;"  onchange="sg_values_all(this)">
-					<option value="">Select Type</option>
-					<option value="">Thermal/Gas/Combined Cycle Power Generation Plant</option>
-					<option value="">Hydro Power Generation Plant</option>
-					<option value="">Nuclear Power Generation Plant</option>
-					<option value="">Transmission lines, cables and other network assets</option>
-					<option value="">Wind Power Generation Plant</option>Sinter Plant
-					<option value="">Electric Distribution Plant</option>
-					<option value="">Gas Storage and Distribution Plant</option>
-					<option value="">Water Distribution Plant including pipelines</option>
-					</select>
-					<select name="subgroups7" id="sg7"    style="display:none; width:100%; padding-bottom: 10px;"  onchange="sg_values_all(this)">
-					<option value="">Select Type</option>
-					<option value="">Sinter Plant</option>
-					<option value="">Blast Furnace</option>
-					<option value="">Coke ovens</option>
-					<option value="">Rolling mill in steel plant</option>
-					<option value="">Basic oxygen Furnace Converter</option>
-					</select>
-					<select name="subgroups8" id="sg8"    style="display:none; width:100%; padding-bottom: 10px;"  onchange="sg_values_all(this)">
-					<option value="">Select Type</option>
-					<option value="">Metal pot line </option>
-					<option value="">Bauxite crushing and grinding section</option>
-					<option value="">Digester section</option>
-					<option value="">Turbine</option>
-					<option value="">Equipments for Calcination </option>
-					<option value="">Copper Smelter </option>
-					<option value="">Roll Grinder</option>
-					<option value="">Soaking Pit</option>
-					<option value="">Annealing Furnace</option>
-					<option value="">Rolling Mills</option>
-					<option value="">Equipments for Scalping, Slitting, etc.</option>
-					<option value="">Surface Miner, Ripper Dozer, etc., used in mines</option>
-					<option value="">Copper refining plant </option>
-					</select>
-					<select name="subgroups9" id="sg9"    style="display:none; width:100%; padding-bottom: 10px;" onchange="sg_values_all(this)" >
-					<option value="">Select Type</option>
-					<option value="">Electrical Machinery, X-ray and electrotherapeutic apparatus and accessories</option>
-					<option value="">Other Equipments.</option>
-					</select>
-					<select name="subgroups10" id="sg10"    style="display:none; width:100%; padding-bottom: 10px;"  onchange="sg_values_all(this)">
-					<option value="">Select Type</option>
-					<option value="">Electrical Machinery, X-ray and electrotherapeutic apparatus and accessories</option>
-					<option value="">Reactors</option>
-					<option value="">Distillation Columns</option>
-					<option value="">Drying equipments/Centrifuges and Decanters</option>
-					<option value="">Vessel/storage tanks</option>
-					</select>
-					<select name="subgroups11" id="sg11"    style="display:none; width:100%; padding-bottom: 10px;"  onchange="sg_values_all(this)">
-					<option value="">Select Type</option>
-					<option value="">Concreting, Crushing, Piling Equipments and Road Making Equipments</option>
-					<option value="">Heavy Lift Equipments : Cranes with capacity of more than 100 tons</option>
-					<option value="">Heavy Lift Equipments : Cranes with capacity of less than 100 tons</option>
-					<option value="">Transmission line, Tunneling Equipments </option>
-					<option value="">Earth-moving equipments</option>
-					<option value="">Others including Material Handling /Pipeline/Welding Equipments </option>
-					</select>
-
-					<select name="values" id="v1"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
-					<option value="">values</option>
-					<option value="">60</option>
-					<option value="">30</option>
-					</select>
-					<select name="values2" id="v2"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
-					<option value="">30</option>
-					</select>
-					<select name="values3" id="v3"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
-					<option value="">values</option>
-					<option value="">10</option>
-					<option value="">05</option>
-					</select>
-					<select name="values4" id="v4"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
-					<option value="">values</option>
-					<option value="">15</option>
-					<option value="">25</option>
-					</select>
-					<select name="values5" id="v5"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
-					<option value="">values</option>
-					<option value="">10</option>
-					<option value="">08</option>
-					</select>
-					<select name="values6" id="v6"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
-					<option value="">values</option>
-					<option value="">10</option>
-					<option value="">06</option>
-					<option value="">08</option>
-					<option value="">08</option>
-					<option value="">08</option>
-					</select>
-					<select name="values7" id="v7"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
-					<option value="">values</option>
-					<option value="">25</option>
-					<option value="">20</option>
-					<option value="">25</option>
-					<option value="">20</option>
-					<option value="">30</option>
-					<option value="">30</option>
-					<option value="">30</option>
-					<option value="">20</option>
-					<option value="">20</option>
-					<option value="">25</option>
-					<option value="">15</option>
-					<option value="">10</option>
-					<option value="">14</option>
-					</select>
-					<select name="values8" id="v8"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
-					<option value="">values</option>
-					<option value="">13</option>
-					<option value="">28</option>
-					</select>
-					<select name="values9" id="v9"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
-					<option value="">values</option>
-					<option value="">06</option>
-					<option value="">03</option>
-					</select>
-					<select name="values10" id="v10"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
-					<option value="">values</option>
-					<option value="">10</option>
-					<option value="">05</option>
-					</select>
-					<select name="type_values" id="tv1"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
-					<option value="">03</option>
-					</select>
-					</select>
-					<select name="type_values2" id="tv2"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
-					<option value="">20</option>
-					</select>
-					</select>
-					<select name="type_values3" id="tv3"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
-					<option value="">15</option>
-					</select>
-					</select>
-					<select name="type_value4" id="tv4"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
-					<option value="">15</option>
-					</select>
-					</select>
-					<select name="type_value5" id="tv5"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
-					<option value="">05</option>
-					</select>
-					</select>
-					<select name="type_values6" id="tv6"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
-					<option value="">10</option>
-					</select>
-					</select>
-					<select name="type_values7" id="tv7"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
-					<option value="">15</option>
-					</select>
-					<select name="group_values" id="gv1"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
-					<option value="">08</option>
-					</select>
-					<select name="group_values2" id="gv2"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
-					<option value="">15</option>
-					</select>
-					<select name="sg_values" id="sgv1"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
-					<option value="">values</option>
-					<option value="">13</option>
-					<option value="">23</option>
-					</select>
-					<select name="sg_values2" id="sgv2"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
-					<option value="">values</option>
-					<option value="">13</option>
-					<option value="">08</option>
-					<option value="">10</option>
-					</select>
-					<select name="sg_values4" id="sgv4"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
-					<option value="">values</option>
-					<option value="">18</option>
-					<option value="">13</option>
-					<option value="">18</option>
-					<option value="">18</option>
-					</select>
-					<select name="sg_values5" id="sgv5"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
-					<option value="">values</option>
-					<option value="">25</option>
-					<option value="">25</option>
-					<option value="">25</option>
-					<option value="">25</option>
-					<option value="">30</option>
-					<option value="">30</option>
-					<option value="">08</option>
-					<option value="">08</option>
-					</select>
-					<select name="sg_values6" id="sgv6"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
-					<option value="">values</option>
-					<option value="">40</option>
-					<option value="">40</option>
-					<option value="">40</option>
-					<option value="">40</option>
-					<option value="">22</option>
-					<option value="">35</option>
-					<option value="">30</option>
-					<option value="">030</option>
-					</select>
-					<select name="sg_values7" id="sgv7"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
-					<option value="">values</option>
-					<option value="">20</option>
-					<option value="">20</option>
-					<option value="">20</option>
-					<option value="">20</option>
-					<option value="">25</option>
-					</select>
-					<select name="sg_values8" id="sgv8"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
-					<option value="">values</option>
-					<option value="">40</option>
-					<option value="">40</option>
-					<option value="">40</option>
-					<option value="">40</option>
-					<option value="">40</option>
-					<option value="">40</option>
-					<option value="">40</option>
-					<option value="">30</option>
-					<option value="">30</option>
-					<option value="">30</option>
-					<option value="">30</option>
-					<option value="">25</option>
-					<option value="">25</option>
-					</select>
-					<select name="sg_values9" id="sgv9"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
-					<option value="">values</option>
-					<option value="">13</option>
-					<option value="">15</option>
-					</select>
-					<select name="sg_values10" id="sgv10"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
-					<option value="">values</option>
-					<option value="">20</option>
-					<option value="">20</option>
-					<option value="">20</option>
-					<option value="">20</option>
-					</select>
-					<select name="sg_values11" id="sgv11"    style="display:none; width:100%; padding-bottom: 10px;" disabled >
-					<option value="">values</option>
-					<option value="">12</option>
-					<option value="">20</option>
-					<option value="">15</option>
-					<option value="">10</option>
-					<option value="">09</option>
-					<option value="">12</option>
-					</select>
-					</select>
-				<br/>				
-				<table class="table width100">
-				<tr>
-				<td class="width14 >
-					<span class="label-input100">Useful Life (In Years)</span>
-				</td>
-				<td class ="width36 paddedbottom10">
-				<input type="text" id="mynumber" placeholder = "Number Of Years" value="" disabled>
-				</td>
-				<td class="width14 >
-				<div class="wrap-input100 validate-input" data-validate="Base Price is Required">
-					<span class="label-input100">Base Price</span>
-				</td>
-					<td class="width36 paddedbottom10">
-				<input class="input100" type="text" name="name" placeholder="Base Price" onkeypress="return isNumber(evt)" id="userInput">
-					<span class="focus-input100"></span>
-				
-				</td>
-				</tr>
-				<tr>
-				<td class="width14 >
-					<span class="label-input100">Term Of Lease (In Years)</span>
-				<td class="width36 paddedbottom10">				
-				<input class="input100" type="text" name="name" placeholder="Term of Lease" onkeypress="return isNumber(evt)"  id="userInput1">
-					<span class="focus-input100"></span>
-				
-				</td>
-				<td class="width14">
-				<div class="wrap-input100 validate-input" data-validate = "Enter Residual Value">
-					<span class="label-input100">Residual Value</span>
-				</td>
-				<td class="width36 paddedbottom10">	
-					<input class="input100" type="text" name="residual" placeholder="Residual Value" onkeypress="return isNumber(evt)"  id="userInput2">
-					<span class="focus-input100"></span>
-				
-				</td>	
-				</tr>
-				<tr>
-				<td class="width14">		
-						<button class="contact100-form-btn"  onclick="calculate_ijara();">
-							<span>
-								CALCULATE
+					</td>
+					</tr>
+					<tr>
+					<td class="width14 >
+						<span class="label-input100">Term Of Lease (In Years)</span>
+					<td class="width36 paddedbottom10">				
+					<input class="input100" type="text" name="name" placeholder="Term of Lease" onkeypress="return isNumber(evt)"  id="userInput1">
+						<span class="focus-input100"></span>
+					
+					</td>
+					<td class="width14">
+					<div class="wrap-input100 validate-input" data-validate = "Enter Residual Value">
+						<span class="label-input100">Residual Value</span>
+					</td>
+					<td class="width36 paddedbottom10">	
+						<input class="input100" type="text" name="residual" placeholder="Residual Value" onkeypress="return isNumber(evt)"  id="userInput2">
+						<span class="focus-input100"></span>
+					
+					</td>	
+					</tr>
+					<tr>
+					<td class="width14">		
+							<button  onclick="calculate_ijara();">
+								<span>
+									CALCULATE
+									
+								</span>
+							</button>
+					</td>
+					<td class="width14">
+					<button id ="resetbutton" value="Clear Results" onclick="resetForm();">
+								<span>
+									RESET
+								</span>
+							</button>
+					</td>
+					<td class ="width14">
+						<p style = "font-size:16px ;">Ijara Markup</p>				
+					</td>
+		
+					<td class="width36">
+					<input type="text" id="amount">
+								</input>
 								
-							</span>
-						</button>
-				</td>
-				<td class="width14">
-				<button class="contact100-form-btn" id ="resetbutton" value="Clear Results" onclick="resetForm();">
-							<span>
-								RESET
-							</span>
-						</button>
-				</td>
-				<td class ="width14">
-					<p style = "font-size:16px ;">TOTAL IJARA</p>				
-				</td>
-	
-				<td class="width36">
-				<!--<input type="text">
-							</input>-->
-							
-				</td>	
-				
-				</tr>
+					</td>	
+					
+					</tr>
 
-				</table> 
+					</table> 
 					<table class="table width100">
                         <tr>
                             <td class="width14">
@@ -479,7 +479,8 @@
                                 <select id="productId" ng-model="formData.productId" class="form-control width170px"
                                         ng-options="product.id as product.name for product in products" value="{{product.id}}"  
                                         ng-change="loanProductChange(formData.productId)" required="required">
-                                    <option style="display:none" value="">{{'label.selectloanproduct' | translate}}</option>
+                                    <option style="" value="">{{'label.selectloanproduct' | translate}}</option>
+									<!--<option style="" value="" id="p101">Ijara</option>-->
                                 </select>
                             </td>
                             <td class="width14">
@@ -543,7 +544,7 @@
                                     </td>
                                     <td class="width36 paddedbottom10">
                                         <input id="loanTermFrequency" class="form-control" name="loanterm" type="text"
-                                            ng-model="formData.loanTermFrequency" disabled />
+                                            ng-model="formData.loanTermFrequency"  disabled />
                                      
                                         <!--<form-validate valattributeform="newloanaccountform" valattribute="loanterm"/>-->
                                     </td>
@@ -552,7 +553,7 @@
                             </table>
 
                             <div ng-show="loanaccountinfo" ng-hide="previewRepayment">                       
-                                <div class="col-md-12">
+                                <!--<div class="col-md-12">
                                     <label><strong>{{ 'label.heading.charges' | translate }}</strong></label>
                                     <select ng-model="chargeFormData.chargeId"
                                             ng-options="charge.id as (charge.name + ',' + charge.currency.displaySymbol) for charge in loanaccountinfo.chargeOptions|filter:loanaccountinfo.currency.code:strict"
@@ -560,7 +561,7 @@
                                         <option value="">{{'label.selectcharge' | translate}}</option>
                                     </select>
                                     <a ng-click="addCharge()"><i class="fa fa-plus "></i></a>
-                                </div>
+                                </div>-->
                                 <table class="table width100" ng-show="charges.length>0">
                                     <tr class="graybg">
                                         <th>{{'label.heading.name' | translate}}</th>
@@ -573,7 +574,7 @@
                                     <tr ng-repeat="charge in charges">
                                         <td>{{charge.name}},{{charge.currency.displaySymbol}}</td>
                                         <td>{{charge.chargeCalculationType.value}}</td>
-                                        <td><input id="{{charges[$index].amount}}" class="form-control" type="text" ng-model="charge.amount"
+                                        <td><input id="amount" class="form-control" type="text" ng-model=""
                                                 placeholder="{{'label.input.amount' | translate}}" number-format></td>
                                         <td>{{charge.chargeTimeType.value}}</td>
                                         <td>
@@ -721,7 +722,7 @@
 			</form>
             </div>
         </div>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+	
 	<script language="JavaScript" type="text/javascript">
 	var glob_var=0;
 	var cal_var=0;
@@ -732,6 +733,9 @@
 
 	
 function resetForm() {
+	dropTypes.display='none';
+	dropGroups.display='none'; 
+	dropSubgroups.display='none';
     document.getElementById("myForm").reset();
 }
 	function calculate_ijara(){
@@ -767,16 +771,25 @@ function resetForm() {
 			return true;
 		}
 
+	var dropTypes=0;
+	var dropGroups=0;
+	var dropSubgroups=0;
+	
 
 	function checkval(sel) {
+	// check if dropOne is intialized
+	dropTypes.display='none';
+	dropGroups.display='none'; 
+	dropSubgroups.display='none';
 	if (sel.selectedIndex==1){
 		var val2 = document.getElementById('t1').name
-	  sel.form[val2].style.display=sel.selectedIndex==1?'block':'none';  
-	  
+	  sel.form[val2].style.display=sel.selectedIndex==1?'block':'none';
+	  dropTypes = sel.form[val2].style;
 	  }
+
+	
 	else if(sel.selectedIndex==2){
-	  
-	  var val2 = document.getElementById('v2').name
+	var val2 = document.getElementById('v2').name
 	  //sel.form[val2].style.display=sel.selectedIndex==2?'block':'none';  
 	  cal_var = document.getElementById("v2");
 	  glob_var = cal_var.options[cal_var.selectedIndex].text;
@@ -787,31 +800,31 @@ function resetForm() {
 	  
 	  var val2 = document.getElementById('t2').name
 	  sel.form[val2].style.display=sel.selectedIndex==3?'block':'none';  
-	  
+	  dropTypes = sel.form[val2].style;
 	  }
 	  else if(sel.selectedIndex==4){
 	  
 	  var val2 = document.getElementById('t3').name
 	  sel.form[val2].style.display=sel.selectedIndex==4?'block':'none';  
-	  
+	  dropTypes = sel.form[val2].style;
 	  }
 	  else if(sel.selectedIndex==5){
 	  
 	  var val2 = document.getElementById('t4').name
 	  sel.form[val2].style.display=sel.selectedIndex==5?'block':'none';  
-	  
+	  dropTypes = sel.form[val2].style;
 	  }
 	  else if(sel.selectedIndex==6){
 	  
 	  var val2 = document.getElementById('t5').name
 	  sel.form[val2].style.display=sel.selectedIndex==6?'block':'none';  
-	  
+	  dropTypes = sel.form[val2].style;
 	  }
 	  else if(sel.selectedIndex==7){
 	  
 	  var val2 = document.getElementById('t6').name
 	  sel.form[val2].style.display	=sel.selectedIndex==7?'block':'none';  
-	  
+	  dropTypes = sel.form[val2].style;
 	  }
 	  else if(sel.selectedIndex==8){
 	  var val2 = document.getElementById('tv2').name
@@ -844,11 +857,13 @@ function resetForm() {
 	  var val1 = document.getElementById('c1').selectedIndex
 	  var val2 = document.getElementById('t7').name
 	  sel.form[val2].style.display=sel.selectedIndex==12?'block':'none';  
+	  dropTypes = sel.form[val2].style;
 	  }
 	  else if(sel.selectedIndex==13){
 	  var val1 = document.getElementById('c1').selectedIndex
 	  var val2 = document.getElementById('t8').name
 	  sel.form[val2].style.display=sel.selectedIndex=13?'block':'none';  
+	  dropTypes = sel.form[val2].style;
 	  }
 	  else if(sel.selectedIndex==14){
 	  var val2 = document.getElementById('tv6').name
@@ -866,7 +881,8 @@ function resetForm() {
 
 
 	function checkval1(sel){
-
+    dropGroups.display='none'; 
+	dropSubgroups.display='none';
 	if(sel.name=='types'){
 		if(sel.selectedIndex==1|2)
 		var val3 = document.getElementById('v1').name
@@ -879,6 +895,7 @@ function resetForm() {
 		if(sel.selectedIndex==1){
 		var val3 = document.getElementById('g1').name
 		sel.form[val3].style.display=sel.selectedIndex==1?'block':'none';   
+		dropGroups = sel.form[val3].style;
 		}
 		if(sel.selectedIndex==2){
 		var val3 = document.getElementById('tv1').name
@@ -892,10 +909,12 @@ function resetForm() {
 		if(sel.selectedIndex==1){
 		var val3 = document.getElementById('g2').name
 		sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none';   
+		  dropGroups = sel.form[val3].style;
 		}	
 		else if(sel.selectedIndex==2){
 		var val3 = document.getElementById('g3').name
 		sel.form[val3].style.display=sel.selectedIndex==1|2?'block':'none';   
+		dropGroups = sel.form[val3].style;
 		}	
 	}
 	else if(sel.name=='types4'){
@@ -918,10 +937,12 @@ function resetForm() {
 		if(sel.selectedIndex==1){
 		var val3 = document.getElementById('g4').name
 		sel.form[val3].style.display=sel.selectedIndex==1?'block':'none';   
+		dropGroups = sel.form[val3].style;
 		}
 		if(sel.selectedIndex==2){
 		var val3 = document.getElementById('g5').name
 		sel.form[val3].style.display=sel.selectedIndex==2?'block':'none';   
+		dropGroups = sel.form[val3].style;
 		}
 	}
 	else if(sel.name=='types7'){
@@ -980,13 +1001,16 @@ function resetForm() {
 	}
 	}
 	function func_sg1(sel){
+	dropSubgroups.display='none'; 
 	if(sel.selectedIndex==1){
 		var val3 = document.getElementById('sg1').name
-		sel.form[val3].style.display=sel.selectedIndex==1?'block':'none';   
+		sel.form[val3].style.display=sel.selectedIndex==1?'block':'none'; 
+			dropSubgroups = sel.form[val3].style;
 		}
 	else if(sel.selectedIndex==2){
 		var val3 = document.getElementById('sg2').name
 		sel.form[val3].style.display=sel.selectedIndex==2?'block':'none';
+		dropSubgroups = sel.form[val3].style;
 	}
 	else if(sel.selectedIndex==3){
 		var val3 = document.getElementById('gv1').name
@@ -998,34 +1022,42 @@ function resetForm() {
 	else if(sel.selectedIndex==4){
 		var val3 = document.getElementById('sg4').name
 		sel.form[val3].style.display=sel.selectedIndex==4?'block':'none';   
+		dropSubgroups = sel.form[val3].style;
 	}
 	else if(sel.selectedIndex==5){
 		var val3 = document.getElementById('sg5').name
 		sel.form[val3].style.display=sel.selectedIndex==5?'block':'none';   
+		dropSubgroups = sel.form[val3].style;
 	}
 	else if(sel.selectedIndex==6){
 		var val3 = document.getElementById('sg6').name
 		sel.form[val3].style.display=sel.selectedIndex==6?'block':'none';   
+		dropSubgroups = sel.form[val3].style;
 	}
 	else if(sel.selectedIndex==7){
 		var val3 = document.getElementById('sg7').name
 		sel.form[val3].style.display=sel.selectedIndex==7?'block':'none';   
+		dropSubgroups = sel.form[val3].style;
 	}
 	else if(sel.selectedIndex==8){
 		var val3 = document.getElementById('sg8').name
 		sel.form[val3].style.display=sel.selectedIndex==8?'block':'none';   
+		dropSubgroups = sel.form[val3].style;
 	}
 	else if(sel.selectedIndex==9){
 		var val3 = document.getElementById('sg9').name
 		sel.form[val3].style.display=sel.selectedIndex==9?'block':'none';   
+		dropSubgroups = sel.form[val3].style;
 	}
 	else if(sel.selectedIndex==10){
 		var val3 = document.getElementById('sg10').name
 		sel.form[val3].style.display=sel.selectedIndex==10?'block':'none';   
+		dropSubgroups = sel.form[val3].style;
 	}
 	else if(sel.selectedIndex==11){
 		var val3 = document.getElementById('sg11').name
 		sel.form[val3].style.display=sel.selectedIndex==11?'block':'none';   
+		dropSubgroups = sel.form[val3].style;
 	}
 	else if(sel.selectedIndex==12){
 		var val3 = document.getElementById('gv2').name
