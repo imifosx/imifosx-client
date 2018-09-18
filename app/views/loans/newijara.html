@@ -441,7 +441,16 @@
 					</td>	
 					</tr>
 					<tr>
-					<td class="width14">		
+					<td class ="width14">
+						<p style = "font-size:16px ;">Ijara Markup</p>				
+					</td>
+		
+					<td class="width36">
+					<input type="text" id="amt">
+								</input>
+								
+					</td>					
+				<td class="width14">		
 							<button  onclick="calculate_ijara();">
 								<span>
 									CALCULATE
@@ -456,15 +465,7 @@
 								</span>
 							</button>
 					</td>
-					<td class ="width14">
-						<p style = "font-size:16px ;">Ijara Markup</p>				
-					</td>
-		
-					<td class="width36">
-					<input type="text" id="amount">
-								</input>
-								
-					</td>	
+				
 					
 					</tr>
 
@@ -539,17 +540,43 @@
                                             ng-model= "formData.principal" />&nbsp;{{loanaccountinfo.currency.displaySymbol}}
 										     
 						<!--<form-validate valattributeform="newloanaccountform" valattribute="principal"/>-->
+
+ 
+                                    </td>
+									
                                     </td>
                                     <td class="width14"><label>{{ 'label.input.loanterm' | translate }}&nbsp;<span class="required">*</span>:</label>
                                     </td>
                                     <td class="width36 paddedbottom10">
                                         <input id="loanTermFrequency" class="form-control" name="loanterm" type="text"
-                                            ng-model="formData.loanTermFrequency"  disabled />
-                                     
-                                        <!--<form-validate valattributeform="newloanaccountform" valattribute="loanterm"/>-->
+                                            ng-model="formData.loanTermFrequency"   />
+			            <select ng-disabled="response.uiDisplayConfigurations.loanAccount.isReadOnlyField.loanTermFrequencyType == true" id="loanTermFrequencyType" class="form-control" ng-model="formData.loanTermFrequencyType"
+                                                ng-options="termFrequencyType.id as termFrequencyType.value for termFrequencyType in loanaccountinfo.termFrequencyTypeOptions"
+                                                value="{{termFrequencyType.id}}"/>                                     
+											                                       
+ <!--<form-validate valattributeform="newloanaccountform" valattribute="loanterm"/>-->
                                     </td>
 									</tr>
 									
+									 <tr>
+                                    <td ng-hide="response.uiDisplayConfigurations.loanAccount.isHiddenField.numberOfRepayments == true"><label>{{ 'label.input.numofrepayments' | translate }}&nbsp;<span class="required">*</span></label>
+                                    </td>
+                                    <td class="paddedbottom10" ng-hide="response.uiDisplayConfigurations.loanAccount.isHiddenField.numberOfRepayments == true">
+                                        <input id="numberOfRepayments" class="form-control" name="numofrepayments" type="text"
+                                            ng-model="formData.numberOfRepayments" required late-Validate/>&nbsp;
+                                        <form-validate valattributeform="newloanaccountform" valattribute="numofrepayments"/>
+                                    </td>
+                                    <td ng-hide="response.uiDisplayConfigurations.loanAccount.isHiddenField.repaymentEvery == true"><label>{{ 'label.input.repaidevery' | translate }}&nbsp;<span class="required">*</span></label></td>
+                                    <td class="paddedbottom10 width500px" ng-hide="response.uiDisplayConfigurations.loanAccount.isHiddenField.repaymentEvery == true">
+
+                                        <input id="repaymentEvery" class="form-control" type="text" name="repaidevery"
+                                            ng-model="formData.repaymentEvery" ng-disabled="!loanaccountinfo.product.allowAttributeOverrides.repaymentEvery" />
+                                        <select id="repaymentFrequencyType" class="form-control" ng-model="formData.repaymentFrequencyType"
+                                                ng-options="repaymentFrequencyType.id as repaymentFrequencyType.value for repaymentFrequencyType in loanaccountinfo.termFrequencyTypeOptions"
+                                                ng-disabled="!loanaccountinfo.product.allowAttributeOverrides.repaymentEvery"
+                                                value="{{repaymentFrequencyType.id}}"/>&nbsp;<span ng-show="formData.repaymentFrequencyType == 2">on</span>
+											</td>
+										</tr>
                             </table>
 
                             <div ng-show="loanaccountinfo" ng-hide="previewRepayment">                       
@@ -567,24 +594,26 @@
                                         <th>{{'label.heading.name' | translate}}</th>
                                         <th>{{'label.heading.type' | translate}}</th>
                                         <th>{{'label.heading.amount' | translate}}</th>
-                                        <th>{{'label.heading.collectedon' | translate}}</th>
+                          <!--              <th>{{'label.heading.collectedon' | translate}}</th>
                                         <th>{{'label.heading.date' | translate}}</th>
-                                        <th>{{'label.heading.actions' | translate}}</th>
+                                        <th>{{'label.heading.actions' | translate}}</th>-->
                                     </tr>
                                     <tr ng-repeat="charge in charges">
                                         <td>{{charge.name}},{{charge.currency.displaySymbol}}</td>
                                         <td>{{charge.chargeCalculationType.value}}</td>
-                                        <td><input id="amount" class="form-control" type="text" ng-model=""
+                                        <td><input id="{{charges[$index].amount}}" class="form-control" type="text" ng-model="charge.amount"
                                                 placeholder="{{'label.input.amount' | translate}}" number-format></td>
-                                        <td>{{charge.chargeTimeType.value}}</td>
+                                  <!--      <td>{{charge.chargeTimeType.value}}</td>
                                         <td>
                                             <input id="charges[{{$index}}].duedate" type="text" datepicker-pop="dd MMMM yyyy" class="form-control"
                                                 placeholder="{{'label.input.duedate' | translate}}" ng-model="charge.dueDate"
                                                 is-open="'openedch'+$index" min="minDate" max="'2020-06-22'"/>
                                         </td>
-                                        <td><a ng-click="deleteCharge($index)"><i class="fa fa-times "></i></a></td>
+-->                                        <td><a ng-click="deleteCharge($index)"><i class="fa fa-times "></i></a></td>
                                     </tr>
                                 </table>
+								<input type="text" id="amount">
+								</input>
                                 <div ng-show="loanaccountinfo.overdueCharges.length>0">
                                     <label><strong>{{ 'label.heading.overduepenalitycharge' | translate }}</strong></label>
                                     <table class="table" class="width100" >
@@ -645,7 +674,7 @@
                 </wz-step>
                 <wz-step  ng-if="datatables" ng-repeat="datatable in datatables" title="{{datatable.registeredTableName}}"  id="dynamicSteps">
                     <form class="form-horizontal well" ng-submit="submit()">
-                        <api-validate></api-validate>
+                      
                         <fieldset>
                             <h3><strong>{{datatable.registeredTableName}}</strong></h3>
                             <hr/>
@@ -728,8 +757,8 @@
 	var cal_var=0;
 	var term_of_lease=0;
 	var base_price=0;
-	
-
+	var term_of_lease_calculation=0;
+    var charge_amount =0;
 
 	
 function resetForm() {
@@ -742,8 +771,8 @@ function resetForm() {
 		var residual_value=0;
 		base_price = document.getElementById("userInput").value
 		term_of_lease = document.getElementById("userInput1").value
-		term_of_lease  = 12 * term_of_lease 
-		document.getElementById("loanTermFrequency").value = term_of_lease;
+		term_of_lease_calculation  = 12 * term_of_lease 
+		document.getElementById("loanTermFrequency").value = term_of_lease_calculation;
 		if(term_of_lease>=glob_var){
 		residual_value = document.getElementById("userInput2").value
 		var cal1 = (base_price/glob_var)*term_of_lease;
@@ -751,6 +780,8 @@ function resetForm() {
 		var cal =   parseInt(cal2);
 		cal = cal -  residual_value;
 		document.getElementById("principal").value = cal;
+		 charge_amount = document.getElementById("amt").value 
+		  document.getElementById("amount").value=  charge_amount
 		//document.getElementById("principal").stepUp();
 		//document.getElementById("principal").stepDown();
 		}
