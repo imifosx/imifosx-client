@@ -21,10 +21,10 @@
 				
 				</form>
 		</div>-->		
-				 <div class="card-content">
+				 <div   ng-init="loanProductChange(formData.productId[0])" class="card-content">
 				 
 				
-						<form name="newloanaccountform"  ng-submit="submit()" class="well form-inline" id ="myForm">
+						<form name="newloanaccountform"  class="well form-inline" id ="myForm">
 						<!--<api-validate></api-validate>-->
 						
 						<select style="width:100%; padding-bottom: 10px;" id="c1" name="categories" onchange="checkval(this);">
@@ -406,33 +406,33 @@
 					<br/>				
 					<table class="table width100">
 					<tr>
-					<td class="width14 >
-						<span class="label-input100">Useful Life (In Years)</span>
+					<td class="width14" >
+						<label>Useful Life (In Years)</label>
 					</td>
 					<td class ="width36 paddedbottom10">
 					<input type="text" id="mynumber" placeholder = "Number Of Years" value="" disabled>
 					</td>
-					<td class="width14 >
-					<div class="wrap-input100 validate-input" data-validate="Base Price is Required">
-						<span class="label-input100">Base Price</span>
+					<td class="width14" >
+						<label>Base Price</label>
 					</td>
 						<td class="width36 paddedbottom10">
-					<input class="input100" type="text" name="name" placeholder="Base Price" onkeypress="return isNumber(evt)" id="userInput">
+					<input class="input100" type="text" name="name" placeholder="Base Price" onkeypress="return isNumber(evt)" id="userInput" required>
 						<span class="focus-input100"></span>
 					
 					</td>
 					</tr>
 					<tr>
-					<td class="width14 >
-						<span class="label-input100">Term Of Lease (In Years)</span>
+					<td class="width14" >
+						<label>Term Of Lease (In Years)</label>
+						</td>
 					<td class="width36 paddedbottom10">				
-					<input class="input100" type="text" name="name" placeholder="Term of Lease" onkeypress="return isNumber(evt)"  id="userInput1">
+					<input class="input100" type="text" name="name" placeholder="Term of Lease" onkeypress="return isNumber(evt)"  id="userInput1" required>
 						<span class="focus-input100"></span>
 					
 					</td>
 					<td class="width14">
 					<div class="wrap-input100 validate-input" data-validate = "Enter Residual Value">
-						<span class="label-input100">Residual Value</span>
+						<label>Residual Value</label>
 					</td>
 					<td class="width36 paddedbottom10">	
 						<input class="input100" type="text" name="residual" placeholder="Residual Value" onkeypress="return isNumber(evt)"  id="userInput2">
@@ -442,30 +442,24 @@
 					</tr>
 					<tr>
 					<td class ="width14">
-						<p style = "font-size:16px ;">Ijara Markup</p>				
+						<label>Ijara Markup Price</label>		
 					</td>
 		
 					<td class="width36">
-					<input type="text" id="amt">
+					<input type="text" id="ijaraMarkup" required>
 								</input>
 								
 					</td>					
 				<td class="width14">		
-							<button  onclick="calculate_ijara();">
-								<span>
-									CALCULATE
-									
-								</span>
-							</button>
+							<input type ="button"  value ="CALCULATE" onclick="calculate_ijara();">
+
+							</input>
 					</td>
 					<td class="width14">
-					<button id ="resetbutton" value="Clear Results" onclick="resetForm();">
-								<span>
-									RESET
-								</span>
-							</button>
+					<input type ="button"  value ="RESET"  onclick="resetForm();">
+					</input>
 					</td>
-				
+				<!--<button onclick="myFunction()";>Submit</button>--->
 					
 					</tr>
 
@@ -477,11 +471,10 @@
                                 <i class="fa fa-question-sign" tooltip="{{'label.tooltip.product' | translate}}"></i>
                             </td>
                             <td class="width36 paddedbottom10">
-                                <select id="productId" ng-model="formData.productId" class="form-control width170px"
-                                        ng-options="product.id as product.name for product in products" value="{{product.id}}"  
-                                        ng-change="loanProductChange(formData.productId)" required="required">
-                                    <option style="" value="">{{'label.selectloanproduct' | translate}}</option>
-									<!--<option style="" value="" id="p101">Ijara</option>-->
+                             <!--   <select id="productId" ng-model="products[3]" class="form-control width170px"
+                                        ng-options="product.id as product.name for product in products" value="{{product.id}}" >-->
+								<select id="productId"  class="form-control width170px" Disabled>
+                                   	<option style="" value="" id="p101" selected>Ijara Loan</option>
                                 </select>
                             </td>
                             <td class="width14">
@@ -489,14 +482,14 @@
                                 <i ng-show="true" class="fa fa-question-sign" tooltip="{{'label.tooltip.loanofficer' | translate}}"></i>
                             </td>
                             <td class="width36 paddedbottom10">
-                                <select ng-show="true" id="loanOfficerId" ng-model="formData.loanOfficerId"
+                                <select ng-show="true" id="officerId" ng-model="formData.loanOfficerId"
                                         ng-options="loanOfficer.id as loanOfficer.displayName for loanOfficer in loanaccountinfo.loanOfficerOptions | orderBy:'displayName':reverse"
                                         class="form-control width170px" value="{{loanOfficer.id}}">
                                     <option value="">{{'label.selectloanofficer' | translate}}</option>
                                 </select>
                             </td>
                         </tr>
-                        <tr ng-show="true">
+                       <!-- <tr ng-show="true">
                             <td><label>{{ 'label.input.loanpurpose' | translate }}:&nbsp;</label>
                             <i class="fa fa-question-sign" tooltip="{{'label.tooltip.loanpurpose' | translate}}"></i></td>
                             <td class="paddedbottom10">
@@ -507,22 +500,27 @@
                                 </select>
                             </td>
 			                              
-                        </tr>
+                        </tr>-->
                         <tr ng-show="true">
                             <td><label>{{ 'label.input.submittedon' | translate }}<span class="required">*</span>:&nbsp;</label>
                             <i class="fa fa-question-sign" tooltip="{{'label.tooltip.submittedon' | translate}}"></i></td>
                             <td class="paddedbottom10">
-                                <input type="text" id="submittedOnDate" name="submittedon" datepicker-pop="dd MMMM yyyy"
+                                <input type="text" id="submittedDate" name="submittedon" datepicker-pop="dd MMMM yyyy"
                                     ng-model="date.first" is-open="opened" min="'2000-01-01'" max="restrictDate" class="form-control"/>
                             </td>
+
                             <td>
-                                <label title="{{ 'label.input.expecteddisbursementon' | translate }}">{{ 'label.input.disbursementon' | translate }}<span class="required">*</span>:&nbsp;</label>
-                                <i class="fa fa-question-sign" tooltip="{{'label.tooltip.disbursementon' | translate}}"></i>
+							<label for="product_name">Disbursed Date<span class="required">*</span>:</label>
+ 	
+							<!--<label title="{{ 'label.input.expecteddisbursementon' | translate }}">{{ 'label.input.disbursementon' | translate }}<span class="required">*</span>:&nbsp;</label>
+                                <i class="fa fa-question-sign" tooltip="{{'label.tooltip.disbursementon' | translate}}"></i>-->
                             </td>
+							
                             <td class="paddedbottom10">
-                                <input id="expectedDisbursementDate" sort type="text" name="expecteddisbursementon"
+							<!--<input  class="form-control" type="date"  name="expectedDisbursementDate" id="datePicker">-->
+							<input id="disbursedDate" type="text" name="expectedDisbursementDate"
                                     datepicker-pop="dd MMMM yyyy" ng-model="date.second" is-open="opened1" min="minDate"
-                                    max="'2020-06-22'" class="form-control"/>
+                                    max="'2020-06-22'" class="form-control" required />
                             </td>
                         </tr>
 
@@ -536,24 +534,20 @@
 									<td class="width14"><label>{{ 'label.input.principal' | translate }}&nbsp;<span
                                             class="required">*</span>:</label></td>
                                     <td class="width36 paddedbottom10">
-                                        <input id="principal"    name="principal" type="text" 
-                                            ng-model= "formData.principal" />&nbsp;{{loanaccountinfo.currency.displaySymbol}}
-										     
-						<!--<form-validate valattributeform="newloanaccountform" valattribute="principal"/>-->
-
- 
-                                    </td>
-									
-                                    </td>
+                                        <input id="principal" class="form-control"   name="principal" type="text" 
+                                            ng-model= "formData.principal" required />&nbsp;{{loanaccountinfo.currency.displaySymbol}}
+											<!--<form-validate valattributeform="newloanaccountform" valattribute="principal"/>-->
+									</td>
+		
                                     <td class="width14"><label>{{ 'label.input.loanterm' | translate }}&nbsp;<span class="required">*</span>:</label>
                                     </td>
-                                    <td class="width36 paddedbottom10">
-                                        <input id="loanTermFrequency" class="form-control" name="loanterm" type="text"
-                                            ng-model="formData.loanTermFrequency"   />
-			            <select ng-disabled="response.uiDisplayConfigurations.loanAccount.isReadOnlyField.loanTermFrequencyType == true" id="loanTermFrequencyType" class="form-control" ng-model="formData.loanTermFrequencyType"
-                                                ng-options="termFrequencyType.id as termFrequencyType.value for termFrequencyType in loanaccountinfo.termFrequencyTypeOptions"
-                                                value="{{termFrequencyType.id}}"/>                                     
-											                                       
+                                    <td class="width24">
+                                        <input id="loanTermFrequency" class="form-control" name="loanterm" type="text" ng-model="formData.loanTermFrequency"   >
+											</td>
+								<td class="width12">
+					   <select id="loanTermFrequencyType" class="form-control" disabled  >
+                                                <option id = "1" selected>Months</option>
+                         </select>                 
  <!--<form-validate valattributeform="newloanaccountform" valattribute="loanterm"/>-->
                                     </td>
 									</tr>
@@ -563,11 +557,17 @@
                                     </td>
                                     <td class="paddedbottom10" ng-hide="response.uiDisplayConfigurations.loanAccount.isHiddenField.numberOfRepayments == true">
                                         <input id="numberOfRepayments" class="form-control" name="numofrepayments" type="text"
-                                            ng-model="formData.numberOfRepayments" required late-Validate/>&nbsp;
-                                        <form-validate valattributeform="newloanaccountform" valattribute="numofrepayments"/>
+                                            ng-model="formData.numberOfRepayments" required />&nbsp;
+                                       <!-- <form-validate valattributeform="newloanaccountform" valattribute="numofrepayments"/>-->
                                     </td>
-                                    <td ng-hide="response.uiDisplayConfigurations.loanAccount.isHiddenField.repaymentEvery == true"><label>{{ 'label.input.repaidevery' | translate }}&nbsp;<span class="required">*</span></label></td>
-                                    <td class="paddedbottom10 width500px" ng-hide="response.uiDisplayConfigurations.loanAccount.isHiddenField.repaymentEvery == true">
+									<td class="width14 paddedbottom10"><label>Ijara Charge</label></td>
+																<td class="width16 paddedbottom10">	<input type="text"  class="form-control" id="amount" required>
+								</input>
+									
+									</td>
+									
+									<!--                                      <td ng-hide="response.uiDisplayConfigurations.loanAccount.isHiddenField.repaymentEvery == true"><label>{{ 'label.input.repaidevery' | translate }}&nbsp;<span class="required">*</span></label></td>
+                                  <td class="paddedbottom10 width500px" ng-hide="response.uiDisplayConfigurations.loanAccount.isHiddenField.repaymentEvery == true">
 
                                         <input id="repaymentEvery" class="form-control" type="text" name="repaidevery"
                                             ng-model="formData.repaymentEvery" ng-disabled="!loanaccountinfo.product.allowAttributeOverrides.repaymentEvery" />
@@ -575,10 +575,10 @@
                                                 ng-options="repaymentFrequencyType.id as repaymentFrequencyType.value for repaymentFrequencyType in loanaccountinfo.termFrequencyTypeOptions"
                                                 ng-disabled="!loanaccountinfo.product.allowAttributeOverrides.repaymentEvery"
                                                 value="{{repaymentFrequencyType.id}}"/>&nbsp;<span ng-show="formData.repaymentFrequencyType == 2">on</span>
-											</td>
+											</td>-->
 										</tr>
                             </table>
-
+							</div>
                             <div ng-show="loanaccountinfo" ng-hide="previewRepayment">                       
                                 <!--<div class="col-md-12">
                                     <label><strong>{{ 'label.heading.charges' | translate }}</strong></label>
@@ -612,8 +612,7 @@
 -->                                        <td><a ng-click="deleteCharge($index)"><i class="fa fa-times "></i></a></td>
                                     </tr>
                                 </table>
-								<input type="text" id="amount">
-								</input>
+								</div>
                                 <div ng-show="loanaccountinfo.overdueCharges.length>0">
                                     <label><strong>{{ 'label.heading.overduepenalitycharge' | translate }}</strong></label>
                                     <table class="table" class="width100" >
@@ -649,23 +648,21 @@
                                     </tr>
                                 </table>
                                 </div>
-                            </div>
-                        </div>
+                         
+                       
                     </div>
                     <br>
-                <div ng-show="loanaccountinfo">
+              <!--  <div ng-show="loanaccountinfo">
 <span><a ng-show="previewRepayment" ng-click="previewRepayment=!previewRepayment">{{'label.anchor.backtoloaninfo'
 | translate}}</i></a><br><br></span>
-                </div>
+                </div>-->
                         <div class="center">
-                            <button id="save1" type="submit" class="btn btn-primary" ng-if="datatables">
+                            <!--<button id="save1" type="submit" class="btn btn-primary" ng-if="datatables">
                                 {{'label.button.proceed' | translate}}
-                            </button>
-                            <div ng-if="!datatables">
-                                <button id="cancel" type="reset" class="btn btn-default" ng-click="cancel()">{{'label.button.cancel' | translate}}</button>
-                                <button id="save" type="submit" has-permission='CREATE_LOAN' class="btn btn-primary" ng-show="loanaccountinfo">{{'label.button.save' |
-                                    translate}}
-                                </button>
+                            </button>-->
+                            <div >
+                                <button id="cancel3" type="reset" class="btn btn-default" ng-click="cancel()">{{'label.button.cancel' | translate}}</button>
+                                <button class="btn btn-primary" onclick="myFunction()";>Submit</button>
                             </div>
                         </div>
                         </fieldset>
@@ -673,7 +670,7 @@
                 </div>
                 </wz-step>
                 <wz-step  ng-if="datatables" ng-repeat="datatable in datatables" title="{{datatable.registeredTableName}}"  id="dynamicSteps">
-                    <form class="form-horizontal well" ng-submit="submit()">
+                    <form  >
                       
                         <fieldset>
                             <h3><strong>{{datatable.registeredTableName}}</strong></h3>
@@ -729,16 +726,14 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="pull-right" ng-if="!$last">
+                          <!--  <div class="pull-right" ng-if="!$last">
                                 <button id="save4" type="submit" class="btn btn-primary">
                                     {{'label.button.proceed' | translate}}
-                                </button>
+                                </button>-->
                             </div>
-                            <div class="col-md-offset-5" ng-if="$last">
-                                <button id="cancel3" type="reset" class="btn btn-default" ng-click="cancel()">{{'label.button.cancel' | translate}}</button>
-                                <button id="save3" type="submit" has-permission='CREATE_LOAN' class="btn btn-primary" ng-show="loanaccountinfo">{{'label.button.save' |
-                                    translate}}
-                                </button>
+                            <div class="col-md-offset-5" >
+                       <!--         <button id="cancel3" type="reset" class="btn btn-default" ng-click="cancel()">{{'label.button.cancel' | translate}}</button>
+                                <button onclick="myFunction()";>Submit</button>-->
                             </div>
                         </fieldset>
                     </form>					
@@ -753,6 +748,99 @@
         </div>
 	
 	<script language="JavaScript" type="text/javascript">
+	var data1=0;
+	var data2=0;
+//	var data3=document.getElementById("amt").value;
+	var client_id;
+	var principal =0;
+	var disbursed_date=0;
+	var submitted_date=0;
+	var ijara_markup=0;
+	var total_ijara_markup=0;
+	var officer_id=0;
+	var officer_id1=0;
+	var no_repay=0;
+	function myFunction() {
+	var $items = $('#userInput1, #userInput2,#amt')
+	var obj = {}
+	$items.each(function() {
+    obj[this.id] = $(this).val();
+	})
+    principal = document.getElementById("principal").value
+	//principal = JSON.stringify(principal);
+    disbursed_date = document.getElementById("disbursedDate").value
+    submitted_date = document.getElementById("submittedDate").value
+   
+    officer_id1 = document.getElementById("officerId").value
+    officer_id = officer_id1.replace(/\D/g, "");
+   
+ 
+	no_repay = document.getElementById("numberOfRepayments").value
+	
+	//alert(disbursed_date);
+
+	data1= JSON.stringify( obj);
+	var dom_el = document.querySelector('[ng-controller="IjaraController"]');
+    var ng_el = angular.element(dom_el);
+    var ng_el_scope = ng_el.scope();
+    client_id = ng_el_scope.clientId;
+	//var street_name = $('[ng-controller="IjaraController"]').scope().clientId;
+	//alert(client_id);
+	
+	//total_ijara_markup =   parseInt(total_ijara_markup);
+	//document.getElementById("amount").value = total_ijara_markup;
+var data0 = {
+//  "allowPartialPeriodInterestCalcualtion": false,
+  "amortizationType": 1,
+  "clientId": client_id,
+  "dateFormat": "dd MMMM yyyy",
+ // "disbursementData": [],
+  "expectedDisbursementDate": disbursed_date,
+ "interestCalculationPeriodType": 1,
+ "interestRatePerPeriod": 0,
+  "interestType": 0,
+  "loanOfficerId": officer_id,
+  "loanPurposeId": 33,
+  "loanTermFrequency": term_of_lease_calculation,
+  "loanTermFrequencyType": 2,
+  "loanType": "individual",
+  "locale": "en",
+  "numberOfRepayments": no_repay,
+  "principal": principal,
+  "productId": 3,
+  "repaymentEvery": 1,
+  "repaymentFrequencyType": 2,
+  "submittedOnDate": submitted_date,
+  "transactionProcessingStrategyId": 1,
+  "charges":[{"id":22,"chargeId":2,"amount":total_ijara_markup}]
+};
+
+data2=JSON.stringify(data0);
+ $.ajaxSetup({
+   headers:{
+      'Fineract-Platform-TenantId': "default",
+	  'Authorization': "Basic bWlmb3M6cGFzc3dvcmQ="
+   },
+   type: "POST",
+   url: "https://localhost:8443/fineract-provider/api/v1/loans",
+  contentType: "application/json"  
+});
+
+var successFunction = function(response){
+    let respString=JSON.stringify(response.loanId);
+	console.log("Success:"+respString);
+	window.location = "/?baseApiUrl=https://localhost:8443#/viewloanaccount/" + respString;
+  };
+/*$.post( "https://demo.openmf.org/fineract-provider/api/v1/loans", function( data ) {
+  $( ".result" ).html( data );
+}); */
+
+$.ajax({ 
+	data: data2,
+	success : successFunction
+	});
+}
+
 	var glob_var=0;
 	var cal_var=0;
 	var term_of_lease=0;
@@ -773,6 +861,10 @@ function resetForm() {
 		term_of_lease = document.getElementById("userInput1").value
 		term_of_lease_calculation  = 12 * term_of_lease 
 		document.getElementById("loanTermFrequency").value = term_of_lease_calculation;
+		 ijara_markup = document.getElementById("ijaraMarkup").value
+		total_ijara_markup = ijara_markup / term_of_lease_calculation;
+		total_ijara_markup =   parseInt(total_ijara_markup);
+		document.getElementById("amount").value = total_ijara_markup;
 		if(term_of_lease>=glob_var){
 		residual_value = document.getElementById("userInput2").value
 		var cal1 = (base_price/glob_var)*term_of_lease;
@@ -780,8 +872,14 @@ function resetForm() {
 		var cal =   parseInt(cal2);
 		cal = cal -  residual_value;
 		document.getElementById("principal").value = cal;
-		 charge_amount = document.getElementById("amt").value 
-		  document.getElementById("amount").value=  charge_amount
+ 		 ijara_markup = document.getElementById("ijaraMarkup").value
+		total_ijara_markup = ijara_markup / term_of_lease_calculation;
+		total_ijara_markup =   parseInt(total_ijara_markup);
+		document.getElementById("amount").value = total_ijara_markup;
+
+
+		// charge_amount = document.getElementById("amt").value 
+		 // document.getElementById("amount").value=  charge_amount
 		//document.getElementById("principal").stepUp();
 		//document.getElementById("principal").stepDown();
 		}
@@ -790,6 +888,8 @@ function resetForm() {
 		var cal2 = +base_price + +cal1;
 		var cal =   parseInt(cal2);
 		document.getElementById("principal").value = cal;
+			total_ijara_markup =   parseInt(total_ijara_markup);
+	document.getElementById("amount").value = total_ijara_markup;
 		}
 		}
 		var evt;
@@ -1044,11 +1144,10 @@ function resetForm() {
 		dropSubgroups = sel.form[val3].style;
 	}
 	else if(sel.selectedIndex==3){
-		var val3 = document.getElementById('gv1').name
+     	var val3 = document.getElementById('gv1').name
 		//sel.form[val3].style.display=sel.selectedIndex==3?'block':'none';	
-		var x= sel.selectedIndex;
-		var y= document.getElementById('gv1').options
-		glob_var = y[x].text;
+		 cal_var = document.getElementById("gv1");
+		glob_var = cal_var.options[cal_var.selectedIndex].text; 
 	 console.log(glob_var); document.getElementById("mynumber").value = glob_var;}
 	else if(sel.selectedIndex==4){
 		var val3 = document.getElementById('sg4').name
@@ -1093,10 +1192,9 @@ function resetForm() {
 	else if(sel.selectedIndex==12){
 		var val3 = document.getElementById('gv2').name
 		//sel.form[val3].style.display=sel.selectedIndex==12?'block':'none';   
-		var x= sel.selectedIndex;
-		var y= document.getElementById('gv2').options
-		glob_var = y[x].text;
-	 console.log(glob_var); document.getElementById("mynumber").value = glob_var;}
+		 cal_var = document.getElementById("gv2");
+		glob_var = cal_var.options[cal_var.selectedIndex].text; 
+		console.log(glob_var); document.getElementById("mynumber").value = glob_var;}
 	}
 
 	function sg_values_all(sel){
