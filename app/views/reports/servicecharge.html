@@ -1,0 +1,26 @@
+<div class="content-container">
+   <div class="card well" ng-controller="ServiceChargeController">
+    <api-validate></api-validate>
+    <div ng-hide="XbrlSuccess">		
+
+		 <form id="form1">
+			Select Month: <select ng-options="s.name for s in month" ng-model="monthselitem" ng-change="getselectval()">
+			<option value="">--Select--</option>
+			</select>
+
+			Select Year: <select ng-options="s.name for s in year" ng-model="yearselitem" ng-change="getselectvalyear()">
+			<option value="">--Select--</option>
+			</select>
+		</form><br>
+			
+		<button ng-click="run()" class="btn btn-primary ng-binding">Run</button>
+		<button ng-show = "clearIsVisible" ng-click="clear()" class="btn btn-primary ng-binding">Clear</button><br>
+		
+		<div id="mainDiv">
+			
+		</div>
+		<button ng-show = "applyIsVisible" ng-click="apply()" class="btn btn-primary ng-binding">Apply</button>
+</div> 
+</div>
+
+

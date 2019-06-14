@@ -4262,5 +4262,6 @@
 	"label.input.share": "Share", 
 	"error.msg.divident.processing.dividend.amount.cannot.divide": "Dividend amount cannot be divided over the shares.",
 	"error.msg.divident.processing.shares.number.less.count": "The number of shares is less than the needed count.",
-	"error.msg.divident.processing.shares.not.enough": "Not enough shares to be divided amoung all the client."
+	"error.msg.divident.processing.shares.not.enough": "Not enough shares to be divided amoung all the client.",
+	"label.anchor.servicecharge" : "Service Charge"
 }

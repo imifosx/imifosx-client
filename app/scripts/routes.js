@@ -509,6 +509,9 @@
             .when('/xbrlreport', {
                 templateUrl: 'views/reports/xbrlreport.html'
             })
+            .when('/servicecharge', {
+                templateUrl: 'views/reports/servicecharge.html'
+             })
             .when('/new_client_saving_application/:clientId', {
                 templateUrl: 'views/savings/new_saving_account_application.html'
             })
