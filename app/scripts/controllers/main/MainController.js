@@ -44,6 +44,8 @@
                     }
                 });
             }
+            
+
 
             scope.$on('scrollbar.show', function(){
                   console.log('Scrollbar show');
@@ -52,7 +54,12 @@
                   console.log('Scrollbar hide');
                 });
 
-            uiConfigService.init();
+            uiConfigService.init(scope);
+            
+            
+            scope.$on('configJsonObj',function(e,response){
+                scope.response = response;
+            });
             //hides loader
             scope.domReady = true;
             scope.activity = {};
@@ -148,6 +155,12 @@
             };
 
             scope.leftnav = false;
+            scope.$on("UserAuthenticationTwoFactorRequired", function (event, data) {
+                if (sessionManager.get(data)) {
+                    scope.start(scope.currentSession);
+                }
+            });
+
             scope.$on("UserAuthenticationSuccessEvent", function (event, data) {
                 scope.authenticationFailed = false;
                 scope.resetPassword = data.shouldRenewPassword;
@@ -205,6 +218,7 @@
             scope.text = '';
 
             scope.logout = function () {
+                $rootScope.$broadcast("OnUserPreLogout");
                 scope.currentSession = sessionManager.clear();
                 scope.resetPassword = false;
                 location.path('/').replace();
@@ -223,7 +237,6 @@
                 scope.optlang = scope.langs[0];
                 tmhDynamicLocale.set(scope.langs[0].code);
                 }
-            console.log(translate.use);
             translate.use(scope.optlang.code);
 
             scope.isActive = function (route) {

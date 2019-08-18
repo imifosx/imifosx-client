@@ -308,31 +308,6 @@
                 scope.viewReportDetails = $sce.trustAsResourceUrl(scope.baseURL);
 
             };
-			
-			scope.viewShareCertificate = function (transactionId) {
-                scope.report = true;
-                scope.viewTransactionReport = true;
-                scope.viewSavingReport = false;
-                scope.printbtn = false;
-                scope.viewReport = true;
-                scope.hidePentahoReport = true;
-                scope.formData.outputType = 'PDF';
-                scope.baseURL = $rootScope.hostUrl + API_VERSION + "/runreports/" + encodeURIComponent("Share Certificate");
-                scope.baseURL += "?output-type=" + encodeURIComponent(scope.formData.outputType) + "&tenantIdentifier=" + $rootScope.tenantIdentifier+"&locale="+scope.optlang.code;
-
-                var reportParams = "";
-                var paramName = "R_transactionId";
-                reportParams += encodeURIComponent(paramName) + "=" + encodeURIComponent(transactionId);
-                if (reportParams > "") {
-                    scope.baseURL += "&" + reportParams;
-                }
-                // allow untrusted urls for iframe http://docs.angularjs.org/error/$sce/insecurl
-                //scope.viewReportDetails = $sce.trustAsResourceUrl(scope.baseURL);
-				window.open(scope.baseURL);
-
-            };
-			
-			
             scope.printReport = function () {
                 window.print();
                 window.close();
@@ -369,6 +344,28 @@
                     return true;
                 }
                 return false;
+            };
+
+	    scope.viewShareCertificate = function (transactionId) {
+                scope.report = true;
+                scope.viewTransactionReport = true;
+                scope.viewSavingReport = false;
+                scope.printbtn = false;
+                scope.viewReport = true;
+                scope.hidePentahoReport = true;
+                scope.formData.outputType = 'PDF';
+                scope.baseURL = $rootScope.hostUrl + API_VERSION + "/runreports/" + encodeURIComponent("Share Certificate");
+                scope.baseURL += "?output-type=" + encodeURIComponent(scope.formData.outputType) + "&tenantIdentifier=" + $rootScope.tenantIdentifier+"&locale="+scope.optlang.code;
+                var reportParams = "";
+                var paramName = "R_transactionId";
+                reportParams += encodeURIComponent(paramName) + "=" + encodeURIComponent(transactionId);
+                if (reportParams > "") {
+                    scope.baseURL += "&" + reportParams;
+                }
+                // allow untrusted urls for iframe http://docs.angularjs.org/error/$sce/insecurl
+                //scope.viewReportDetails = $sce.trustAsResourceUrl(scope.baseURL);
+		window.open(scope.baseURL);
+
             };
 
         }

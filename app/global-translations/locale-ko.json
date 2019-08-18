@@ -14,13 +14,15 @@
 			"SeoJeongHo",
 			"Ykhwong",
 			"아라",
-			"In2acous"
+			"In2acous",
+			"Nuevo Paso"
 		]
 	},
 	"label.heading.shareperclient": "클라이언트마다 공유",
 	"label.heading.suspenseaccount": "미결 계좌",
 	"label.heading.equityaccount": "공평 계좌",
 	"label.heading.name": "이름",
+	"label.heading.alias": "다른 이름",
 	"label.heading.country": "국가",
 	"label.heading.stale_period": "stale_period",
 	"label.heading.startdate": "시작 날짜",
@@ -135,7 +137,7 @@
 	"label.input.clients": "클라이언트",
 	"label.input.enternote": "참고 입력",
 	"label.input.notes": "참고",
-	"label.input.externalid": "바깥 ID",
+	"label.input.externalid": "외부 ID",
 	"label.input.description": "설명",
 	"label.input.repeat": "반복",
 	"label.input.comments": "댓글",
@@ -247,6 +249,7 @@
 	"label.heading.fullname": "이름",
 	"label.heading.mifosxclient": "Mifos X 클라이언트",
 	"label.heading.mifosx": "Mifos X",
+	"label.heading.uptodate": "은(는) 최신입니다",
 	"label.heading.resources": "자료",
 	"label.heading.contribute": "기여",
 	"label.heading.loginname": "로그인 이름",
@@ -264,6 +267,7 @@
 	"label.heading.primaryemail": "주 사용 이메일",
 	"label.heading.categoryname": "분류 이름",
 	"label.menu.office": "사무실",
+	"label.anchor.startpage": "시작 페이지",
 	"label.anchor.homepage": "홈페이지",
 	"label.anchor.loginpage": "로그인 문서",
 	"label.anchor.logout": "로그아웃",
@@ -587,6 +591,7 @@
 	"validation.msg.staff.firstname.cannot.be.blank": "이름은 필수입니다.",
 	"validation.msg.staff.firstname.exceeds.max.length": "이름은 {{params[0].value}}자를 초과할 수 없습니다.",
 	"validation.msg.holiday.date.cannot.be.past.date": "날짜는 과거 날짜가 될 수 없습니다",
+	"validation.msg.tax.component.startDate.is.less.than.date": "시작 날짜는 현재 날짜, 이전 시작 날짜 이후이거나 동일해야 합니다",
 	"label.tooltip.employees.active.true": "활성",
 	"label.tooltip.employees.active.false": "비활성",
 	"label.heading.addcode": "코드 추가",
@@ -864,5 +869,6 @@
 	"error.otp.validate.invalid": "지정된 인증 토큰은 유효하지 않습니다",
 	"error.otp.validate.other": "인증 토큰의 확인을 시도하는 동안 오류가 발생했습니다",
 	"error.twofactor.config.disabled": "2요소 인증은 비활성화되어 있거나 서버에서 지원하지 않습니다!",
+	"validation.msg.sharesproduct.description.cannot.be.blank": "설명은 빈 칸으로 둘 수 없습니다.",
 	"----End---": "--파일 끝--"
 }

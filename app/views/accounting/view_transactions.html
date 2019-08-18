@@ -18,7 +18,7 @@
             <div class="modal-footer">
                 <api-validate></api-validate>
                 <br>
-                <button class="btn btn-warning" ng-click="cancel()">{{'label.button.cancel' | translate}}</button>
+                <button class="btn btn-default" ng-click="cancel()">{{'label.button.cancel' | translate}}</button>
                 <button class="btn btn-primary" ng-click="redirect()">{{'label.button.redirecttonewtrx' | translate}}
                 </button>
             </div>
@@ -27,7 +27,7 @@
             <div class="modal-header silver">
                 <h3 class="bolder">{{'label.heading.viewjournalentry' | translate}}</h3>
                 <legend></legend>
-                <table id="mytable" class="modalwidth600">
+                 <table id="mytable" class="modalwidth600">
                     <tr>
                         <td class="width31">{{'label.input.office' | translate}}</td>
                         <td>{{transaction.officeName}}</td>
@@ -99,11 +99,10 @@
                         <td>{{'label.createdon' | translate}}</td>
                         <td>{{transaction.createdDate | DateFormat}}</td>
                     </tr>
-					
                 </table>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-warning" ng-click="cancel()">{{'label.button.cancel' | translate}}</button>
+                <button class="btn btn-default" ng-click="cancel()">{{'label.button.cancel' | translate}}</button>
 				<button class="btn btn-warning" onclick="printData()">Print Voucher</button>
             </div>
         </script>
@@ -119,7 +118,7 @@
                     <textarea rows="4" ng-model="data.reverseComments"></textarea>
                 </div>
                 <br>
-                <button class="btn btn-warning" ng-click="cancel()">{{'label.button.cancel' | translate}}</button>
+                <button class="btn btn-default" ng-click="cancel()">{{'label.button.cancel' | translate}}</button>
                 <button class="btn btn-primary" ng-click="reverse()">{{'label.button.reverse' | translate}}</button>
             </div>
         </script>
@@ -135,7 +134,7 @@
                                 <span class="required" data-ng-show="!flag"><strong>{{ 'label.transactionisreversedonce' | translate
                                 }}</strong></span>
                                 <div class="btn-group">
-                                    <a data-ng-show="flag" ng-click="reverseTransaction(transactionNumber)" class="btn btn-primary" has-permission='REVERSE_JOURNALENTRY'><i class="fa fa-undo "></i>{{'label.button.reverse' | translate}}</a>
+                                    <a data-ng-show="flag" ng-click="reverseTransaction(transactionNumber)" class="btn btn-primary" has-permission='REVERSE_JOURNALENTRY'><i class="fa fa-undo "></i>&nbsp;&nbsp;{{'label.button.reverse' | translate}}</a>
                                 </div>
                             </div>
                         </span>
@@ -199,7 +198,7 @@
         </div>
 </div>
 
-						<script type="text/javascript">
+		<script type="text/javascript">
                             function printData() {
                                 var divToPrint = document.getElementById("mytable");
                                 newWin = window.open("");
