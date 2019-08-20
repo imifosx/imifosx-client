@@ -12,7 +12,7 @@
             scope.formDat = {};
             scope.clientNonPersonDetails = {};
             scope.restrictDate = new Date();
-            scope.showSavingOptions = false;
+            scope.showSavingOptions = true;
             scope.savings = {};
             scope.savings.opensavingsproduct = true;
             scope.forceOffice = null;
