@@ -1,0 +1,23 @@
+<div class="content-container">
+   <div class="card well" ng-controller="ServiceChargeController">
+    <api-validate></api-validate>
+	 <form id="form1">
+		Select Month: <select ng-options="s.name for s in month" ng-model="monthselitem" ng-change="getselectval()">
+		<option value="">--Select--</option>
+		</select>
+		<p> {{selectedmonthvalues}}</p>
+
+		Select Year: <select ng-options="s.name for s in year" ng-model="yearselitem" ng-change="getselectvalyear()">
+		<option value="">--Select--</option>
+		</select>
+		<p> {{selectedyearvalues}}</p>
+ 
+	</form>
+			
+	<button ng-click="run()" class="btn btn-primary ng-binding">Run</button>
+	<div id="mainDiv">
+	</div>
+	<button ng-click="apply()" class="btn btn-primary ng-binding" ng-show="ifRunHasBeenRun">Apply</button>
+</div>
+
+
