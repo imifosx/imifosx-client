@@ -1008,7 +1008,7 @@
                 templateUrl: 'views/adhocquery/editadhocquery.html'
             })
             .when('/servicecharge', {
-                templateUrl: 'views/reports/servicecharge.html'
+                templateUrl: 'views/ideoholic/reports/servicecharge.html'
             })
             .otherwise({
                 templateUrl: "views/errors/404.html"

@@ -322,8 +322,7 @@ define(['Q', 'underscore', 'mifosX'], function (Q) {
             'adhocquery/AdHocQueryListController',
             'adhocquery/CreateAdHocQueryController',
             'adhocquery/ViewAdHocQueryController',
-            'adhocquery/EditAdHocQueryController',
-            'reports/ServiceChargeController'
+            'adhocquery/EditAdHocQueryController'
         ],
         filters: [
             'StatusLookup',
@@ -360,6 +359,9 @@ define(['Q', 'underscore', 'mifosX'], function (Q) {
             'TabsPersistenceDirective',
             'ScrollableDirective',
             'DecimalDirective'
+        ],
+	ideoholic: [
+			'reports/ServiceChargeController'
         ]
     };
 
