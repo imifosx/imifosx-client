@@ -1010,6 +1010,9 @@
             .when('/servicecharge', {
                 templateUrl: 'views/ideoholic/reports/servicecharge.html'
             })
+            .when('/clienttoaccountingheadertransfer', {
+                templateUrl: 'views/ideoholic/accounting/clienttoaccountingheadertransfer.html'
+            })
             .otherwise({
                 templateUrl: "views/errors/404.html"
             })

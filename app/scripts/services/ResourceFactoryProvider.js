@@ -704,6 +704,8 @@
                     twoFactorConfigResource: defineResource(apiVer+"/twofactor/configure", {}, {
                         getAllConfigs: {method: 'GET', params: {}},
                         put: {method: 'PUT', params: {}}
+                    }),
+                    clientToAccountingHeaderTransferResource: defineResource(apiVer+"/clienttoheader", {}, {
                     })
                 };
             }];
