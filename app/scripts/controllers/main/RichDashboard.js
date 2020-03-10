@@ -46,7 +46,10 @@
 
             //retrieve last 8 recent activities
             for (var l = 0; l < 8; l++) {
-                scope.recents.push(scope.uniqueArray[l]);
+                var oneElement = scope.uniqueArray[l];
+                if((typeof oneElement != 'undefined') && (oneElement != null)) {
+                   scope.recents.push(oneElement);
+                }
             }
             // 8 recent activities retrieved
 

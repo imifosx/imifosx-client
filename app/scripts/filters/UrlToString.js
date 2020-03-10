@@ -4,10 +4,12 @@
             return function (input) {
                 var exp = input;
                 var alpha = '';
-                for (var i = 0; i < exp.length; i++) {
-                    if (exp[i] >= 'A' && exp[i] <= 'z') {
-                        alpha = alpha + exp[i];
-                    }
+                if((typeof exp != 'undefined') && (exp != null)) {
+                   for (var i = 0; i < exp.length; i++) {
+                       if (exp[i] >= 'A' && exp[i] <= 'z') {
+                           alpha = alpha + exp[i];
+                       }
+                   }
                 }
                 return alpha;
             }
