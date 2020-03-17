@@ -284,6 +284,24 @@
                 scope.formData.charges = [];
                 if (scope.charges.length > 0) {
                     for (var i in scope.charges) {
+
+if (scope.charges[i].name === "Fixed Service Charge") {
+   var finalChargeAmount = scope.charges[i].amountOrPercentage;
+console.log("finalChargeAmount:" + finalChargeAmount);
+console.log("scope.formData.loanTermFrequencyType:" + scope.formData.loanTermFrequencyType);
+console.log("scope.formData.loanTermFrequency:" + scope.formData.loanTermFrequency);
+   switch (scope.formData.loanTermFrequencyType) {
+     case 0: finalChargeAmount = (finalChargeAmount * scope.formData.loanTermFrequency) / 365;
+             break;
+     case 1: finalChargeAmount = (finalChargeAmount * scope.formData.loanTermFrequency) / 30; 
+             break;
+     case 2: finalChargeAmount = (finalChargeAmount * scope.formData.loanTermFrequency) / 12; 
+             // break;
+   }// End of Switch
+   scope.charges[i].amountOrPercentage = finalChargeAmount;
+   console.log("Final Charge Percentage:" + finalChargeAmount);
+}
+
                         scope.formData.charges.push({id: scope.charges[i].id, chargeId: scope.charges[i].chargeId, amount: scope.charges[i].amountOrPercentage, dueDate: dateFilter(scope.charges[i].dueDate, scope.df) });
                     }
                 }
