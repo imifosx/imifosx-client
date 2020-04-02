@@ -324,7 +324,8 @@ define(['Q', 'underscore', 'mifosX'], function (Q) {
             'adhocquery/ViewAdHocQueryController',
             'adhocquery/EditAdHocQueryController',
             'ideoholic/reports/ServiceChargeController',
-            'ideoholic/controllers/accounting/ClientToAccountingHeaderTransfer'
+            'ideoholic/controllers/accounting/ClientToAccountingHeaderTransfer',
+            'ideoholic/controllers/accounting/ServiceChargeJournalEntryController'
         ],
         filters: [
             'StatusLookup',

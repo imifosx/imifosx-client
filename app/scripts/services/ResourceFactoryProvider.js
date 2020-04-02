@@ -706,6 +706,8 @@
                         put: {method: 'PUT', params: {}}
                     }),
                     clientToAccountingHeaderTransferResource: defineResource(apiVer+"/clienttoheader", {}, {
+                    }),
+                    serviceChargeJournalEntriesResource: defineResource(apiVer+"/servicechargejournalentries", {}, {
                     })
                 };
             }];

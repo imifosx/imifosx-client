@@ -1013,6 +1013,9 @@
             .when('/clienttoaccountingheadertransfer', {
                 templateUrl: 'views/ideoholic/accounting/clienttoaccountingheadertransfer.html'
             })
+			.when('/scjournalentry', {
+                templateUrl: 'views/ideoholic/accounting/scjournalentry.html'
+            })
             .otherwise({
                 templateUrl: "views/errors/404.html"
             })
