@@ -1,11 +1,31 @@
 (function (module) {
     mifosX.controllers = _.extend(module, {
-        ExpertSearchController: function (scope, resourceFactory, location) {
+	ExpertSearchController: function (scope, resourceFactory, location) {
+        /*ExpertSearchController: function (scope, resourceFactory, location, http, API_VERSION, $rootScope, $sce) {*/
         	scope.dashModel = 'dashboard';
+                /*scope.baseURL = "";*/
             scope.switch = function() {
 	        	location.path('/richdashboard');
 			}
-            
+		// Dashboard call
+	   /* scope.runReport = function() {
+	        	var reportURL =  $rootScope.hostUrl + API_VERSION + "/runreports/" + "Dashboard";
+                            reportURL += "?output-type=PDF&tenantIdentifier=" + $rootScope.tenantIdentifier + "&locale=" + scope.optlang.code + "&dateFormat=" + scope.df + "&R_branch=1";
+				
+				 reportURL = $sce.trustAsResourceUrl(reportURL);
+                            reportURL = $sce.valueOf(reportURL);
+                            http.get(reportURL, {responseType: 'arraybuffer'}).
+                              success(function(data, status, headers, config) {
+                                var contentType = headers('Content-Type');
+                                var file = new Blob([data], {type: contentType});
+                                var fileContent = URL.createObjectURL(file);
+                                // Pass the form data to the iframe as a data url.
+                                scope.baseURL = $sce.trustAsResourceUrl(fileContent);
+                              });
+
+			}
+		scope.runReport();
+            */
             scope.searchParams = ['create client', 'clients', 'create group', 'groups', 'centers', 'create center', 'configuration', 'tasks', 'templates', 'system users',
                                   'create template', 'create loan product', 'create saving product', 'roles', 'add role', 'configure maker checker tasks',
                                   'users', 'loan products', 'charges', 'saving products', 'offices', 'create office', 'currency configurations', 'user settings',
@@ -184,8 +204,11 @@
 
         }
 
+		
+	
     });
-    mifosX.ng.application.controller('ExpertSearchController', ['$scope', 'ResourceFactory', '$location', mifosX.controllers.ExpertSearchController]).run(function ($log) {
+	mifosX.ng.application.controller('ExpertSearchController', ['$scope', 'ResourceFactory', '$location', mifosX.controllers.ExpertSearchController]).run(function ($log) {
+    /*mifosX.ng.application.controller('ExpertSearchController', ['$scope', 'ResourceFactory', '$location','$http', 'API_VERSION', '$rootScope', '$sce', mifosX.controllers.ExpertSearchController]).run(function ($log) {*/
         $log.info("ExpertSearchController initialized");
     });
 }(mifosX.controllers || {}));
