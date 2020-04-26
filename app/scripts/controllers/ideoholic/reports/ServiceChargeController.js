@@ -76,17 +76,19 @@
     }
 	
     scope.run = function () {
-
+        let scTableURL = $rootScope.hostUrl + API_VERSION + '/servicecharge/getServiceChargeTableForMonthYear?tenantIdentifier=';
+	scTableURL += $rootScope.tenantIdentifier;
+	scTableURL += '&pretty=true&table=true&quarter='+scope.monthno+'&year='+scope.yearno;
+        scTableURL += '&useJournalEntries=false';
 	http({
 		method: 'GET',
-		url: $rootScope.hostUrl + API_VERSION + '/servicecharge/getQuarterJournalEntries?tenantIdentifier=scbun&pretty=true&table=true&quarter='+scope.monthno+'&year='+scope.yearno
+		url: scTableURL
 	     })
 	     .success(function (data) {						
 		var element1 = angular.element(data.html);
 		 $("#mainDiv").append(element1);
 		 scope.ifRunHasBeenRun = true;
 	});
-
     }
 
     scope.apply = function () {
