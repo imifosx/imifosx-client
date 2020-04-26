@@ -13,6 +13,10 @@
 			scope.restrictDate = new Date();
 			scope.showPaymentDetails = false;
 			scope.toClientData = "";
+			scope.formData.mobilization = 0;
+			scope.formData.servicing = 0;
+			scope.formData.overheads = 0;
+			scope.formData.investment = 0;
 
 			scope.back = function() {
 				window.history.back();
@@ -58,7 +62,7 @@
 				}, function(data) {
 					let resultArray = data.pageItems;
 					let arrLength = resultArray.length;
-					if(arrLength > 7){
+					if (arrLength > 7) {
 						arrLength = arrLength - 7;
 						resultArray.splice(7, arrLength);
 					}
@@ -134,6 +138,11 @@
 				transferTransaction.receiptNumber = this.formData.receiptNumber;
 				transferTransaction.bankNumber = this.formData.bankNumber;
 				transferTransaction.transferDescription = this.formData.transferDescription;
+
+				transferTransaction.mobilization = this.formData.mobilization;
+				transferTransaction.servicing = this.formData.servicing;
+				transferTransaction.overheads = this.formData.overheads;
+				transferTransaction.investment = this.formData.investment;
 
 				//construct account-headers array
 				transferTransaction.accountingHeaders = [];

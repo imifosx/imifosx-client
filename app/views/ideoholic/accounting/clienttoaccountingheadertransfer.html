@@ -67,13 +67,13 @@
 								type="text" typeahead-min-length="3" typeahead-editable="false"
 								uib-typeahead="client as clientTypeAheadDisplay(client) for client in clientOptions($viewValue)"
 								typeahead-on-select="changeClient($item)" required> </div>
-<!-- uib-typeahead="client as client.displayName for client in clientOptions($viewValue)"
+						<!-- uib-typeahead="client as client.displayName for client in clientOptions($viewValue)"
 uib-typeahead="(client.id + ' ' + client.displayName) as (client.id + ' ' + client.displayName) for client in clientOptions($viewValue) | limitTo:8" -->
 						<label class="control-label col-sm-2"
 							for="amount">{{ 'label.heading.amount' | translate }}</label>
 						<div class="col-sm-3">
-							<input type="text" id="amount" ng-model="formData.amount"
-								number-format class="form-control">
+							<input type="text" id="amount" ng-model="formData.amount" number-format
+								class="form-control">
 						</div>
 
 					</div>
@@ -114,13 +114,13 @@ uib-typeahead="(client.id + ' ' + client.displayName) as (client.id + ' ' + clie
 									class="btn btn-primary" ng-click="addDebitAccount()"><i class="fa fa-plus "></i></a>
 							</h4>
 							<div ng-repeat="dbAccount in formData.dbAccounts" class="form-inline paddedbottom10">
-								<select style='width:300px' chosen="crdrOptSelected" ng-model="dbAccount.crDrOptSelected"
-									class="form-control">
+								<select style='width:300px' chosen="crdrOptSelected"
+									ng-model="dbAccount.crDrOptSelected" class="form-control">
 									<option class="displaynone" value="">{{'label.selectone' | translate}}</option>
 									<option value="debit">{{'label.heading.debit' | translate}}</option>
 									<option value="credit">{{'label.heading.credit' | translate}}</option>
 								</select>
-								<select chosen="glAccounts" ng-model="dbAccount.select" 
+								<select chosen="glAccounts" ng-model="dbAccount.select"
 									ng-options="(debitAccount.name +'('+ debitAccount.glCode +')') for debitAccount in glAccounts | orderBy:'glCode'"
 									class="form-control">
 									<option class="displaynone" value="">{{'label.select' | translate}}</option>
@@ -133,7 +133,7 @@ uib-typeahead="(client.id + ' ' + client.displayName) as (client.id + ' ' + clie
 						</div>
 					</div>
 
-					<!-- Section of additional payment parameters -->
+					<!-- Section of additional payment parameters starts-->
 					<div class="form-group">
 						<label class="control-label col-sm-2">{{ 'label.anchor.showpaymentdetails' | translate}}</label>
 
@@ -194,7 +194,49 @@ uib-typeahead="(client.id + ' ' + client.displayName) as (client.id + ' ' + clie
 							</div>
 						</div>
 					</div>
-					<!-- Section of additional payment parameters -->
+					<!-- Section of additional payment parameters ends -->
+					<div class="form-group">
+						<label class="control-label col-sm-2">{{'label.input.showscoptions' | translate}}</label>
+						<div class="col-sm-2">
+							<input id="scOptionsCheckbox" type="checkbox" ng-model="scOptions" name="scOptionsCheckbox">
+						</div>
+					</div>
+					<div class="form-group" ng-show="scOptions">
+						<label class="control-label col-sm-2"
+							for="mobilization">{{ 'label.input.mobilization' | translate }}&nbsp;<span
+								class="required">*</span></label>
+						<div class="col-sm-3">
+							<input type="number" id="mobilization" ng-model="formData.mobilization" class="form-control"
+								required>
+						</div>
+
+						<label class="control-label col-sm-2"
+							for="servicing">{{ 'label.input.servicing' | translate }}&nbsp;<span
+								class="required">*</span></label>
+						<div class="col-sm-3">
+							<input type="number" id="servicing" ng-model="formData.servicing" class="form-control"
+								required>
+						</div>
+					</div>
+
+					<div class="form-group" ng-show="scOptions">
+						<label class="control-label col-sm-2"
+							for="overheads">{{ 'label.input.overheads' | translate }}&nbsp;<span
+								class="required">*</span></label>
+						<div class="col-sm-3">
+							<input type="number" id="overheads" ng-model="formData.overheads" class="form-control"
+								required>
+						</div>
+
+						<label class="control-label col-sm-2"
+							for="investment">{{ 'label.input.investment' | translate }}&nbsp;<span
+								class="required">*</span></label>
+						<div class="col-sm-3">
+							<input type="number" id="investment" ng-model="formData.investment" class="form-control"
+								required>
+						</div>
+					</div>
+					<!-- Section of service charge parameters ends -->
 					<div class="form-group">
 						<label class="control-label col-sm-2" for="transferDescription">
 							{{ 'label.input.description' | translate }}<span class="required">*</span></label>
