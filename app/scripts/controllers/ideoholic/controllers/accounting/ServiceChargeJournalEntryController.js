@@ -11,6 +11,10 @@
 			scope.debitaccounttemplate = false;
 			scope.restrictDate = new Date();
 			scope.showPaymentDetails = false;
+			scope.formData.mobilization = 0;
+			scope.formData.servicing = 0;
+			scope.formData.overheads = 0;
+			scope.formData.investment = 0;
 
 			resourceFactory.accountCoaResource.getAllAccountCoas({ manualEntriesAllowed: true, usage: 1, disabled: false }, function(data) {
 				scope.glAccounts = data;
