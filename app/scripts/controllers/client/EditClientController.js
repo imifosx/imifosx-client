@@ -134,6 +134,13 @@
                     delete this.formData.middlename;
                     delete this.formData.lastname;
                 }
+		// In case there is firstname and it has a non-zero length
+		if (this.formData.firstname && this.formData.firstname.length != 0) {
+		   // And there is no lastname then set the lastname to NA
+			if(!this.formData.lastname || this.formData.lastname === ""){
+			   this.formData.lastname = "NA";
+			}
+		}
 
                 resourceFactory.clientResource.update({'clientId': routeParams.id}, this.formData, function (data) {
                     location.path('/viewclient/' + routeParams.id);
