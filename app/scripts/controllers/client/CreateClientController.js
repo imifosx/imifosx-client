@@ -247,7 +247,10 @@
             };
 
             scope.submit = function () {
-
+                if(!this.formData.savingsProductId){
+                   alert("Savings Account selection is mandatory.\n Please select Savings Account for linking with Member's share account");
+                   return;
+                }
                 var reqDate = dateFilter(scope.first.date, scope.df);
 
                 this.formData.locale = scope.optlang.code;
