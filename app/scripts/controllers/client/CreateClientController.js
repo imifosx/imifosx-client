@@ -247,6 +247,7 @@
             };
 
             scope.submit = function () {
+
                 var reqDate = dateFilter(scope.first.date, scope.df);
 
                 this.formData.locale = scope.optlang.code;
@@ -441,10 +442,13 @@
                     scope.formData.familyMembers.push(temp);
                 }
 
-                //
-
-
-
+		// In case there is firstname and it has a non-zero length
+		if (this.formData.firstname && this.formData.firstname.length != 0) {
+		   // And there is no lastname then set the lastname to NA
+			if(!this.formData.lastname || this.formData.lastname === ""){
+			   this.formData.lastname = "NA";
+			}
+		}
                 resourceFactory.clientResource.save(this.formData, function (data) {
                     location.path('/createshareaccount/' + data.clientId);
                 });
