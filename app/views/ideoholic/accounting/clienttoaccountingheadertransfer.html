@@ -132,7 +132,49 @@ uib-typeahead="(client.id + ' ' + client.displayName) as (client.id + ' ' + clie
 							</div>
 						</div>
 					</div>
+					<!-- Section of service charge parameters starts -->
+					<div class="form-group">
+						<label class="control-label col-sm-2">{{'label.input.showscoptions' | translate}}</label>
+						<div class="col-sm-2">
+							<input id="scOptionsCheckbox" type="checkbox" ng-model="scOptions" name="scOptionsCheckbox">
+						</div>
+					</div>
+					<div class="form-group" ng-show="scOptions">
+						<label class="control-label col-sm-2"
+							for="mobilization">{{ 'label.input.mobilization' | translate }}&nbsp;<span
+								class="required">*</span></label>
+						<div class="col-sm-3">
+							<input type="number" id="mobilization" ng-model="formData.mobilization" class="form-control"
+								required>
+						</div>
 
+						<label class="control-label col-sm-2"
+							for="servicing">{{ 'label.input.servicing' | translate }}&nbsp;<span
+								class="required">*</span></label>
+						<div class="col-sm-3">
+							<input type="number" id="servicing" ng-model="formData.servicing" class="form-control"
+								required>
+						</div>
+					</div>
+
+					<div class="form-group" ng-show="scOptions">
+						<label class="control-label col-sm-2"
+							for="overheads">{{ 'label.input.overheads' | translate }}&nbsp;<span
+								class="required">*</span></label>
+						<div class="col-sm-3">
+							<input type="number" id="overheads" ng-model="formData.overheads" class="form-control"
+								required>
+						</div>
+
+						<label class="control-label col-sm-2"
+							for="investment">{{ 'label.input.investment' | translate }}&nbsp;<span
+								class="required">*</span></label>
+						<div class="col-sm-3">
+							<input type="number" id="investment" ng-model="formData.investment" class="form-control"
+								required>
+						</div>
+					</div>
+					<!-- Section of service charge parameters ends -->
 					<!-- Section of additional payment parameters starts-->
 					<div class="form-group">
 						<label class="control-label col-sm-2">{{ 'label.anchor.showpaymentdetails' | translate}}</label>
@@ -195,48 +237,7 @@ uib-typeahead="(client.id + ' ' + client.displayName) as (client.id + ' ' + clie
 						</div>
 					</div>
 					<!-- Section of additional payment parameters ends -->
-					<div class="form-group">
-						<label class="control-label col-sm-2">{{'label.input.showscoptions' | translate}}</label>
-						<div class="col-sm-2">
-							<input id="scOptionsCheckbox" type="checkbox" ng-model="scOptions" name="scOptionsCheckbox">
-						</div>
-					</div>
-					<div class="form-group" ng-show="scOptions">
-						<label class="control-label col-sm-2"
-							for="mobilization">{{ 'label.input.mobilization' | translate }}&nbsp;<span
-								class="required">*</span></label>
-						<div class="col-sm-3">
-							<input type="number" id="mobilization" ng-model="formData.mobilization" class="form-control"
-								required>
-						</div>
 
-						<label class="control-label col-sm-2"
-							for="servicing">{{ 'label.input.servicing' | translate }}&nbsp;<span
-								class="required">*</span></label>
-						<div class="col-sm-3">
-							<input type="number" id="servicing" ng-model="formData.servicing" class="form-control"
-								required>
-						</div>
-					</div>
-
-					<div class="form-group" ng-show="scOptions">
-						<label class="control-label col-sm-2"
-							for="overheads">{{ 'label.input.overheads' | translate }}&nbsp;<span
-								class="required">*</span></label>
-						<div class="col-sm-3">
-							<input type="number" id="overheads" ng-model="formData.overheads" class="form-control"
-								required>
-						</div>
-
-						<label class="control-label col-sm-2"
-							for="investment">{{ 'label.input.investment' | translate }}&nbsp;<span
-								class="required">*</span></label>
-						<div class="col-sm-3">
-							<input type="number" id="investment" ng-model="formData.investment" class="form-control"
-								required>
-						</div>
-					</div>
-					<!-- Section of service charge parameters ends -->
 					<div class="form-group">
 						<label class="control-label col-sm-2" for="transferDescription">
 							{{ 'label.input.description' | translate }}<span class="required">*</span></label>
