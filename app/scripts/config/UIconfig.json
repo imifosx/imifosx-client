@@ -1,14 +1,14 @@
 {
-  "enableUIDisplayConfiguration": false,
+  "enableUIDisplayConfiguration": true,
   "uiDisplayConfigurations": {
 	"loanAccount": {
 	  "isHiddenField": {
 		"fundId": true,
-		"linkAccountId": true,
-		"createStandingInstruction": true,
-		"numberOfRepayments": true,
-		"repaymentEvery": true,
-		"repaymentFrequencyType": true,
+		"linkAccountId": false,
+		"createStandingInstruction": false,
+		"numberOfRepayments": false,
+		"repaymentEvery": false,
+		"repaymentFrequencyType": false,
 		"repaymentFrequencyNthDayType": true,
 		"repaymentFrequencyDayOfWeekType": true,
 		"interestChargedFromDate": true,
@@ -24,17 +24,27 @@
 	  },
 	  "isHiddenSection": {
 		"interestRecalculationSection": true,
-		"collateralSection": true
+		"collateralSection": false
 	  },
 	  "isReadOnlyField": {
-		"loanTermFrequencyType": true
+		"loanTermFrequencyType": false
+	  }
+	},
+	"savingsAccount": {
+	  "isHiddenField": {
+		"interestCalculationFields": true,
+		"interestOverdraftFields": true,
+		"interestCalculationBalanceField": true
+	  },
+	  "isHiddenSection": {
+		"interestTermsSection": true
 	  }
 	},
 	"whiteLabel": {
 		"loginPage":{
 			"hideCommunityDetails": false,
 			"releaseDetails": false,
-			"companyName": "Mifos"
+			"companyName": "iMifosX"
 		}
 	}
   }
