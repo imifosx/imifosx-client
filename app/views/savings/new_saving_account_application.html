@@ -99,7 +99,7 @@
                             <b>{{data.currency.decimalPlaces}}</b>
                         </label>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" ng-hide="response.uiDisplayConfigurations.savingsAccount.isHiddenField.interestCalculationFields == true">
                         <label class="control-label col-sm-2">{{ 'label.input.nominalannualinterestrate' | translate }}&nbsp;
                             <span class="required">*</span>
                         </label>
@@ -124,7 +124,7 @@
                         <div class="col-sm-2">
                             <input type="text" value="{{data.currency.inMultiplesOf}}" class="form-control" readonly/>
                         </div>
-
+                        <div ng-hide="response.uiDisplayConfigurations.savingsAccount.isHiddenField.interestCalculationFields == true">
                         <label class="control-label col-sm-2 col-sm-offset-2">{{ 'label.input.interestpostingperiod' | translate }}&nbsp;
                             <span class="required">*</span>
                         </label>
@@ -134,8 +134,9 @@
                                 value="{{type.id}}" class="form-control width170px">
                             </select>
                         </div>
+                        </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" ng-hide="response.uiDisplayConfigurations.savingsAccount.isHiddenField.interestCalculationFields == true">
                         <label class="control-label col-sm-2">{{ 'label.input.interestcalculatedusing' | translate }}&nbsp;
                             <span class="required">*</span>
                         </label>
@@ -192,7 +193,7 @@
                             <input id="overdraftLimit" type="text" class="form-control" ng-model="formData.overdraftLimit" number-format>
                         </div>
                     </div>
-                    <div class="form-group" ng-show="formData.allowOverdraft">
+                    <div class="form-group" ng-show="formData.allowOverdraft && response.uiDisplayConfigurations.savingsAccount.isHiddenField.interestOverdraftFields == false">
                         <div class="col-sm-2">
                             <label class="control-label">{{ 'label.input.nominalannualinterestrateoverdraft' | translate }}&nbsp;
                             </label>
@@ -221,7 +222,7 @@
                             <input id="minRequiredBalance" type="text" class="form-control" ng-model="formData.minRequiredBalance" number-format>
                         </div>
                     </div>
-                    <div class="form-control" ng-show="data.minBalanceForInterestCalculation">
+                    <div class="form-control" ng-show="data.minBalanceForInterestCalculation && response.uiDisplayConfigurations.savingsAccount.isHiddenField.interestCalculationBalanceField == false">
                         <div class="col-sm-2"> {{'label.heading.minbalanceforinterestcalculation' | translate}}</div>
                         <div class="col-sm-2">{{data.minBalanceForInterestCalculation | number}}</div>
                     </div>
@@ -440,10 +441,11 @@
                             <td>{{'label.heading.decimalplaces' | translate}}</td>
                             <td colspan="6">{{data.currency.decimalPlaces}}</td>
                         </tr>
-                        <td>{{ 'label.input.nominalannualinterestrate' | translate}}</td>
-                        <td colspan="6">{{formData.nominalAnnualInterestRate}}</td>
+                        <tr ng-hide="response.uiDisplayConfigurations.savingsAccount.isHiddenField.interestCalculationFields == true">
+                            <td>{{ 'label.input.nominalannualinterestrate' | translate}}</td>
+                            <td colspan="6">{{formData.nominalAnnualInterestRate}}</td>
                         </tr>
-                        <tr>
+                        <tr ng-hide="response.uiDisplayConfigurations.savingsAccount.isHiddenField.interestCalculationFields == true">
                             <td>{{'label.input.interestcompoundingperiod' | translate}}</td>
                             <td colspan="6">{{savingdetails.interestCompoundingPeriodTypeValue}}</td>
                         </tr>
@@ -451,15 +453,15 @@
                             <td>{{ 'label.input.currencyinmultiplesof' | translate }}</td>
                             <td colspan="6">{{data.currency.inMultiplesOf}}</td>
                         </tr>
-                        <tr>
+                        <tr ng-hide="response.uiDisplayConfigurations.savingsAccount.isHiddenField.interestCalculationFields == true">
                             <td>{{'label.input.interestpostingperiod' | translate}}</td>
                             <td colspan="6">{{savingdetails.interestPostingPeriodTypeValue}}</td>
                         </tr>
-                        <tr>
+                        <tr ng-hide="response.uiDisplayConfigurations.savingsAccount.isHiddenField.interestCalculationFields == true">
                             <td>{{'label.input.interestcalculatedusing' | translate}}</td>
                             <td colspan="6">{{savingdetails.interestCalculationTypeValue}}</td>
                         </tr>
-                        <tr>
+                        <tr ng-hide="response.uiDisplayConfigurations.savingsAccount.isHiddenField.interestCalculationFields == true">
                             <td>{{ 'label.input.daysinyears' | translate }}</td>
                             <td colspan="6">{{savingdetails.interestCalculationDaysInYearTypeValue}}</td>
                         </tr>
@@ -484,11 +486,11 @@
                             <td>{{'label.input.overdraftlimit' | translate}}</td>
                             <td colspan="6">{{formData.overdraftLimit}}</td>
                         </tr>
-                        <tr ng-show="formData.allowOverdraft">
+                        <tr ng-show="formData.allowOverdraft && response.uiDisplayConfigurations.savingsAccount.isHiddenField.interestOverdraftFields == false">
                             <td>{{ 'label.input.nominalannualinterestrateoverdraft' | translate}}</td>
                             <td colspan="6">{{formData.nominalAnnualInterestRateOverdraft}}</td>
                         </tr>
-                        <tr ng-show="formData.allowOverdraft">
+                        <tr ng-show="formData.allowOverdraft && response.uiDisplayConfigurations.savingsAccount.isHiddenField.interestOverdraftFields == false">
                             <td>{{ 'label.input.minoverdraftforinterestcalculation' | translate}}</td>
                             <td colspan="6">{{formData.minOverdraftForInterestCalculation}}</td>
                         </tr>
