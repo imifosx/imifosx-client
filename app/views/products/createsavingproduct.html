@@ -111,7 +111,7 @@
                 </fieldset>
             </form>
         </wz-step>
-        <wz-step wz-title="{{ 'label.heading.terms' | translate }}">
+        <wz-step wz-title="{{ 'label.heading.terms' | translate }}" wz-disabled="{{response.uiDisplayConfigurations.savingsAccount.isHiddenSection.interestTermsSection}}">
             <form name="Terms" novalidate="" ng-submit="goNext(Terms)" class="form-horizontal">
                 <api-validate></api-validate>
                 <fieldset>
@@ -125,7 +125,7 @@
                         <div class="col-sm-2">
                             <input id="nominalAnnualInterestRate" name="nominalAnnualInterestRate" type="text"
                                    class="form-control"
-                                   ng-model="formData.nominalAnnualInterestRate" required late-validate decimals/>
+                                   ng-model="formData.nominalAnnualInterestRate" late-validate decimals/>
                         </div>
                         <div class="col-sm-2">
                             <form-validate valattributeform="Terms" valattribute="nominalAnnualInterestRate"/>
