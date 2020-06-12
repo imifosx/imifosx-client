@@ -222,14 +222,14 @@
                                             class="padded-td">{{savingaccountdetails.nominalAnnualInterestRate}}%</span>
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr ng-hide="response.uiDisplayConfigurations.savingsAccount.isHiddenField.interestCalculationFields == true">
                                     <th class="table-bold-acc fontnormal">{{'label.interestcompoundingperiod' |
                                         translate}}
                                     </td>
                                     <td><span class="padded-td">{{savingaccountdetails.interestCompoundingPeriodType.value}}</span>
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr ng-hide="response.uiDisplayConfigurations.savingsAccount.isHiddenField.interestCalculationFields == true">
                                     <th class="table-bold-acc fontnormal">{{'label.interestpostingperiod' |
                                         translate}}
                                     </th>
@@ -237,7 +237,7 @@
                                             class="padded-td">{{savingaccountdetails.interestPostingPeriodType.value}}</span>
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr ng-hide="response.uiDisplayConfigurations.savingsAccount.isHiddenField.interestCalculationFields == true">
                                     <th class="table-bold-acc fontnormal">{{'label.interestcalculatedusing' |
                                         translate}}
                                     </th>
