@@ -70,7 +70,7 @@
 	        </div>
 			<h3>{{ 'label.heading.terms' | translate }}</h3>
 			<hr>
-	        <div class="form-group">
+	        <div class="form-group" ng-hide="response.uiDisplayConfigurations.savingsAccount.isHiddenSection.interestTermsSection == true">
 	            <label class="control-label col-sm-2">{{ 'label.input.nominalannualinterestrate' | translate }}<span class="required">*</span></label>
 	            <div class="col-sm-2">
 	            	<input id="nominalAnnualInterestRate" name="nominalAnnualInterestRate" type="text" class="form-control" 
@@ -141,10 +141,12 @@
                     <input id="withdrawalFeeForTransfers" type="checkbox" ng-model="formData.withdrawalFeeForTransfers"
                            ng-true-value="true" ng-false-value="false">
                 </div>
+                <div ng-show="response.uiDisplayConfigurations.savingsAccount.isHiddenField.interestCalculationBalanceField == false">
                 <label class="control-label col-sm-2">{{ 'label.input.minbalanceforinterest' | translate }}</label>
                 <div class="col-sm-2">
                     <input id="minBalanceForInterestCalculation"  type="text" class="form-control"
                            number-format ng-model="formData.minBalanceForInterestCalculation">
+                </div>
                 </div>
 			</div>
             <div class="form-group">
@@ -176,7 +178,7 @@
 	            </div>
 
 	        </div>
-            <div class="form-group" ng-show="formData.allowOverdraft">
+            <div class="form-group" ng-show="formData.allowOverdraft && response.uiDisplayConfigurations.savingsAccount.isHiddenField.interestOverdraftFields == false">
                 <label class="control-label col-sm-3">{{ 'label.input.nominalannualinterestrateoverdraft' | translate }}</label>
                 <div class="col-sm-2">
                     <input id="nominalAnnualInterestRateOverdraft" type="text" class="form-control"
