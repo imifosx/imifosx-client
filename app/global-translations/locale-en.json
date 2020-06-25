@@ -312,6 +312,7 @@
   "label.button.dividends": "Dividends",
   "label.button.postdividends": "Post Dividends",
   "label.button.proceed": "Proceed",
+  "label.button.transfershares": "Transfer Shares",
   "#Misc Labels": "..",
   "label.uniquelyidentifiedwithid": "Uniquely identified with Id",
   "label.belongsto": "Belongs To",

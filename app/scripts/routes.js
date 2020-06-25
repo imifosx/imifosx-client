@@ -1016,6 +1016,9 @@
 			.when('/scjournalentry', {
                 templateUrl: 'views/ideoholic/accounting/scjournalentry.html'
             })
+	    .when('/sharestransfer/:accountId/transfershares', {
+                templateUrl: 'views/ideoholic/shares/sharestransfer.html'
+            })	
             .otherwise({
                 templateUrl: "views/errors/404.html"
             })

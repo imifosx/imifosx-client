@@ -79,6 +79,9 @@
                     case "close":
                         location.path('/shareaccount/' + accountId + '/close');
                         break;
+		    case "transfershares":
+                        location.path('/sharestransfer/' + accountId + '/transfershares');
+                        break;
                     case "assignSavingsOfficer":
                         location.path('/assignshareofficer/' + accountId);
                         break;
@@ -219,6 +222,10 @@
                                 {
                                     name: "button.close",
                                     taskPermissionName:"CLOSE_SHAREACCOUNT"
+                                },
+				 {
+                                    name: "button.transfershares",
+                                    taskPermissionName:"WITHDRAW_SAVINGSACCOUNT"
                                 }
                             ]
 

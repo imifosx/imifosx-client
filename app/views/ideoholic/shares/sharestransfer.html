@@ -1,0 +1,105 @@
+<div class="content-container" ng-controller="SharesTransferController">
+    <ul class="breadcrumb">
+        <li><a href="#/viewshareaccount/{{accountId}}">{{'label.anchor.viewshareaccount' | translate}}</a></li>
+        <li class="active">sharestransfer</li>
+    </ul>
+    <div class="card">
+        <div class="content">
+            <div class="toolbar">
+                <h4>{{ title | translate}}</h4>
+            </div>
+            <br>
+            <form name="shareccountactionform" novalidate="" class="form-horizontal" rc-submit="submit()">
+                <api-validate></api-validate>
+                <fieldset>
+                   
+
+		 <div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">{{ 'label.input.office' | translate }}<span
+								class="required">*</span></label>
+
+						<div class="col-sm-3">
+							<select chosen="offices" id="officeId" ng-model="officeId" class="form-control"
+								ng-options="office.id as office.name for office in offices" value="{{office.id}}">
+							</select>
+						</div>
+                        </div>
+                        <div class="form-group">
+                            
+			<label class="control-label col-sm-2"
+							for="toClientId">{{ 'label.input.client' | translate }}<span
+								class="required">*</span></label>
+
+				<div class="col-sm-3">
+							<input id="toClientId" ng-model="toClientData" name="client" class="form-control"
+								type="text" typeahead-min-length="3" typeahead-editable="false"
+								uib-typeahead="client as clientTypeAheadDisplay(client) for client in clientOptions($viewValue)"
+								typeahead-on-select="changeClient($item)" required> </div>
+                        </div>
+                    </div>
+			
+
+		<div class="form-group">
+                      
+
+
+                    <div class="form-group" >
+                        <label class="control-label col-sm-2" for="modelName">{{labelName | translate}}<span
+                                class="required">*</span></label>
+
+                        <div class="col-sm-3">
+                            <input id="{{modelName}}" type="text" name="DateField" sort datepicker-pop="dd MMMM yyyy"
+                                   ng-model="formData[modelName]" is-open="opened" min="minDate" max="restrictDate" class="form-control" required late-validate>
+                        </div>
+                        <div class="col-sm-3">
+                                <form-validate valattributeform="shareccountactionform" valattribute="DateField"/>
+                            </div>
+                    </div>
+
+		
+
+                    <div>
+                        <div class="form-group">
+
+                            <label class="control-label col-sm-2" for="requestedShares">{{ 'label.input.totalnumberofshares' |
+                                translate}}<span class="required">*</span></label>
+
+                            <div class="col-sm-3">
+                                <input id="requestedShares" type="text" name="requestedShares"
+                                       ng-model="formData.requestedShares" class="form-control" number-format required late-Validate/>
+                            </div>
+                            <div class="col-sm-3">
+                                <form-validate valattributeform="shareccountactionform" valattribute="requestedShares"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="unitprice">{{ 'label.input.todaysprice' |
+                                translate}}<span class="required">*</span>({{shareaccountdetails.currency.displaySymbol}})</label>
+
+                            <div class="col-sm-3">
+                                <input id="unitprice" type="text" name="unitprice" disabled
+                                       ng-model="formData.unitPrice" class="form-control" number-format required late-Validate/>
+                            </div>
+                            <div class="col-sm-3">
+                                <form-validate valattributeform="shareccountactionform" valattribute="unitprice"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="note">{{ 'label.input.note' | translate}}</label>
+
+                        <div class="col-sm-3">
+                            <textarea rows="2" id="note" ng-model="formData.note" class="form-control"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-md-offset-3">
+                        <button id="cancel" ng-click="cancel()" class="btn btn-default">{{ 'label.button.cancel' | translate }}</button>
+                        <button id="save" type="submit" has-permission='{{taskPermissionName}}' class="btn btn-primary">{{ 'label.button.save' | translate }}</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
