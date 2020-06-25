@@ -293,6 +293,7 @@
                     scope.standinginstruction = response;
                     scope.searchTransaction();
                 });
+		scope.changeTransactionSort('id');
             });
 
             var fetchFunction = function (offset, limit, callback) {

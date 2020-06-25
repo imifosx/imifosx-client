@@ -69,6 +69,42 @@
 							</div>
 						</div>
 					</div>
+                                        <div class="form-group">
+                                                <label class="control-label col-sm-2"
+                                                        for="mobilization">{{ 'label.input.mobilization' | translate }}&nbsp;<span
+                                                                class="required">*</span></label>
+                                                <div class="col-sm-3">
+                                                        <input type="number" id="mobilization" ng-model="formData.mobilization" class="form-control"
+                                                                required>
+                                                </div>
+
+                                                <label class="control-label col-sm-2"
+                                                        for="servicing">{{ 'label.input.servicing' | translate }}&nbsp;<span
+                                                                class="required">*</span></label>
+                                                <div class="col-sm-3">
+                                                        <input type="number" id="servicing" ng-model="formData.servicing" class="form-control"
+                                                                required>
+                                                </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                                <label class="control-label col-sm-2"
+                                                        for="overheads">{{ 'label.input.overheads' | translate }}&nbsp;<span
+                                                                class="required">*</span></label>
+                                                <div class="col-sm-3">
+                                                        <input type="number" id="overheads" ng-model="formData.overheads" class="form-control"
+                                                                required>
+                                                </div>
+
+                                                <label class="control-label col-sm-2"
+                                                        for="investment">{{ 'label.input.investment' | translate }}&nbsp;<span
+                                                                class="required">*</span></label>
+                                                <div class="col-sm-3">
+                                                        <input type="number" id="investment" ng-model="formData.investment" class="form-control"
+                                                                required>
+                                                </div>
+                                        </div>
+
 					<div class="form-group">
 						<label class="control-label col-sm-2"
 							for="referenceNumber">{{ 'label.input.referencenumber' | translate }}</label>
@@ -147,41 +183,6 @@
 						</div>
 					</div>
 					<!-- Section of additional payment parameters ends -->
-					<div class="form-group">
-						<label class="control-label col-sm-2"
-							for="mobilization">{{ 'label.input.mobilization' | translate }}&nbsp;<span
-								class="required">*</span></label>
-						<div class="col-sm-3">
-							<input type="number" id="mobilization" ng-model="formData.mobilization" class="form-control"
-								required>
-						</div>
-
-						<label class="control-label col-sm-2"
-							for="servicing">{{ 'label.input.servicing' | translate }}&nbsp;<span
-								class="required">*</span></label>
-						<div class="col-sm-3">
-							<input type="number" id="servicing" ng-model="formData.servicing" class="form-control"
-								required>
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label class="control-label col-sm-2"
-							for="overheads">{{ 'label.input.overheads' | translate }}&nbsp;<span
-								class="required">*</span></label>
-						<div class="col-sm-3">
-							<input type="number" id="overheads" ng-model="formData.overheads" class="form-control"
-								required>
-						</div>
-
-						<label class="control-label col-sm-2"
-							for="investment">{{ 'label.input.investment' | translate }}&nbsp;<span
-								class="required">*</span></label>
-						<div class="col-sm-3">
-							<input type="number" id="investment" ng-model="formData.investment" class="form-control"
-								required>
-						</div>
-					</div>
 					<div class="form-group">
 						<label class="control-label col-sm-2">{{ 'label.input.comments' | translate }}</label>
 

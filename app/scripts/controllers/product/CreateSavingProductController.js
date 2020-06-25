@@ -11,6 +11,9 @@
             scope.configureFundOption = {};
             scope.isClicked = false;
 
+            //Setting nominal interest to zero by default
+            scope.formData.nominalAnnualInterestRate = 0;
+
             resourceFactory.savingProductResource.get({resourceType: 'template'}, function (data) {
                 scope.product = data;
                 scope.product.chargeOptions = scope.product.chargeOptions || [];

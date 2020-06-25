@@ -32,6 +32,16 @@
 	  "isReadOnlyField": {
 		"loanTermFrequencyType": true
 	  }
+	},
+	"savingsAccount": {
+	  "isHiddenField": {
+		"interestCalculationFields": true,
+		"interestOverdraftFields": true,
+		"interestCalculationBalanceField": true
+	  },
+	  "isHiddenSection": {
+		"interestTermsSection": true
+	  }
 	}
   }
 }

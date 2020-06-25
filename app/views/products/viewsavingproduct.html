@@ -47,23 +47,23 @@
             <td>{{'label.heading.currencyinmultiplesof' | translate}}</td>
             <td colspan="3">{{savingproduct.currency.inMultiplesOf}}</td>
         </tr>
-        <tr>
+        <tr ng-hide="response.uiDisplayConfigurations.savingsAccount.isHiddenField.interestCalculationFields == true">
             <td>{{'label.heading.nominalannualinterestrate' | translate}}</td>
             <td colspan="3">{{savingproduct.nominalAnnualInterestRate}}</td>
         </tr>
-        <tr>
+        <tr ng-hide="response.uiDisplayConfigurations.savingsAccount.isHiddenField.interestCalculationFields == true">
             <td>{{'label.heading.interestcompoundingperiod' | translate}}</td>
             <td colspan="3">{{savingproduct.interestCompoundingPeriodType.value}}</td>
         </tr>
-        <tr>
+        <tr ng-hide="response.uiDisplayConfigurations.savingsAccount.isHiddenField.interestCalculationFields == true">
             <td>{{'label.heading.interestpostingperiod' | translate}}</td>
             <td colspan="3">{{savingproduct.interestPostingPeriodType.value}}</td>
         </tr>
-        <tr>
+        <tr ng-hide="response.uiDisplayConfigurations.savingsAccount.isHiddenField.interestCalculationFields == true">
             <td>{{'label.heading.interestcalculatedusing' | translate}}</td>
             <td colspan="3">{{savingproduct.interestCalculationType.value}}</td>
         </tr>
-        <tr>
+        <tr ng-hide="response.uiDisplayConfigurations.savingsAccount.isHiddenField.interestCalculationFields == true">
             <td>{{'label.heading.daysinyears' | translate}}</td>
             <td colspan="3">{{savingproduct.interestCalculationDaysInYearType.value}}</td>
         </tr>
@@ -93,15 +93,15 @@
             <td>{{'label.heading.overdraftlimit' | translate}}</td>
             <td colspan="3">{{savingproduct.overdraftLimit}}</td>
         </tr>
-        <tr ng-show="savingproduct.allowOverdraft">
+        <tr ng-show="savingproduct.allowOverdraft && response.uiDisplayConfigurations.savingsAccount.isHiddenField.interestOverdraftFields == false">
             <td>{{'label.heading.nominalannualinterestrateoverdraft' | translate}}</td>
             <td colspan="3">{{savingproduct.nominalAnnualInterestRateOverdraft}}</td>
         </tr>
-        <tr ng-show="savingproduct.allowOverdraft">
+        <tr ng-show="savingproduct.allowOverdraft && response.uiDisplayConfigurations.savingsAccount.isHiddenField.interestOverdraftFields == false">
             <td>{{'label.heading.minoverdraftforinterestcalculation' | translate}}</td>
             <td colspan="3">{{savingproduct.minOverdraftForInterestCalculation}}</td>
         </tr>
-        <tr>
+        <tr ng-hide="response.uiDisplayConfigurations.savingsAccount.isHiddenField.interestCalculationBalanceField == true">
             <td>{{'label.heading.minbalanceforinterestcalculation' | translate}}</td>
             <td colspan="3">{{savingproduct.minBalanceForInterestCalculation|number}}</td>
         </tr>
